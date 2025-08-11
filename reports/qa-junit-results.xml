@@ -1,0 +1,35 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="5.643059">
+<testsuite name="dashboard-demo.spec.ts" timestamp="2025-08-11T11:24:38.048Z" hostname="qa-api-tests" tests="3" failures="0" skipped="0" time="1.809" errors="0">
+<testcase name="Dashboard Demo Data › API test to populate dashboard @smoke" classname="dashboard-demo.spec.ts" time="1.602">
+<system-out>
+<![CDATA[📊 Getting users list...
+👤 Getting user 1 details...
+📝 Creating new post...
+✅ Created post with ID: 101
+📝 Updating post 101...
+✅ Post updated successfully
+
+[[ATTACHMENT|../test-results/qa/dashboard-demo-Dashboard-D-51dc9-to-populate-dashboard-smoke-qa-api-tests/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Dashboard Demo Data › API error handling test @regression" classname="dashboard-demo.spec.ts" time="0.11">
+<system-out>
+<![CDATA[🔍 Testing error handling...
+✅ Error handling tests completed
+
+[[ATTACHMENT|../test-results/qa/dashboard-demo-Dashboard-D-0b37b-or-handling-test-regression-qa-api-tests/trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Dashboard Demo Data › Performance test for dashboard metrics @performance" classname="dashboard-demo.spec.ts" time="0.097">
+<system-out>
+<![CDATA[⚡ Running performance tests...
+⚡ Completed 5 concurrent requests in 83ms
+
+[[ATTACHMENT|../test-results/qa/dashboard-demo-Dashboard-D-8ad25-shboard-metrics-performance-qa-api-tests/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

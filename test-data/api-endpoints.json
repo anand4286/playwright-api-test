@@ -1,0 +1,25 @@
+{
+  "auth": {
+    "register": "/api/v1/auth/register",
+    "login": "/api/v1/auth/login",
+    "logout": "/api/v1/auth/logout",
+    "refresh": "/api/v1/auth/refresh",
+    "forgotPassword": "/api/v1/auth/forgot-password",
+    "resetPassword": "/api/v1/auth/reset-password"
+  },
+  "users": {
+    "profile": "/api/v1/users/profile",
+    "updateProfile": "/api/v1/users/profile",
+    "changePassword": "/api/v1/users/change-password",
+    "uploadAvatar": "/api/v1/users/avatar",
+    "deleteAccount": "/api/v1/users/account"
+  },
+  "profile": {
+    "get": "/api/v1/profile",
+    "update": "/api/v1/profile",
+    "updateEmail": "/api/v1/profile/email",
+    "updatePhone": "/api/v1/profile/phone",
+    "updateAddress": "/api/v1/profile/address",
+    "preferences": "/api/v1/profile/preferences"
+  }
+}

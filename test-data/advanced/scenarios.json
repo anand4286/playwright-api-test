@@ -1,0 +1,289 @@
+{
+  "dataSetTests": {
+    "userProfiles": [
+      {
+        "name": "John Smith",
+        "email": "john.smith@testdomain.com",
+        "username": "jsmith",
+        "website": "https://johnsmith.dev",
+        "phone": "+1-555-0101"
+      },
+      {
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@testdomain.com", 
+        "username": "sjohnson",
+        "website": "https://sarahjohnson.com",
+        "phone": "+1-555-0102"
+      },
+      {
+        "name": "Mike Chen",
+        "email": "mike.chen@testdomain.com",
+        "username": "mchen",
+        "website": "https://mikechen.org",
+        "phone": "+1-555-0103"
+      }
+    ],
+    "authenticationCredentials": [
+      {
+        "username": "validuser1",
+        "password": "SecurePass123!",
+        "expectedResult": "success"
+      },
+      {
+        "username": "validuser2", 
+        "password": "AnotherPass456@",
+        "expectedResult": "success"
+      },
+      {
+        "username": "validuser3",
+        "password": "ThirdPass789#",
+        "expectedResult": "success"
+      }
+    ]
+  },
+  "chainedTests": {
+    "userRegistrationFlow": {
+      "registration": {
+        "name": "Chain Test User",
+        "email": "chaintest@example.com",
+        "username": "chainuser",
+        "password": "ChainTest123!"
+      },
+      "expectedTokenFields": ["accessToken", "refreshToken", "tokenType"],
+      "profileUpdate": {
+        "website": "https://chaintest.example.com",
+        "phone": "+1-555-9999"
+      }
+    }
+  },
+  "headerValidation": {
+    "requiredRequestHeaders": [
+      "Content-Type",
+      "Accept", 
+      "User-Agent"
+    ],
+    "expectedResponseHeaders": [
+      "Content-Type",
+      "Content-Length",
+      "Date"
+    ],
+    "authenticationHeaders": {
+      "Authorization": "Bearer",
+      "X-API-Key": "test-api-key"
+    }
+  },
+  "negativeScenarios": {
+    "invalidData": {
+      "users": [
+        {
+          "scenario": "Missing required fields",
+          "data": {
+            "email": "incomplete@test.com"
+          },
+          "expectedError": "ValidationError"
+        },
+        {
+          "scenario": "Invalid email format",
+          "data": {
+            "name": "Test User",
+            "email": "invalid-email",
+            "username": "testuser"
+          },
+          "expectedError": "InvalidEmailFormat"
+        },
+        {
+          "scenario": "Empty name field",
+          "data": {
+            "name": "",
+            "email": "empty@test.com",
+            "username": "emptyname"
+          },
+          "expectedError": "EmptyNameField"
+        }
+      ],
+      "authentication": [
+        {
+          "scenario": "Invalid credentials",
+          "username": "nonexistent@test.com",
+          "password": "wrongpassword",
+          "expectedStatus": 401
+        },
+        {
+          "scenario": "Missing password",
+          "username": "test@example.com", 
+          "password": "",
+          "expectedStatus": 400
+        },
+        {
+          "scenario": "Malformed request",
+          "data": "invalid-json-data",
+          "expectedStatus": 400
+        }
+      ]
+    },
+    "errorResponses": {
+      "notFound": {
+        "userIds": [999999, 888888, 777777],
+        "expectedStatus": 404
+      },
+      "unauthorized": {
+        "invalidTokens": ["invalid-token", "expired-token", ""],
+        "expectedStatus": 401
+      }
+    }
+  }
+}
+        "expectedError": "Password does not meet requirements"
+      },
+      {
+        "testCase": "Missing required fields",
+        "userData": {
+          "firstName": "Missing",
+          "email": "missing.fields@example.com"
+        },
+        "expectedStatus": 400,
+        "shouldPass": false,
+        "expectedError": "Required fields missing"
+      }
+    ],
+    "bulkProfileUpdates": [
+      {
+        "testCase": "Update all profile fields",
+        "profileData": {
+          "firstName": "Updated",
+          "lastName": "Name",
+          "phone": "+1-555-999-8888",
+          "bio": "Updated biography",
+          "website": "https://updated-website.com",
+          "location": "Updated City, State"
+        },
+        "expectedStatus": 200,
+        "shouldPass": true
+      },
+      {
+        "testCase": "Update with invalid phone format",
+        "profileData": {
+          "phone": "invalid-phone-123"
+        },
+        "expectedStatus": 400,
+        "shouldPass": false,
+        "expectedError": "Invalid phone number format"
+      },
+      {
+        "testCase": "Update with malicious script in bio",
+        "profileData": {
+          "bio": "<script>alert('xss')</script>"
+        },
+        "expectedStatus": 400,
+        "shouldPass": false,
+        "expectedError": "Invalid characters in bio"
+      }
+    ]
+  },
+  "chainedTestData": {
+    "userJourney": {
+      "registration": {
+        "firstName": "ChainTest",
+        "lastName": "User",
+        "email": "chaintest.user@example.com",
+        "password": "ChainTestPass123!"
+      },
+      "verification": {
+        "emailToken": "verification-token-placeholder",
+        "phoneCode": "123456"
+      },
+      "profileSetup": {
+        "bio": "This is a test user for chained scenarios",
+        "avatar": "https://example.com/avatar.jpg",
+        "preferences": {
+          "notifications": true,
+          "privacy": "public"
+        }
+      }
+    }
+  },
+  "headerValidationData": {
+    "validHeaders": {
+      "contentType": "application/json",
+      "userAgent": "PlaywrightTestFramework/1.0",
+      "acceptLanguage": "en-US,en;q=0.9",
+      "acceptEncoding": "gzip, deflate, br"
+    },
+    "invalidHeaders": {
+      "malformedContentType": "invalid/content-type",
+      "oversizedUserAgent": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "invalidAcceptLanguage": "invalid-language-format"
+    },
+    "securityHeaders": {
+      "expectedResponseHeaders": [
+        "x-content-type-options",
+        "x-frame-options", 
+        "x-xss-protection",
+        "strict-transport-security",
+        "content-security-policy"
+      ]
+    }
+  },
+  "negativeTestScenarios": {
+    "authenticationAttacks": [
+      {
+        "scenario": "SQL Injection in email",
+        "credentials": {
+          "email": "' OR '1'='1' --",
+          "password": "anypassword"
+        },
+        "expectedStatus": 400,
+        "expectedError": "Invalid email format"
+      },
+      {
+        "scenario": "XSS in password field",
+        "credentials": {
+          "email": "test@example.com",
+          "password": "<script>alert('xss')</script>"
+        },
+        "expectedStatus": 400,
+        "expectedError": "Invalid characters in password"
+      },
+      {
+        "scenario": "Extremely long email",
+        "credentials": {
+          "email": "verylongemailaddressthatshouldexceedmaximumlengthaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+          "password": "ValidPass123!"
+        },
+        "expectedStatus": 400,
+        "expectedError": "Email too long"
+      }
+    ],
+    "rateLimitingTests": {
+      "maxRequestsPerMinute": 60,
+      "burstRequests": 100,
+      "expectedRateLimitHeaders": [
+        "x-ratelimit-limit",
+        "x-ratelimit-remaining", 
+        "x-ratelimit-reset"
+      ]
+    }
+  },
+  "performanceTestData": {
+    "loadTestScenarios": [
+      {
+        "name": "Light Load",
+        "concurrentUsers": 5,
+        "requestsPerUser": 10,
+        "maxResponseTime": 1000
+      },
+      {
+        "name": "Medium Load", 
+        "concurrentUsers": 25,
+        "requestsPerUser": 20,
+        "maxResponseTime": 2000
+      },
+      {
+        "name": "Heavy Load",
+        "concurrentUsers": 50,
+        "requestsPerUser": 30,
+        "maxResponseTime": 5000
+      }
+    ]
+  }
+}

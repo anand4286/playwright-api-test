@@ -1,0 +1,135 @@
+{
+  "dataSetTests": {
+    "userProfiles": [
+      {
+        "name": "John Smith",
+        "email": "john.smith@testdomain.com",
+        "username": "jsmith",
+        "website": "https://johnsmith.dev",
+        "phone": "+1-555-0101"
+      },
+      {
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@testdomain.com", 
+        "username": "sjohnson",
+        "website": "https://sarahjohnson.com",
+        "phone": "+1-555-0102"
+      },
+      {
+        "name": "Mike Chen",
+        "email": "mike.chen@testdomain.com",
+        "username": "mchen",
+        "website": "https://mikechen.org",
+        "phone": "+1-555-0103"
+      }
+    ],
+    "authenticationCredentials": [
+      {
+        "username": "validuser1",
+        "password": "SecurePass123!",
+        "expectedResult": "success"
+      },
+      {
+        "username": "validuser2", 
+        "password": "AnotherPass456@",
+        "expectedResult": "success"
+      },
+      {
+        "username": "validuser3",
+        "password": "ThirdPass789#",
+        "expectedResult": "success"
+      }
+    ]
+  },
+  "chainedTests": {
+    "userRegistrationFlow": {
+      "registration": {
+        "name": "Chain Test User",
+        "email": "chaintest@example.com",
+        "username": "chainuser",
+        "password": "ChainTest123!"
+      },
+      "expectedTokenFields": ["accessToken", "refreshToken", "tokenType"],
+      "profileUpdate": {
+        "website": "https://chaintest.example.com",
+        "phone": "+1-555-9999"
+      }
+    }
+  },
+  "headerValidation": {
+    "requiredRequestHeaders": [
+      "Content-Type",
+      "Accept", 
+      "User-Agent"
+    ],
+    "expectedResponseHeaders": [
+      "Content-Type",
+      "Content-Length",
+      "Date"
+    ],
+    "authenticationHeaders": {
+      "Authorization": "Bearer",
+      "X-API-Key": "test-api-key"
+    }
+  },
+  "negativeScenarios": {
+    "invalidData": {
+      "users": [
+        {
+          "scenario": "Missing required fields",
+          "data": {
+            "email": "incomplete@test.com"
+          },
+          "expectedError": "ValidationError"
+        },
+        {
+          "scenario": "Invalid email format",
+          "data": {
+            "name": "Test User",
+            "email": "invalid-email",
+            "username": "testuser"
+          },
+          "expectedError": "InvalidEmailFormat"
+        },
+        {
+          "scenario": "Empty name field",
+          "data": {
+            "name": "",
+            "email": "empty@test.com",
+            "username": "emptyname"
+          },
+          "expectedError": "EmptyNameField"
+        }
+      ],
+      "authentication": [
+        {
+          "scenario": "Invalid credentials",
+          "username": "nonexistent@test.com",
+          "password": "wrongpassword",
+          "expectedStatus": 401
+        },
+        {
+          "scenario": "Missing password",
+          "username": "test@example.com", 
+          "password": "",
+          "expectedStatus": 400
+        },
+        {
+          "scenario": "Malformed request",
+          "data": "invalid-json-data",
+          "expectedStatus": 400
+        }
+      ]
+    },
+    "errorResponses": {
+      "notFound": {
+        "userIds": [999999, 888888, 777777],
+        "expectedStatus": 404
+      },
+      "unauthorized": {
+        "invalidTokens": ["invalid-token", "expired-token", ""],
+        "expectedStatus": 401
+      }
+    }
+  }
+}

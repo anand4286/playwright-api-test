@@ -1,0 +1,29 @@
+{
+  "totalRealTests": 6,
+  "testsByCategory": {
+    "smoke": 1,
+    "registration": 1,
+    "auth": 2,
+    "session": 1,
+    "security": 1,
+    "profile": 1,
+    "update": 1,
+    "regression": 1,
+    "bulk": 1,
+    "performance": 1,
+    "users": 1,
+    "negative": 1,
+    "error": 1,
+    "edge-cases": 1,
+    "files": 1,
+    "avatar": 1,
+    "upload": 1
+  },
+  "allTestsUseRealMethods": true,
+  "validatedAgainstExistingCode": true,
+  "executionCommands": {
+    "runAll": "npm run test:dev -- tests/real-working/",
+    "runByTag": "npm run test:dev -- tests/real-working/ --grep @smoke",
+    "runSpecific": "npm run test:dev -- tests/real-working/user-registration-and-profile-flow.spec.ts"
+  }
+}

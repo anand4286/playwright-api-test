@@ -1,0 +1,65 @@
+{
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "skipped": 0,
+  "flaky": 0,
+  "tests": [
+    {
+      "title": "User Registration with Validation @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
+      "line": 29,
+      "status": "passed",
+      "duration": 441,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-11T13:36:27.169Z"
+    },
+    {
+      "title": "User Registration Test @smoke @registration",
+      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
+      "line": 14,
+      "status": "passed",
+      "duration": 854,
+      "retry": 0,
+      "annotations": [
+        {
+          "type": "user-id",
+          "description": 11
+        }
+      ],
+      "tags": [
+        "smoke",
+        "registration"
+      ],
+      "timestamp": "2025-08-11T13:36:27.580Z"
+    },
+    {
+      "title": "Multiple User Registration @performance",
+      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
+      "line": 41,
+      "status": "passed",
+      "duration": 1466,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "performance"
+      ],
+      "timestamp": "2025-08-11T13:36:28.195Z"
+    }
+  ],
+  "summary": {
+    "status": "passed",
+    "startTime": "2025-08-11T13:36:26.404Z",
+    "endTime": "2025-08-11T13:36:32.000Z",
+    "duration": 5596,
+    "success": true
+  },
+  "apiLogs": [],
+  "generatedAt": "2025-08-11T13:36:32.000Z",
+  "framework": "Playwright API Testing",
+  "version": "1.0.0"
+}

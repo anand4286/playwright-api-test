@@ -1,0 +1,59 @@
+{
+  "basicProfile": {
+    "name": "Test User - Updated",
+    "phone": "+1234567890",
+    "website": "https://updated-website.com"
+  },
+  "emailManagement": {
+    "validEmails": [
+      "updated@example.com",
+      "newemail@test.com", 
+      "verification@example.com"
+    ],
+    "invalidEmails": [
+      "invalid-email-format",
+      "missing@domain",
+      "@missinguser.com",
+      "spaces in@email.com"
+    ],
+    "duplicateEmail": "existing@example.com"
+  },
+  "phoneNumbers": {
+    "valid": [
+      "+15559849055",
+      "+1-555-123-4567",
+      "+44 20 7946 0958"
+    ],
+    "invalid": [
+      "123",
+      "invalid-phone",
+      "1234567890123456789"
+    ],
+    "international": {
+      "us": "+1-555-123-4567",
+      "uk": "+44 20 7946 0958",
+      "de": "+49 30 12345678"
+    }
+  },
+  "addresses": {
+    "complete": {
+      "street": "456 Updated St",
+      "city": "New City", 
+      "state": "New State",
+      "zipCode": "54321",
+      "country": "Updated Country"
+    },
+    "partial": {
+      "street": "123 Updated Street",
+      "city": "Updated City"
+    }
+  },
+  "profilePictures": {
+    "validUrl": "https://via.placeholder.com/150?text=UpdatedUser",
+    "avatarUpload": {
+      "fileName": "profile-picture.jpg",
+      "fileSize": 1024000,
+      "mimeType": "image/jpeg"
+    }
+  }
+}

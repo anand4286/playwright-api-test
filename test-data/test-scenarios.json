@@ -1,0 +1,39 @@
+[
+  {
+    "id": "f1485b46-34a4-42d5-bb46-27a32e5f920a",
+    "name": "Complete User Registration Flow",
+    "description": "End-to-end user registration with email verification",
+    "steps": [
+      "Register new user",
+      "Verify email address",
+      "Complete profile setup",
+      "Login with new credentials"
+    ],
+    "expectedOutcome": "User successfully registered and logged in",
+    "priority": "High",
+    "tags": [
+      "registration",
+      "smoke",
+      "critical-path"
+    ]
+  },
+  {
+    "id": "62246f0c-0f4a-47cd-ba9d-8f532efb2de1",
+    "name": "User Profile Management",
+    "description": "Update user profile information including email and phone",
+    "steps": [
+      "Login with existing user",
+      "Update email address",
+      "Update phone number",
+      "Update profile information",
+      "Verify changes persisted"
+    ],
+    "expectedOutcome": "Profile information successfully updated",
+    "priority": "High",
+    "tags": [
+      "profile",
+      "regression",
+      "user-management"
+    ]
+  }
+]

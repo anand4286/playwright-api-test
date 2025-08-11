@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright API Testing Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 1.3em;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        .metric.success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .metric.warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+        }
+
+        .metric.error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .metric h4 {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .metric p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .results-table th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .results-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875em;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-badge.passed {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-badge.failed {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status-badge.skipped {
+            background: #feebc8;
+            color: #744210;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75em;
+            margin-right: 0.25rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+        }
+
+        .loading::after {
+            content: "...";
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: #718096; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 #718096, .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 #718096, .5em 0 0 #718096; }
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+            margin-bottom: 1rem;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .real-time-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #48bb78;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875em;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .real-time-indicator::before {
+            content: "●";
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .tab:hover {
+            background: #f7fafc;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎭 Playwright API Testing Dashboard</h1>
+        <p>Real-time monitoring and analytics for your API test suite</p>
+    </div>
+
+    <div class="real-time-indicator">
+        Live Updates
+    </div>
+
+    <div class="container">
+        <button class="refresh-btn" onclick="refreshData()">🔄 Refresh Data</button>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="tab" onclick="showTab('results')">📝 Test Results</button>
+            <button class="tab" onclick="showTab('api-logs')">🔗 API Logs</button>
+            <button class="tab" onclick="showTab('traceability')">🗺️ Traceability</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="metrics-grid">
+                <div class="metric">
+                    <h4 id="total-tests">0</h4>
+                    <p>Total Tests</p>
+                </div>
+                <div class="metric success">
+                    <h4 id="passed-tests">0</h4>
+                    <p>Passed</p>
+                </div>
+                <div class="metric error">
+                    <h4 id="failed-tests">0</h4>
+                    <p>Failed</p>
+                </div>
+                <div class="metric warning">
+                    <h4 id="success-rate">0%</h4>
+                    <p>Success Rate</p>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>📈 Test Results Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="resultsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>⏱️ Test Execution Timeline</h3>
+                    <div class="chart-container">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🏷️ Test Categories</h3>
+                    <div class="chart-container">
+                        <canvas id="categoriesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🌐 API Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Results Tab -->
+        <div id="results" class="tab-content">
+            <div class="card">
+                <h3>📋 Detailed Test Results</h3>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Tags</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody id="test-results-tbody">
+                            <tr>
+                                <td colspan="5" class="loading">Loading test results</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Logs Tab -->
+        <div id="api-logs" class="tab-content">
+            <div class="card">
+                <h3>🔗 API Request/Response Logs</h3>
+                <div id="api-logs-content" class="loading">Loading API logs</div>
+            </div>
+        </div>
+
+        <!-- Traceability Tab -->
+        <div id="traceability" class="tab-content">
+            <div class="card">
+                <h3>🗺️ Requirements Traceability Matrix</h3>
+                <div id="traceability-content" class="loading">Loading traceability matrix</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let socket;
+        let currentData = null;
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSocket();
+            refreshData();
+        });
+
+        // Initialize WebSocket connection
+        function initializeSocket() {
+            socket = io();
+            
+            socket.on('connect', function() {
+                console.log('Connected to dashboard server');
+            });
+
+            socket.on('test-results-update', function(data) {
+                if (data) {
+                    currentData = data;
+                    updateDashboard(data);
+                }
+            });
+
+            socket.on('disconnect', function() {
+                console.log('Disconnected from dashboard server');
+            });
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Load tab-specific data
+            if (tabName === 'api-logs') {
+                loadApiLogs();
+            } else if (tabName === 'traceability') {
+                loadTraceability();
+            }
+        }
+
+        // Refresh all data
+        function refreshData() {
+            fetch('/api/test-results')
+                .then(response => response.json())
+                .then(data => {
+                    currentData = data;
+                    updateDashboard(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching test results:', error);
+                });
+        }
+
+        // Update dashboard with new data
+        function updateDashboard(data) {
+            if (!data || !data.tests) return;
+
+            // Update metrics
+            document.getElementById('total-tests').textContent = data.total || 0;
+            document.getElementById('passed-tests').textContent = data.passed || 0;
+            document.getElementById('failed-tests').textContent = data.failed || 0;
+            
+            const successRate = data.total > 0 ? Math.round((data.passed / data.total) * 100) : 0;
+            document.getElementById('success-rate').textContent = successRate + '%';
+
+            // Update charts
+            updateResultsChart(data);
+            updateTimelineChart(data);
+            updateCategoriesChart(data);
+            
+            // Update test results table
+            updateTestResultsTable(data.tests);
+        }
+
+        // Update results pie chart
+        function updateResultsChart(data) {
+            const ctx = document.getElementById('resultsChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Passed', 'Failed', 'Skipped'],
+                    datasets: [{
+                        data: [data.passed || 0, data.failed || 0, data.skipped || 0],
+                        backgroundColor: ['#48bb78', '#f56565', '#ed8936'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update timeline chart
+        function updateTimelineChart(data) {
+            if (!data.tests) return;
+
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            
+            const timeData = data.tests.map((test, index) => ({
+                x: index,
+                y: test.duration,
+                status: test.status
+            }));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Test Duration (ms)',
+                        data: timeData.map(d => d.y),
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Duration (ms)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Test Number'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update categories chart
+        function updateCategoriesChart(data) {
+            if (!data.tests) return;
+
+            const ctx = document.getElementById('categoriesChart').getContext('2d');
+            
+            // Count tests by tags
+            const tagCounts = {};
+            data.tests.forEach(test => {
+                if (test.tags && test.tags.length > 0) {
+                    test.tags.forEach(tag => {
+                        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                    });
+                }
+            });
+
+            const labels = Object.keys(tagCounts);
+            const counts = Object.values(tagCounts);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Test Count',
+                        data: counts,
+                        backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                        borderColor: '#667eea',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Tests'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update test results table
+        function updateTestResultsTable(tests) {
+            const tbody = document.getElementById('test-results-tbody');
+            
+            if (!tests || tests.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No test results available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = tests.map(test => `
+                <tr>
+                    <td>${test.title.replace(/@\w+/g, '').trim()}</td>
+                    <td><span class="status-badge ${test.status}">${test.status.toUpperCase()}</span></td>
+                    <td>${test.duration}ms</td>
+                    <td>
+                        ${(test.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </td>
+                    <td>${test.file ? test.file.split('/').pop() : 'N/A'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Load API logs
+        function loadApiLogs() {
+            fetch('/api/api-logs')
+                .then(response => response.json())
+                .then(data => {
+                    const content = document.getElementById('api-logs-content');
+                    
+                    if (data.requests && data.requests.length > 0) {
+                        content.innerHTML = `
+                            <div style="margin-bottom: 1rem;">
+                                <strong>Total API Requests: ${data.totalRequests}</strong>
+                            </div>
+                            <div class="table-container">
+                                <table class="results-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>Method</th>
+                                            <th>URL</th>
+                                            <th>Status</th>
+                                            <th>Response Time</th>
+                                            <th>Scenario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${data.requests.slice(0, 50).map(req => `
+                                            <tr>
+                                                <td>${new Date(req.timestamp).toLocaleString()}</td>
+                                                <td><span style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">${req.method || 'N/A'}</span></td>
+                                                <td>${req.url || 'N/A'}</td>
+                                                <td>${req.status || 'N/A'}</td>
+                                                <td>${req.responseTime ? req.responseTime + 'ms' : 'N/A'}</td>
+                                                <td>${req.scenarioName || 'N/A'}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                    } else {
+                        content.innerHTML = '<p style="text-align: center; color: #718096;">No API logs available</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading API logs:', error);
+                    document.getElementById('api-logs-content').innerHTML = '<p style="color: #f56565;">Error loading API logs</p>';
+                });
+        }
+
+        // Load traceability matrix
+        function loadTraceability() {
+            fetch('/api/traceability')
+                .then(response => response.json())
+                .then(data => {
+                    const content = document.getElementById('traceability-content');
+                    
+                    if (data.requirements) {
+                        content.innerHTML = generateTraceabilityMatrix(data);
+                    } else {
+                        content.innerHTML = '<p style="text-align: center; color: #718096;">No traceability data available</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading traceability:', error);
+                    document.getElementById('traceability-content').innerHTML = '<p style="color: #f56565;">Error loading traceability matrix</p>';
+                });
+        }
+
+        // Generate traceability matrix HTML
+        function generateTraceabilityMatrix(data) {
+            return `
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Requirement ID</th>
+                                <th>Description</th>
+                                <th>Test Cases</th>
+                                <th>Coverage</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.requirements.map(req => `
+                                <tr>
+                                    <td>${req.id}</td>
+                                    <td>${req.description}</td>
+                                    <td>
+                                        ${req.testCases.map(tc => `<span class="tag">${tc}</span>`).join('')}
+                                    </td>
+                                    <td>${req.coverage}%</td>
+                                    <td><span class="status-badge ${req.status.toLowerCase()}">${req.status}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Initialize performance chart (placeholder)
+        function initPerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['GET', 'POST', 'PUT', 'DELETE'],
+                    datasets: [{
+                        label: 'Avg Response Time (ms)',
+                        data: [120, 250, 180, 95],
+                        backgroundColor: 'rgba(118, 75, 162, 0.6)',
+                        borderColor: '#764ba2',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Response Time (ms)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize performance chart after page load
+        setTimeout(initPerformanceChart, 1000);
+    </script>
+</body>
+</html>

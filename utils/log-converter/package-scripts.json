@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "convert:logs": "node utils/log-converter/quick-start.ts",
+    "convert:logs:custom": "node utils/log-converter/log-converter-cli.ts",
+    "convert:demo": "utils/log-converter/demo.sh",
+    "convert:test": "node utils/log-converter/test-converter.ts",
+    "convert:batch": "node utils/log-converter/log-converter-cli.ts --batch-size 100 --migration-mode full"
+  }
+}

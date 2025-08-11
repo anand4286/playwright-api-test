@@ -1,0 +1,307 @@
+{
+  "config": {
+    "configFile": "/Users/Anand/github/playwright-api-test/playwright.config.js",
+    "rootDir": "/Users/Anand/github/playwright-api-test/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": "/Users/Anand/github/playwright-api-test/utils/globalTeardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "reports/qa-html-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/qa-test-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "reports/qa-junit-results.xml"
+        }
+      ],
+      [
+        "/Users/Anand/github/playwright-api-test/utils/customReporter.ts",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/qa",
+        "repeatEach": 1,
+        "retries": 5,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "qa-api-tests",
+        "name": "qa-api-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/qa",
+        "repeatEach": 1,
+        "retries": 5,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "qa-api-tests-debug",
+        "name": "qa-api-tests-debug",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/qa",
+        "repeatEach": 1,
+        "retries": 5,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "qa-performance-tests",
+        "name": "qa-performance-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/performance-*.spec.ts"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/qa",
+        "repeatEach": 1,
+        "retries": 5,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "qa-security-tests",
+        "name": "qa-security-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/security-*.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "dashboard-demo.spec.ts",
+      "file": "dashboard-demo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Dashboard Demo Data",
+          "file": "dashboard-demo.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "API test to populate dashboard @smoke",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "qa-api-tests",
+                  "projectName": "qa-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1602,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📊 Getting users list...\n"
+                        },
+                        {
+                          "text": "👤 Getting user 1 details...\n"
+                        },
+                        {
+                          "text": "📝 Creating new post...\n"
+                        },
+                        {
+                          "text": "✅ Created post with ID: 101\n"
+                        },
+                        {
+                          "text": "📝 Updating post 101...\n"
+                        },
+                        {
+                          "text": "✅ Post updated successfully\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T11:24:38.313Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/qa/dashboard-demo-Dashboard-D-51dc9-to-populate-dashboard-smoke-qa-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9504e5afde21e9077f09-4435f95005f575cf6628",
+              "file": "dashboard-demo.spec.ts",
+              "line": 6,
+              "column": 7
+            },
+            {
+              "title": "API error handling test @regression",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "qa-api-tests",
+                  "projectName": "qa-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 110,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🔍 Testing error handling...\n"
+                        },
+                        {
+                          "text": "✅ Error handling tests completed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T11:24:38.310Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/qa/dashboard-demo-Dashboard-D-0b37b-or-handling-test-regression-qa-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9504e5afde21e9077f09-35bb7e03e66299405240",
+              "file": "dashboard-demo.spec.ts",
+              "line": 73,
+              "column": 7
+            },
+            {
+              "title": "Performance test for dashboard metrics @performance",
+              "ok": true,
+              "tags": [
+                "performance"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "qa-api-tests",
+                  "projectName": "qa-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 97,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⚡ Running performance tests...\n"
+                        },
+                        {
+                          "text": "⚡ Completed 5 concurrent requests in 83ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T11:24:38.317Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/qa/dashboard-demo-Dashboard-D-8ad25-shboard-metrics-performance-qa-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9504e5afde21e9077f09-f27403f5bcbd6f54a17a",
+              "file": "dashboard-demo.spec.ts",
+              "line": 91,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-11T11:24:37.950Z",
+    "duration": 5643.059,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

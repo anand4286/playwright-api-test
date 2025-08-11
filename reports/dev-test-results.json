@@ -1,0 +1,363 @@
+{
+  "config": {
+    "configFile": "/Users/Anand/github/playwright-api-test/playwright.config.js",
+    "rootDir": "/Users/Anand/github/playwright-api-test/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": "/Users/Anand/github/playwright-api-test/utils/globalTeardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "reports/dev-html-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/dev-test-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "reports/dev-junit-results.xml"
+        }
+      ],
+      [
+        "/Users/Anand/github/playwright-api-test/utils/customReporter.ts",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/dev",
+        "repeatEach": 1,
+        "retries": 3,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "dev-api-tests",
+        "name": "dev-api-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/dev",
+        "repeatEach": 1,
+        "retries": 3,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "dev-api-tests-debug",
+        "name": "dev-api-tests-debug",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/dev",
+        "repeatEach": 1,
+        "retries": 3,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "dev-performance-tests",
+        "name": "dev-performance-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/performance-*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/Anand/github/playwright-api-test/test-results/dev",
+        "repeatEach": 1,
+        "retries": 3,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "dev-security-tests",
+        "name": "dev-security-tests",
+        "testDir": "/Users/Anand/github/playwright-api-test/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/security-*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "real-working/final-working-tests.spec.ts",
+      "file": "real-working/final-working-tests.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Final Real Working Tests",
+          "file": "real-working/final-working-tests.spec.ts",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "User Registration Test @smoke @registration",
+              "ok": true,
+              "tags": [
+                "smoke",
+                "registration"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "user-id",
+                      "description": 11
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "dev-api-tests",
+                  "projectName": "dev-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 854,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n📍 TEST STEP: Test User Registration\n⏰ Step Started: 2025-08-11T13:36:26.723Z\n────────────────────────────────────────────────────────────\n\n\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📤 HTTP REQUEST\n================================================================================\n🧪 Test Case: User Registration Test @smoke @registration\n📍 Test Step: Test User Registration\n🌐 Method: POST\n🔗 URL: https://jsonplaceholder.typicode.com/users\n⏰ Timestamp: 2025-08-11T13:36:26.723Z\n🏷️  Test ID: 6a7f3291-a4aa-41c7-b524-f8a095ea1731\n🎭 Scenario: User Registration\n\n📋 Request Headers:\n{}\n\n📤 Request Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user_1754919386722\",\n  \"email\": \"test1754919386722@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  }\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:26.723\",\n  \"level\": \"debug\",\n  \"message\": \"🔄 API Request\",\n  \"type\": \"api_request\",\n  \"testCase\": \"User Registration Test @smoke @registration\",\n  \"testStep\": \"Test User Registration\",\n  \"method\": \"POST\",\n  \"url\": \"https://jsonplaceholder.typicode.com/users\",\n  \"headers\": {},\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user_1754919386722\",\n    \"email\": \"test1754919386722@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    }\n  },\n  \"testId\": \"6a7f3291-a4aa-41c7-b524-f8a095ea1731\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📥 HTTP RESPONSE\n================================================================================\n🧪 Test Case: User Registration Test @smoke @registration\n📍 Test Step: Test User Registration\n📊 Status: 201 Created\n⏱️  Response Time: 819ms\n⏰ Timestamp: 2025-08-11T13:36:27.544Z\n🏷️  Test ID: 6a7f3291-a4aa-41c7-b524-f8a095ea1731\n🎭 Scenario: User Registration\n\n📋 Response Headers:\n{\n  \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"content-length\": \"452\",\n  \"connection\": \"keep-alive\",\n  \"access-control-allow-credentials\": \"true\",\n  \"access-control-expose-headers\": \"Location\",\n  \"cache-control\": \"no-cache\",\n  \"etag\": \"W/\\\"1c4-73nXxKJQlFoSg+puNEG4Jm2NdCU\\\"\",\n  \"expires\": \"-1\",\n  \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n  \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n  \"pragma\": \"no-cache\",\n  \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n  \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n  \"server\": \"cloudflare\",\n  \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n  \"via\": \"2.0 heroku-router\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-powered-by\": \"Express\",\n  \"x-ratelimit-limit\": \"1000\",\n  \"x-ratelimit-remaining\": \"997\",\n  \"x-ratelimit-reset\": \"1754919407\",\n  \"cf-cache-status\": \"DYNAMIC\",\n  \"cf-ray\": \"96d81f379cb1cfbb-MEL\",\n  \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n}\n\n📥 Response Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user_1754919386722\",\n  \"email\": \"test1754919386722@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  },\n  \"id\": 11\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.545\",\n  \"level\": \"debug\",\n  \"message\": \"✅ API Response\",\n  \"type\": \"api_response\",\n  \"testCase\": \"User Registration Test @smoke @registration\",\n  \"testStep\": \"Test User Registration\",\n  \"status\": 201,\n  \"statusText\": \"Created\",\n  \"headers\": {\n    \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n    \"content-type\": \"application/json; charset=utf-8\",\n    \"content-length\": \"452\",\n    \"connection\": \"keep-alive\",\n    \"access-control-allow-credentials\": \"true\",\n    \"access-control-expose-headers\": \"Location\",\n    \"cache-control\": \"no-cache\",\n    \"etag\": \"W/\\\"1c4-73nXxKJQlFoSg+puNEG4Jm2NdCU\\\"\",\n    \"expires\": \"-1\",\n    \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n    \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n    \"pragma\": \"no-cache\",\n    \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n    \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n    \"server\": \"cloudflare\",\n    \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n    \"via\": \"2.0 heroku-router\",\n    \"x-content-type-options\": \"nosniff\",\n    \"x-powered-by\": \"Express\",\n    \"x-ratelimit-limit\": \"1000\",\n    \"x-ratelimit-remaining\": \"997\",\n    \"x-ratelimit-reset\": \"1754919407\",\n    \"cf-cache-status\": \"DYNAMIC\",\n    \"cf-ray\": \"96d81f379cb1cfbb-MEL\",\n    \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n  },\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user_1754919386722\",\n    \"email\": \"test1754919386722@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    },\n    \"id\": 11\n  },\n  \"responseTime\": 819,\n  \"testId\": \"6a7f3291-a4aa-41c7-b524-f8a095ea1731\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T13:36:26.713Z",
+                      "annotations": [
+                        {
+                          "type": "user-id",
+                          "description": 11
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/dev/real-working-final-working-73837-ion-Test-smoke-registration-dev-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5e6208acefb30ed00bfa-18c8a1ea5c017a425909",
+              "file": "real-working/final-working-tests.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "User Registration with Validation @regression",
+              "ok": true,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "dev-api-tests",
+                  "projectName": "dev-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 441,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n📍 TEST STEP: Test User Registration\n⏰ Step Started: 2025-08-11T13:36:26.725Z\n────────────────────────────────────────────────────────────\n\n\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📤 HTTP REQUEST\n================================================================================\n🧪 Test Case: User Registration with Validation @regression\n📍 Test Step: Test User Registration\n🌐 Method: POST\n🔗 URL: https://jsonplaceholder.typicode.com/users\n⏰ Timestamp: 2025-08-11T13:36:26.725Z\n🏷️  Test ID: f741ec30-6d79-41ef-b14a-9af3035d9c0b\n🎭 Scenario: User Registration\n\n📋 Request Headers:\n{}\n\n📤 Request Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user_1754919386724\",\n  \"email\": \"test1754919386724@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  }\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:26.725\",\n  \"level\": \"debug\",\n  \"message\": \"🔄 API Request\",\n  \"type\": \"api_request\",\n  \"testCase\": \"User Registration with Validation @regression\",\n  \"testStep\": \"Test User Registration\",\n  \"method\": \"POST\",\n  \"url\": \"https://jsonplaceholder.typicode.com/users\",\n  \"headers\": {},\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user_1754919386724\",\n    \"email\": \"test1754919386724@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    }\n  },\n  \"testId\": \"f741ec30-6d79-41ef-b14a-9af3035d9c0b\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📥 HTTP RESPONSE\n================================================================================\n🧪 Test Case: User Registration with Validation @regression\n📍 Test Step: Test User Registration\n📊 Status: 201 Created\n⏱️  Response Time: 407ms\n⏰ Timestamp: 2025-08-11T13:36:27.135Z\n🏷️  Test ID: f741ec30-6d79-41ef-b14a-9af3035d9c0b\n🎭 Scenario: User Registration\n\n📋 Response Headers:\n{\n  \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"content-length\": \"452\",\n  \"connection\": \"keep-alive\",\n  \"access-control-allow-credentials\": \"true\",\n  \"access-control-expose-headers\": \"Location\",\n  \"cache-control\": \"no-cache\",\n  \"etag\": \"W/\\\"1c4-MqdukKrBEeqxrF4ojQypARDVYuc\\\"\",\n  \"expires\": \"-1\",\n  \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n  \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n  \"pragma\": \"no-cache\",\n  \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919386\\\"}],\\\"max_age\\\":3600}\",\n  \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\\\"\",\n  \"server\": \"cloudflare\",\n  \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n  \"via\": \"2.0 heroku-router\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-powered-by\": \"Express\",\n  \"x-ratelimit-limit\": \"1000\",\n  \"x-ratelimit-remaining\": \"998\",\n  \"x-ratelimit-reset\": \"1754919407\",\n  \"cf-cache-status\": \"DYNAMIC\",\n  \"cf-ray\": \"96d81f379895e6b1-MEL\",\n  \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n}\n\n📥 Response Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user_1754919386724\",\n  \"email\": \"test1754919386724@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  },\n  \"id\": 11\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.135\",\n  \"level\": \"debug\",\n  \"message\": \"✅ API Response\",\n  \"type\": \"api_response\",\n  \"testCase\": \"User Registration with Validation @regression\",\n  \"testStep\": \"Test User Registration\",\n  \"status\": 201,\n  \"statusText\": \"Created\",\n  \"headers\": {\n    \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n    \"content-type\": \"application/json; charset=utf-8\",\n    \"content-length\": \"452\",\n    \"connection\": \"keep-alive\",\n    \"access-control-allow-credentials\": \"true\",\n    \"access-control-expose-headers\": \"Location\",\n    \"cache-control\": \"no-cache\",\n    \"etag\": \"W/\\\"1c4-MqdukKrBEeqxrF4ojQypARDVYuc\\\"\",\n    \"expires\": \"-1\",\n    \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n    \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n    \"pragma\": \"no-cache\",\n    \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919386\\\"}],\\\"max_age\\\":3600}\",\n    \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\\\"\",\n    \"server\": \"cloudflare\",\n    \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n    \"via\": \"2.0 heroku-router\",\n    \"x-content-type-options\": \"nosniff\",\n    \"x-powered-by\": \"Express\",\n    \"x-ratelimit-limit\": \"1000\",\n    \"x-ratelimit-remaining\": \"998\",\n    \"x-ratelimit-reset\": \"1754919407\",\n    \"cf-cache-status\": \"DYNAMIC\",\n    \"cf-ray\": \"96d81f379895e6b1-MEL\",\n    \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n  },\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user_1754919386724\",\n    \"email\": \"test1754919386724@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    },\n    \"id\": 11\n  },\n  \"responseTime\": 407,\n  \"testId\": \"f741ec30-6d79-41ef-b14a-9af3035d9c0b\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T13:36:26.715Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/dev/real-working-final-working-9294a--with-Validation-regression-dev-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5e6208acefb30ed00bfa-c077b406b4282d52fbc8",
+              "file": "real-working/final-working-tests.spec.ts",
+              "line": 29,
+              "column": 7
+            },
+            {
+              "title": "Multiple User Registration @performance",
+              "ok": true,
+              "tags": [
+                "performance"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "dev-api-tests",
+                  "projectName": "dev-api-tests",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1466,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n📍 TEST STEP: Test User Registration\n⏰ Step Started: 2025-08-11T13:36:26.724Z\n────────────────────────────────────────────────────────────\n\n\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📤 HTTP REQUEST\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n🌐 Method: POST\n🔗 URL: https://jsonplaceholder.typicode.com/users\n⏰ Timestamp: 2025-08-11T13:36:26.725Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Request Headers:\n{}\n\n📤 Request Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user01754919386724\",\n  \"email\": \"test01754919386724@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  }\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:26.725\",\n  \"level\": \"debug\",\n  \"message\": \"🔄 API Request\",\n  \"type\": \"api_request\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"method\": \"POST\",\n  \"url\": \"https://jsonplaceholder.typicode.com/users\",\n  \"headers\": {},\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user01754919386724\",\n    \"email\": \"test01754919386724@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    }\n  },\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📥 HTTP RESPONSE\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n📊 Status: 201 Created\n⏱️  Response Time: 407ms\n⏰ Timestamp: 2025-08-11T13:36:27.134Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Response Headers:\n{\n  \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"content-length\": \"453\",\n  \"connection\": \"keep-alive\",\n  \"access-control-allow-credentials\": \"true\",\n  \"access-control-expose-headers\": \"Location\",\n  \"cache-control\": \"no-cache\",\n  \"etag\": \"W/\\\"1c5-A0vjIWMDIETrQUvmsMj/uH5l2Do\\\"\",\n  \"expires\": \"-1\",\n  \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n  \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n  \"pragma\": \"no-cache\",\n  \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919386\\\"}],\\\"max_age\\\":3600}\",\n  \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\\\"\",\n  \"server\": \"cloudflare\",\n  \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n  \"via\": \"2.0 heroku-router\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-powered-by\": \"Express\",\n  \"x-ratelimit-limit\": \"1000\",\n  \"x-ratelimit-remaining\": \"999\",\n  \"x-ratelimit-reset\": \"1754919407\",\n  \"cf-cache-status\": \"DYNAMIC\",\n  \"cf-ray\": \"96d81f379c39f7b6-MEL\",\n  \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n}\n\n📥 Response Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user01754919386724\",\n  \"email\": \"test01754919386724@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  },\n  \"id\": 11\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.135\",\n  \"level\": \"debug\",\n  \"message\": \"✅ API Response\",\n  \"type\": \"api_response\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"status\": 201,\n  \"statusText\": \"Created\",\n  \"headers\": {\n    \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n    \"content-type\": \"application/json; charset=utf-8\",\n    \"content-length\": \"453\",\n    \"connection\": \"keep-alive\",\n    \"access-control-allow-credentials\": \"true\",\n    \"access-control-expose-headers\": \"Location\",\n    \"cache-control\": \"no-cache\",\n    \"etag\": \"W/\\\"1c5-A0vjIWMDIETrQUvmsMj/uH5l2Do\\\"\",\n    \"expires\": \"-1\",\n    \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n    \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n    \"pragma\": \"no-cache\",\n    \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919386\\\"}],\\\"max_age\\\":3600}\",\n    \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\\\"\",\n    \"server\": \"cloudflare\",\n    \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n    \"via\": \"2.0 heroku-router\",\n    \"x-content-type-options\": \"nosniff\",\n    \"x-powered-by\": \"Express\",\n    \"x-ratelimit-limit\": \"1000\",\n    \"x-ratelimit-remaining\": \"999\",\n    \"x-ratelimit-reset\": \"1754919407\",\n    \"cf-cache-status\": \"DYNAMIC\",\n    \"cf-ray\": \"96d81f379c39f7b6-MEL\",\n    \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n  },\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user01754919386724\",\n    \"email\": \"test01754919386724@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    },\n    \"id\": 11\n  },\n  \"responseTime\": 407,\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n📍 TEST STEP: Test User Registration\n⏰ Step Started: 2025-08-11T13:36:27.144Z\n────────────────────────────────────────────────────────────\n\n\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📤 HTTP REQUEST\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n🌐 Method: POST\n🔗 URL: https://jsonplaceholder.typicode.com/users\n⏰ Timestamp: 2025-08-11T13:36:27.144Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Request Headers:\n{}\n\n📤 Request Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user11754919387144\",\n  \"email\": \"test11754919387144@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  }\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.144\",\n  \"level\": \"debug\",\n  \"message\": \"🔄 API Request\",\n  \"type\": \"api_request\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"method\": \"POST\",\n  \"url\": \"https://jsonplaceholder.typicode.com/users\",\n  \"headers\": {},\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user11754919387144\",\n    \"email\": \"test11754919387144@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    }\n  },\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📥 HTTP RESPONSE\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n📊 Status: 201 Created\n⏱️  Response Time: 662ms\n⏰ Timestamp: 2025-08-11T13:36:27.808Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Response Headers:\n{\n  \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"content-length\": \"453\",\n  \"connection\": \"keep-alive\",\n  \"access-control-allow-credentials\": \"true\",\n  \"access-control-expose-headers\": \"Location\",\n  \"cache-control\": \"no-cache\",\n  \"etag\": \"W/\\\"1c5-6sR2kw08x/NzRJ3chR8gKj3jorI\\\"\",\n  \"expires\": \"-1\",\n  \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n  \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n  \"pragma\": \"no-cache\",\n  \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n  \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n  \"server\": \"cloudflare\",\n  \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n  \"via\": \"2.0 heroku-router\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-powered-by\": \"Express\",\n  \"x-ratelimit-limit\": \"1000\",\n  \"x-ratelimit-remaining\": \"996\",\n  \"x-ratelimit-reset\": \"1754919407\",\n  \"cf-cache-status\": \"DYNAMIC\",\n  \"cf-ray\": \"96d81f39e86ef7b6-MEL\",\n  \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n}\n\n📥 Response Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user11754919387144\",\n  \"email\": \"test11754919387144@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  },\n  \"id\": 11\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.808\",\n  \"level\": \"debug\",\n  \"message\": \"✅ API Response\",\n  \"type\": \"api_response\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"status\": 201,\n  \"statusText\": \"Created\",\n  \"headers\": {\n    \"date\": \"Mon, 11 Aug 2025 13:36:27 GMT\",\n    \"content-type\": \"application/json; charset=utf-8\",\n    \"content-length\": \"453\",\n    \"connection\": \"keep-alive\",\n    \"access-control-allow-credentials\": \"true\",\n    \"access-control-expose-headers\": \"Location\",\n    \"cache-control\": \"no-cache\",\n    \"etag\": \"W/\\\"1c5-6sR2kw08x/NzRJ3chR8gKj3jorI\\\"\",\n    \"expires\": \"-1\",\n    \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n    \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n    \"pragma\": \"no-cache\",\n    \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n    \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n    \"server\": \"cloudflare\",\n    \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n    \"via\": \"2.0 heroku-router\",\n    \"x-content-type-options\": \"nosniff\",\n    \"x-powered-by\": \"Express\",\n    \"x-ratelimit-limit\": \"1000\",\n    \"x-ratelimit-remaining\": \"996\",\n    \"x-ratelimit-reset\": \"1754919407\",\n    \"cf-cache-status\": \"DYNAMIC\",\n    \"cf-ray\": \"96d81f39e86ef7b6-MEL\",\n    \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n  },\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user11754919387144\",\n    \"email\": \"test11754919387144@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    },\n    \"id\": 11\n  },\n  \"responseTime\": 662,\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n📍 TEST STEP: Test User Registration\n⏰ Step Started: 2025-08-11T13:36:27.815Z\n────────────────────────────────────────────────────────────\n\n\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📤 HTTP REQUEST\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n🌐 Method: POST\n🔗 URL: https://jsonplaceholder.typicode.com/users\n⏰ Timestamp: 2025-08-11T13:36:27.816Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Request Headers:\n{}\n\n📤 Request Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user21754919387815\",\n  \"email\": \"test21754919387815@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  }\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:27.816\",\n  \"level\": \"debug\",\n  \"message\": \"🔄 API Request\",\n  \"type\": \"api_request\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"method\": \"POST\",\n  \"url\": \"https://jsonplaceholder.typicode.com/users\",\n  \"headers\": {},\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user21754919387815\",\n    \"email\": \"test21754919387815@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    }\n  },\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        },
+                        {
+                          "text": "\n================================================================================\n📥 HTTP RESPONSE\n================================================================================\n🧪 Test Case: Multiple User Registration @performance\n📍 Test Step: Test User Registration\n📊 Status: 201 Created\n⏱️  Response Time: 334ms\n⏰ Timestamp: 2025-08-11T13:36:28.151Z\n🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6\n🎭 Scenario: User Registration\n\n📋 Response Headers:\n{\n  \"date\": \"Mon, 11 Aug 2025 13:36:28 GMT\",\n  \"content-type\": \"application/json; charset=utf-8\",\n  \"content-length\": \"453\",\n  \"connection\": \"keep-alive\",\n  \"access-control-allow-credentials\": \"true\",\n  \"access-control-expose-headers\": \"Location\",\n  \"cache-control\": \"no-cache\",\n  \"etag\": \"W/\\\"1c5-ijyv/IOZZ72cueaozBmsYWUs1bo\\\"\",\n  \"expires\": \"-1\",\n  \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n  \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n  \"pragma\": \"no-cache\",\n  \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n  \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n  \"server\": \"cloudflare\",\n  \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n  \"via\": \"2.0 heroku-router\",\n  \"x-content-type-options\": \"nosniff\",\n  \"x-powered-by\": \"Express\",\n  \"x-ratelimit-limit\": \"1000\",\n  \"x-ratelimit-remaining\": \"995\",\n  \"x-ratelimit-reset\": \"1754919407\",\n  \"cf-cache-status\": \"DYNAMIC\",\n  \"cf-ray\": \"96d81f3e1ff4f7b6-MEL\",\n  \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n}\n\n📥 Response Body:\n{\n  \"name\": \"Test User\",\n  \"username\": \"user21754919387815\",\n  \"email\": \"test21754919387815@example.com\",\n  \"phone\": \"+1234567890\",\n  \"website\": \"https://example.com\",\n  \"address\": {\n    \"street\": \"123 Test St\",\n    \"city\": \"Test City\",\n    \"state\": \"Test State\",\n    \"zipCode\": \"12345\",\n    \"country\": \"Test Country\"\n  },\n  \"company\": {\n    \"name\": \"Test Company\",\n    \"department\": \"Engineering\",\n    \"jobTitle\": \"Software Developer\"\n  },\n  \"id\": 11\n}\n================================================================================\n\n"
+                        },
+                        {
+                          "text": "{\n  \"timestamp\": \"13:36:28.152\",\n  \"level\": \"debug\",\n  \"message\": \"✅ API Response\",\n  \"type\": \"api_response\",\n  \"testCase\": \"Multiple User Registration @performance\",\n  \"testStep\": \"Test User Registration\",\n  \"status\": 201,\n  \"statusText\": \"Created\",\n  \"headers\": {\n    \"date\": \"Mon, 11 Aug 2025 13:36:28 GMT\",\n    \"content-type\": \"application/json; charset=utf-8\",\n    \"content-length\": \"453\",\n    \"connection\": \"keep-alive\",\n    \"access-control-allow-credentials\": \"true\",\n    \"access-control-expose-headers\": \"Location\",\n    \"cache-control\": \"no-cache\",\n    \"etag\": \"W/\\\"1c5-ijyv/IOZZ72cueaozBmsYWUs1bo\\\"\",\n    \"expires\": \"-1\",\n    \"location\": \"https://jsonplaceholder.typicode.com/users/11\",\n    \"nel\": \"{\\\"report_to\\\":\\\"heroku-nel\\\",\\\"response_headers\\\":[\\\"Via\\\"],\\\"max_age\\\":3600,\\\"success_fraction\\\":0.01,\\\"failure_fraction\\\":0.1}\",\n    \"pragma\": \"no-cache\",\n    \"report-to\": \"{\\\"group\\\":\\\"heroku-nel\\\",\\\"endpoints\\\":[{\\\"url\\\":\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\\\u0026ts=1754919387\\\"}],\\\"max_age\\\":3600}\",\n    \"reporting-endpoints\": \"heroku-nel=\\\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\\\"\",\n    \"server\": \"cloudflare\",\n    \"vary\": \"Origin, X-HTTP-Method-Override, Accept-Encoding\",\n    \"via\": \"2.0 heroku-router\",\n    \"x-content-type-options\": \"nosniff\",\n    \"x-powered-by\": \"Express\",\n    \"x-ratelimit-limit\": \"1000\",\n    \"x-ratelimit-remaining\": \"995\",\n    \"x-ratelimit-reset\": \"1754919407\",\n    \"cf-cache-status\": \"DYNAMIC\",\n    \"cf-ray\": \"96d81f3e1ff4f7b6-MEL\",\n    \"alt-svc\": \"h3=\\\":443\\\"; ma=86400\"\n  },\n  \"body\": {\n    \"name\": \"Test User\",\n    \"username\": \"user21754919387815\",\n    \"email\": \"test21754919387815@example.com\",\n    \"phone\": \"+1234567890\",\n    \"website\": \"https://example.com\",\n    \"address\": {\n      \"street\": \"123 Test St\",\n      \"city\": \"Test City\",\n      \"state\": \"Test State\",\n      \"zipCode\": \"12345\",\n      \"country\": \"Test Country\"\n    },\n    \"company\": {\n      \"name\": \"Test Company\",\n      \"department\": \"Engineering\",\n      \"jobTitle\": \"Software Developer\"\n    },\n    \"id\": 11\n  },\n  \"responseTime\": 334,\n  \"testId\": \"4407685f-c650-4910-8b1d-a1559c9374b6\",\n  \"scenarioName\": \"User Registration\"\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-11T13:36:26.715Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/Anand/github/playwright-api-test/test-results/dev/real-working-final-working-cb79a-er-Registration-performance-dev-api-tests/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5e6208acefb30ed00bfa-2e33903c5d4dcba08b0a",
+              "file": "real-working/final-working-tests.spec.ts",
+              "line": 41,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-11T13:36:26.404Z",
+    "duration": 5470.451,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

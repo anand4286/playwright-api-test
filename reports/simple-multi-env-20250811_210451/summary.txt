@@ -1,0 +1,9 @@
+Multi-Environment Test Summary
+Generated: Mon Aug 11 21:07:46 AEST 2025
+
+Environments Tested: dev
+Total: 1
+Passed: 0 ()
+Failed: 1 (dev)
+
+Reports Location: reports/simple-multi-env-20250811_210451

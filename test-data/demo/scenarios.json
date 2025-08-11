@@ -1,0 +1,41 @@
+{
+  "scenarios": {
+    "traceDemo": {
+      "postData": {
+        "title": "Test Post for Trace Demo",
+        "body": "This is a test post to demonstrate trace functionality"
+      }
+    },
+    "dashboardDemo": {
+      "createPost": {
+        "title": "Dashboard Demo Post", 
+        "body": "This post was created to demonstrate dashboard functionality"
+      },
+      "updatePost": {
+        "title": "Updated Dashboard Demo Post",
+        "body": "This post was updated to show PUT request in dashboard"
+      }
+    },
+    "performanceTest": {
+      "concurrentRequests": 5,
+      "maxResponseTime": 5000,
+      "expectedMaxResponseTime": 2000
+    },
+    "errorScenarios": {
+      "notFound": {
+        "userIds": [999999],
+        "postIds": [999999]
+      },
+      "invalidRequests": {
+        "malformedData": {
+          "title": "",
+          "body": null
+        }
+      }
+    }
+  },
+  "users": {
+    "testUserIds": [1, 2, 3, 4, 5],
+    "invalidUserIds": [999999, 0, -1]
+  }
+}
