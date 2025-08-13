@@ -1,0 +1,95 @@
+{
+  "cycle": "demo-cycle-2",
+  "environment": "dev",
+  "generatedAt": "2025-08-12T23:21:34.019Z",
+  "totalTests": 26,
+  "passed": 9,
+  "failed": 17,
+  "skipped": 0,
+  "passRate": 35,
+  "requirements": 4,
+  "executionTime": 27281,
+  "cycleDuration": 0,
+  "requirementCoverage": [
+    {
+      "requirementId": "REQ-STO-001",
+      "passRate": 100,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "lastExecuted": 1755040894020,
+      "category": "STO"
+    },
+    {
+      "requirementId": "REQ-STO-002",
+      "passRate": 20,
+      "totalTests": 10,
+      "passedTests": 2,
+      "failedTests": 8,
+      "lastExecuted": 1755040894020,
+      "category": "STO"
+    },
+    {
+      "requirementId": "REQ-STO-003",
+      "passRate": 67,
+      "totalTests": 6,
+      "passedTests": 4,
+      "failedTests": 2,
+      "lastExecuted": 1755040894020,
+      "category": "STO"
+    },
+    {
+      "requirementId": "REQ-STO-004",
+      "passRate": 13,
+      "totalTests": 8,
+      "passedTests": 1,
+      "failedTests": 7,
+      "lastExecuted": 1755040894020,
+      "category": "STO"
+    }
+  ],
+  "trends": [
+    {
+      "timestamp": "2025-08-12T23:20:00.000Z",
+      "passRate": 35,
+      "totalTests": 26,
+      "passed": 9,
+      "failed": 17
+    }
+  ],
+  "failureAnalysis": {
+    "totalFailures": 17,
+    "topErrorPatterns": [
+      {
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected",
+        "count": 9
+      },
+      {
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value",
+        "count": 8
+      }
+    ],
+    "requirementFailures": [
+      {
+        "requirement": "REQ-STO-002",
+        "count": 8
+      },
+      {
+        "requirement": "REQ-STO-004",
+        "count": 7
+      },
+      {
+        "requirement": "REQ-STO-003",
+        "count": 2
+      }
+    ]
+  },
+  "performanceMetrics": {
+    "avgExecutionTime": 1049,
+    "minExecutionTime": 235,
+    "maxExecutionTime": 1728,
+    "medianExecutionTime": 1076,
+    "p95ExecutionTime": 1608,
+    "slowTests": []
+  }
+}

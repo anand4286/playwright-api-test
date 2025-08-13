@@ -1,0 +1,467 @@
+{
+  "apiInfo": {
+    "name": "E-commerce API",
+    "version": "2.0.0",
+    "description": "Complete e-commerce platform API with products, orders, and payments"
+  },
+  "generated": "2025-08-13T00:12:06.339Z",
+  "totalTestCases": 21,
+  "testCases": [
+    {
+      "id": "REQ-E-COMMERCE-API-001-TC-001",
+      "requirementId": "REQ-E-COMMERCE-API-001",
+      "title": "GET /products - Valid Request",
+      "description": "Test successful GET operation for /products",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-001-TC-002",
+      "requirementId": "REQ-E-COMMERCE-API-001",
+      "title": "GET /products - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-001-TC-003",
+      "requirementId": "REQ-E-COMMERCE-API-001",
+      "title": "GET /products - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-002-TC-004",
+      "requirementId": "REQ-E-COMMERCE-API-002",
+      "title": "POST /products - Valid Request",
+      "description": "Test successful POST operation for /products",
+      "category": "Products",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/products",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "name": "Test Item",
+          "description": "Test Description"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-002-TC-005",
+      "requirementId": "REQ-E-COMMERCE-API-002",
+      "title": "POST /products - Invalid Data",
+      "description": "Test POST operation with invalid data",
+      "category": "Products",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/products",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "invalidField": "test"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-002-TC-006",
+      "requirementId": "REQ-E-COMMERCE-API-002",
+      "title": "POST /products - Edge Case",
+      "description": "Test POST operation edge cases",
+      "category": "Products",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/products",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-003-TC-007",
+      "requirementId": "REQ-E-COMMERCE-API-003",
+      "title": "GET /products/{productId} - Valid Request",
+      "description": "Test successful GET operation for /products/{productId}",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products/{productId}",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-003-TC-008",
+      "requirementId": "REQ-E-COMMERCE-API-003",
+      "title": "GET /products/{productId} - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products/{productId}",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-003-TC-009",
+      "requirementId": "REQ-E-COMMERCE-API-003",
+      "title": "GET /products/{productId} - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Products",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/products/{productId}",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-004-TC-010",
+      "requirementId": "REQ-E-COMMERCE-API-004",
+      "title": "GET /orders - Valid Request",
+      "description": "Test successful GET operation for /orders",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-004-TC-011",
+      "requirementId": "REQ-E-COMMERCE-API-004",
+      "title": "GET /orders - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-004-TC-012",
+      "requirementId": "REQ-E-COMMERCE-API-004",
+      "title": "GET /orders - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-005-TC-013",
+      "requirementId": "REQ-E-COMMERCE-API-005",
+      "title": "POST /orders - Valid Request",
+      "description": "Test successful POST operation for /orders",
+      "category": "Orders",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/orders",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "name": "Test Item",
+          "description": "Test Description"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-005-TC-014",
+      "requirementId": "REQ-E-COMMERCE-API-005",
+      "title": "POST /orders - Invalid Data",
+      "description": "Test POST operation with invalid data",
+      "category": "Orders",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/orders",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "invalidField": "test"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-005-TC-015",
+      "requirementId": "REQ-E-COMMERCE-API-005",
+      "title": "POST /orders - Edge Case",
+      "description": "Test POST operation edge cases",
+      "category": "Orders",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/orders",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-006-TC-016",
+      "requirementId": "REQ-E-COMMERCE-API-006",
+      "title": "GET /orders/{orderId} - Valid Request",
+      "description": "Test successful GET operation for /orders/{orderId}",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders/{orderId}",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-006-TC-017",
+      "requirementId": "REQ-E-COMMERCE-API-006",
+      "title": "GET /orders/{orderId} - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders/{orderId}",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-006-TC-018",
+      "requirementId": "REQ-E-COMMERCE-API-006",
+      "title": "GET /orders/{orderId} - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Orders",
+      "priority": "High",
+      "method": "GET",
+      "endpoint": "/orders/{orderId}",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-007-TC-019",
+      "requirementId": "REQ-E-COMMERCE-API-007",
+      "title": "POST /payments - Valid Request",
+      "description": "Test successful POST operation for /payments",
+      "category": "Payments",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/payments",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "name": "Test Item",
+          "description": "Test Description"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-007-TC-020",
+      "requirementId": "REQ-E-COMMERCE-API-007",
+      "title": "POST /payments - Invalid Data",
+      "description": "Test POST operation with invalid data",
+      "category": "Payments",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/payments",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "invalidField": "test"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-E-COMMERCE-API-007-TC-021",
+      "requirementId": "REQ-E-COMMERCE-API-007",
+      "title": "POST /payments - Edge Case",
+      "description": "Test POST operation edge cases",
+      "category": "Payments",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/payments",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    }
+  ]
+}

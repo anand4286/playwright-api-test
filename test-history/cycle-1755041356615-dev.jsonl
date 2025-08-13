@@ -1,0 +1,1 @@
+{"requirementId":"REQ-PET-004","testCaseId":"REQ-PET-004-TC-002","testName":"Find pet by invalid ID - expect 404","status":"PASS","executionTime":946,"details":"Correctly returned 404 for non-existent pet ID: 999999999","timestamp":1755041357562,"environment":"dev","cycle":"cycle-1755041356615"}

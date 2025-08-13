@@ -1,0 +1,104 @@
+{
+  "cycle": "demo-cycle-1",
+  "environment": "dev",
+  "generatedAt": "2025-08-12T22:56:20.583Z",
+  "totalTests": 38,
+  "passed": 10,
+  "failed": 28,
+  "skipped": 0,
+  "passRate": 26,
+  "requirements": 5,
+  "executionTime": 39131,
+  "cycleDuration": 1,
+  "requirementCoverage": [
+    {
+      "requirementId": "REQ-PET-004",
+      "passRate": 50,
+      "totalTests": 8,
+      "passedTests": 4,
+      "failedTests": 4,
+      "lastExecuted": 1755039380584,
+      "category": "PET"
+    },
+    {
+      "requirementId": "REQ-PET-001",
+      "passRate": 11,
+      "totalTests": 18,
+      "passedTests": 2,
+      "failedTests": 16,
+      "lastExecuted": 1755039380584,
+      "category": "PET"
+    },
+    {
+      "requirementId": "REQ-PET-005",
+      "passRate": 0,
+      "totalTests": 8,
+      "passedTests": 0,
+      "failedTests": 8,
+      "lastExecuted": 1755039380584,
+      "category": "PET"
+    },
+    {
+      "requirementId": "REQ-PET-003",
+      "passRate": 100,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "lastExecuted": 1755039380584,
+      "category": "PET"
+    },
+    {
+      "requirementId": "REQ-PET-002",
+      "passRate": 100,
+      "totalTests": 2,
+      "passedTests": 2,
+      "failedTests": 0,
+      "lastExecuted": 1755039380584,
+      "category": "PET"
+    }
+  ],
+  "trends": [
+    {
+      "timestamp": "2025-08-12T22:55:00.000Z",
+      "passRate": 26,
+      "totalTests": 38,
+      "passed": 10,
+      "failed": 28
+    }
+  ],
+  "failureAnalysis": {
+    "totalFailures": 28,
+    "topErrorPatterns": [
+      {
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value",
+        "count": 16
+      },
+      {
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected",
+        "count": 12
+      }
+    ],
+    "requirementFailures": [
+      {
+        "requirement": "REQ-PET-001",
+        "count": 16
+      },
+      {
+        "requirement": "REQ-PET-005",
+        "count": 8
+      },
+      {
+        "requirement": "REQ-PET-004",
+        "count": 4
+      }
+    ]
+  },
+  "performanceMetrics": {
+    "avgExecutionTime": 1030,
+    "minExecutionTime": 234,
+    "maxExecutionTime": 1930,
+    "medianExecutionTime": 959,
+    "p95ExecutionTime": 1718,
+    "slowTests": []
+  }
+}

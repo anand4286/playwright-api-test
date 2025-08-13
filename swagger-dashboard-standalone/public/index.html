@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagger Dashboard - Universal OpenAPI Testing Framework</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .api-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .api-selector label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .api-selector select {
+            padding: 10px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            min-width: 200px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .api-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .refresh-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .requirements-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .requirements-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .requirement-item {
+            padding: 15px;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .requirement-item:hover {
+            border-color: #667eea;
+        }
+
+        .requirement-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .requirement-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .priority-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .priority-medium {
+            background: #feca57;
+            color: #333;
+        }
+
+        .priority-low {
+            background: #48cae4;
+            color: white;
+        }
+
+        .category-badge {
+            padding: 4px 12px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #555;
+            margin-left: auto;
+        }
+
+        .requirement-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .requirement-endpoint {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .api-selector {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .api-selector select {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Swagger Dashboard</h1>
+            <p>Universal OpenAPI Testing Framework</p>
+        </div>
+
+        <div class="controls">
+            <div class="api-selector">
+                <label for="apiSelect">Select API:</label>
+                <select id="apiSelect">
+                    <option value="">Loading APIs...</option>
+                </select>
+                <button class="refresh-btn" onclick="loadAvailableApis()">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <div id="dashboardContent">
+            <div class="loading">
+                <h3>📡 Loading dashboard...</h3>
+                <p>Please select an API to view its requirements and metrics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentApiId = null;
+        let availableApis = [];
+
+        // Load available APIs on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAvailableApis();
+        });
+
+        async function loadAvailableApis() {
+            try {
+                const response = await fetch('/api/swagger/available');
+                availableApis = await response.json();
+                
+                const select = document.getElementById('apiSelect');
+                select.innerHTML = '<option value="">Select an API...</option>';
+                
+                if (availableApis.length === 0) {
+                    select.innerHTML = '<option value="">No APIs found</option>';
+                    showEmptyState();
+                    return;
+                }
+                
+                availableApis.forEach(api => {
+                    const option = document.createElement('option');
+                    option.value = api.id;
+                    option.textContent = api.name;
+                    select.appendChild(option);
+                });
+                
+                // Add event listener for API selection
+                select.addEventListener('change', function() {
+                    if (this.value) {
+                        loadApiData(this.value);
+                    } else {
+                        showEmptyState();
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error loading APIs:', error);
+                showError('Failed to load available APIs: ' + error.message);
+            }
+        }
+
+        async function loadApiData(apiId) {
+            currentApiId = apiId;
+            showLoading();
+            
+            try {
+                // Load API info, metrics, and requirements in parallel
+                const [infoResponse, metricsResponse, requirementsResponse] = await Promise.all([
+                    fetch(`/api/swagger/${apiId}/info`),
+                    fetch(`/api/swagger/${apiId}/metrics`),
+                    fetch(`/api/swagger/${apiId}/requirements`)
+                ]);
+                
+                const info = await infoResponse.json();
+                const metrics = await metricsResponse.json();
+                const requirements = await requirementsResponse.json();
+                
+                displayDashboard(info, metrics, requirements);
+                
+            } catch (error) {
+                console.error('Error loading API data:', error);
+                showError('Failed to load API data: ' + error.message);
+            }
+        }
+
+        function displayDashboard(info, metrics, requirements) {
+            const content = document.getElementById('dashboardContent');
+            
+            content.innerHTML = `
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>📊 Total Endpoints</h3>
+                        <div class="metric-value">${metrics.totalEndpoints}</div>
+                        <div class="metric-label">API Endpoints</div>
+                    </div>
+                    <div class="card">
+                        <h3>📋 Requirements</h3>
+                        <div class="metric-value">${metrics.totalRequirements}</div>
+                        <div class="metric-label">Test Requirements</div>
+                    </div>
+                    <div class="card">
+                        <h3>🧪 Test Cases</h3>
+                        <div class="metric-value">${metrics.totalTestCases}</div>
+                        <div class="metric-label">Generated Tests</div>
+                    </div>
+                    <div class="card">
+                        <h3>📈 Coverage</h3>
+                        <div class="metric-value">${Math.round((metrics.totalTestCases / metrics.totalEndpoints) * 100) / 100}</div>
+                        <div class="metric-label">Tests per Endpoint</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>🔧 HTTP Methods</h3>
+                        <div class="chart-container">
+                            <canvas id="methodsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>📂 Requirement Categories</h3>
+                        <div class="chart-container">
+                            <canvas id="categoriesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>⚡ Test Priorities</h3>
+                        <div class="chart-container">
+                            <canvas id="prioritiesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="requirements-section">
+                    <h3>📋 Requirements Matrix</h3>
+                    <div class="requirements-grid" id="requirementsGrid">
+                        <!-- Requirements will be populated here -->
+                    </div>
+                </div>
+            `;
+
+            // Create charts
+            createCharts(metrics);
+            
+            // Display requirements
+            displayRequirements(requirements.requirements || []);
+        }
+
+        function createCharts(metrics) {
+            // HTTP Methods Chart
+            const methodsCtx = document.getElementById('methodsChart').getContext('2d');
+            new Chart(methodsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(metrics.endpointsByMethod),
+                    datasets: [{
+                        data: Object.values(metrics.endpointsByMethod),
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4ecdc4'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Categories Chart
+            const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+            new Chart(categoriesCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(metrics.requirementsByCategory),
+                    datasets: [{
+                        label: 'Requirements',
+                        data: Object.values(metrics.requirementsByCategory),
+                        backgroundColor: '#667eea',
+                        borderColor: '#5a6fd8',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Priorities Chart
+            const prioritiesCtx = document.getElementById('prioritiesChart').getContext('2d');
+            new Chart(prioritiesCtx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(metrics.testCasesByPriority),
+                    datasets: [{
+                        data: Object.values(metrics.testCasesByPriority),
+                        backgroundColor: ['#ff6b6b', '#feca57', '#48cae4'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function displayRequirements(requirements) {
+            const grid = document.getElementById('requirementsGrid');
+            
+            if (requirements.length === 0) {
+                grid.innerHTML = '<p>No requirements found for this API.</p>';
+                return;
+            }
+            
+            grid.innerHTML = requirements.map(req => `
+                <div class="requirement-item">
+                    <div class="requirement-header">
+                        <span class="requirement-id">${req.id}</span>
+                        <span class="priority-badge priority-${req.priority.toLowerCase()}">${req.priority}</span>
+                        <span class="category-badge">${req.category}</span>
+                    </div>
+                    <div class="requirement-description">${req.description}</div>
+                    <div class="requirement-endpoint">${req.endpoint}</div>
+                </div>
+            `).join('');
+        }
+
+        function showLoading() {
+            document.getElementById('dashboardContent').innerHTML = `
+                <div class="loading">
+                    <h3>📡 Loading API data...</h3>
+                    <p>Fetching requirements and metrics...</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('dashboardContent').innerHTML = `
+                <div class="error">
+                    <h3>❌ Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        function showEmptyState() {
+            document.getElementById('dashboardContent').innerHTML = `
+                <div class="empty-state">
+                    <h3>🔍 No API Selected</h3>
+                    <p>Please select an API from the dropdown above to view its requirements and metrics.</p>
+                    <p>If no APIs are available, add OpenAPI specification files to the openapi-specs directory.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

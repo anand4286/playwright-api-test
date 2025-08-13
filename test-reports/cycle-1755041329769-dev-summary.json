@@ -1,0 +1,56 @@
+{
+  "cycle": "cycle-1755041329769",
+  "environment": "dev",
+  "generatedAt": "2025-08-12T23:28:50.727Z",
+  "totalTests": 1,
+  "passed": 0,
+  "failed": 1,
+  "skipped": 0,
+  "passRate": 0,
+  "requirements": 1,
+  "executionTime": 947,
+  "cycleDuration": 958,
+  "requirementCoverage": [
+    {
+      "requirementId": "REQ-PET-001",
+      "passRate": 0,
+      "totalTests": 1,
+      "passedTests": 0,
+      "failedTests": 1,
+      "lastExecuted": 1755041330728,
+      "category": "PET"
+    }
+  ],
+  "trends": [
+    {
+      "timestamp": "2025-08-12T23:25:00.000Z",
+      "passRate": 0,
+      "totalTests": 1,
+      "passed": 0,
+      "failed": 1
+    }
+  ],
+  "failureAnalysis": {
+    "totalFailures": 1,
+    "topErrorPatterns": [
+      {
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value",
+        "count": 1
+      }
+    ],
+    "requirementFailures": [
+      {
+        "requirement": "REQ-PET-001",
+        "count": 1
+      }
+    ]
+  },
+  "performanceMetrics": {
+    "avgExecutionTime": 947,
+    "minExecutionTime": 947,
+    "maxExecutionTime": 947,
+    "medianExecutionTime": 947,
+    "p95ExecutionTime": 947,
+    "slowTests": []
+  }
+}

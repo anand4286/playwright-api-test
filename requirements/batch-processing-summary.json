@@ -1,0 +1,28 @@
+{
+  "processedAt": "2025-08-13T00:12:06.339Z",
+  "totalApis": 3,
+  "successfulApis": 3,
+  "failedApis": 0,
+  "totalRequirements": 21,
+  "totalTestCases": 63,
+  "apis": [
+    {
+      "name": "blog-api.json",
+      "status": "SUCCESS",
+      "requirements": 8,
+      "testCases": 24
+    },
+    {
+      "name": "ecommerce-api.yaml",
+      "status": "SUCCESS",
+      "requirements": 7,
+      "testCases": 21
+    },
+    {
+      "name": "user-management-api.json",
+      "status": "SUCCESS",
+      "requirements": 6,
+      "testCases": 18
+    }
+  ]
+}

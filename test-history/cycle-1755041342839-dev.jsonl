@@ -1,0 +1,1 @@
+{"requirementId":"REQ-PET-005","testCaseId":"REQ-PET-005-TC-001","testName":"Delete pet - valid request","status":"PASS","executionTime":1709,"details":"Successfully deleted pet ID: 929686","timestamp":1755041344549,"environment":"dev","cycle":"cycle-1755041342839"}

@@ -1,0 +1,400 @@
+{
+  "apiInfo": {
+    "name": "User Management API",
+    "version": "1.0.0",
+    "description": "API for managing users, profiles, and authentication"
+  },
+  "generated": "2025-08-13T00:12:06.339Z",
+  "totalTestCases": 18,
+  "testCases": [
+    {
+      "id": "REQ-USER-MANAGEMENT-API-001-TC-001",
+      "requirementId": "REQ-USER-MANAGEMENT-API-001",
+      "title": "GET /users - Valid Request",
+      "description": "Test successful GET operation for /users",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-001-TC-002",
+      "requirementId": "REQ-USER-MANAGEMENT-API-001",
+      "title": "GET /users - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-001-TC-003",
+      "requirementId": "REQ-USER-MANAGEMENT-API-001",
+      "title": "GET /users - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-002-TC-004",
+      "requirementId": "REQ-USER-MANAGEMENT-API-002",
+      "title": "POST /users - Valid Request",
+      "description": "Test successful POST operation for /users",
+      "category": "Users",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/users",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "name": "Test Item",
+          "description": "Test Description"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-002-TC-005",
+      "requirementId": "REQ-USER-MANAGEMENT-API-002",
+      "title": "POST /users - Invalid Data",
+      "description": "Test POST operation with invalid data",
+      "category": "Users",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/users",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "invalidField": "test"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-002-TC-006",
+      "requirementId": "REQ-USER-MANAGEMENT-API-002",
+      "title": "POST /users - Edge Case",
+      "description": "Test POST operation edge cases",
+      "category": "Users",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/users",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-003-TC-007",
+      "requirementId": "REQ-USER-MANAGEMENT-API-003",
+      "title": "GET /users/{userId} - Valid Request",
+      "description": "Test successful GET operation for /users/{userId}",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users/{userId}",
+      "test_type": "positive",
+      "test_data": {
+        "queryParams": {
+          "limit": 10,
+          "offset": 0
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-003-TC-008",
+      "requirementId": "REQ-USER-MANAGEMENT-API-003",
+      "title": "GET /users/{userId} - Invalid Data",
+      "description": "Test GET operation with invalid data",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users/{userId}",
+      "test_type": "negative",
+      "test_data": {
+        "queryParams": {
+          "limit": -1,
+          "offset": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-003-TC-009",
+      "requirementId": "REQ-USER-MANAGEMENT-API-003",
+      "title": "GET /users/{userId} - Edge Case",
+      "description": "Test GET operation edge cases",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "GET",
+      "endpoint": "/users/{userId}",
+      "test_type": "boundary",
+      "test_data": {
+        "queryParams": {
+          "limit": 999999,
+          "offset": 999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-004-TC-010",
+      "requirementId": "REQ-USER-MANAGEMENT-API-004",
+      "title": "PUT /users/{userId} - Valid Request",
+      "description": "Test successful PUT operation for /users/{userId}",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "PUT",
+      "endpoint": "/users/{userId}",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "id": 1,
+          "name": "Updated Item"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-004-TC-011",
+      "requirementId": "REQ-USER-MANAGEMENT-API-004",
+      "title": "PUT /users/{userId} - Invalid Data",
+      "description": "Test PUT operation with invalid data",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "PUT",
+      "endpoint": "/users/{userId}",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "id": "invalid",
+          "name": null
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-004-TC-012",
+      "requirementId": "REQ-USER-MANAGEMENT-API-004",
+      "title": "PUT /users/{userId} - Edge Case",
+      "description": "Test PUT operation edge cases",
+      "category": "Users",
+      "priority": "Medium",
+      "method": "PUT",
+      "endpoint": "/users/{userId}",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "id": 0,
+          "name": ""
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-005-TC-013",
+      "requirementId": "REQ-USER-MANAGEMENT-API-005",
+      "title": "DELETE /users/{userId} - Valid Request",
+      "description": "Test successful DELETE operation for /users/{userId}",
+      "category": "Users",
+      "priority": "High",
+      "method": "DELETE",
+      "endpoint": "/users/{userId}",
+      "test_type": "positive",
+      "test_data": {
+        "pathParams": {
+          "id": 1
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-005-TC-014",
+      "requirementId": "REQ-USER-MANAGEMENT-API-005",
+      "title": "DELETE /users/{userId} - Invalid Data",
+      "description": "Test DELETE operation with invalid data",
+      "category": "Users",
+      "priority": "High",
+      "method": "DELETE",
+      "endpoint": "/users/{userId}",
+      "test_type": "negative",
+      "test_data": {
+        "pathParams": {
+          "id": "invalid"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-005-TC-015",
+      "requirementId": "REQ-USER-MANAGEMENT-API-005",
+      "title": "DELETE /users/{userId} - Edge Case",
+      "description": "Test DELETE operation edge cases",
+      "category": "Users",
+      "priority": "High",
+      "method": "DELETE",
+      "endpoint": "/users/{userId}",
+      "test_type": "boundary",
+      "test_data": {
+        "pathParams": {
+          "id": 999999999
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-006-TC-016",
+      "requirementId": "REQ-USER-MANAGEMENT-API-006",
+      "title": "POST /auth/login - Valid Request",
+      "description": "Test successful POST operation for /auth/login",
+      "category": "Authentication",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/auth/login",
+      "test_type": "positive",
+      "test_data": {
+        "body": {
+          "name": "Test Item",
+          "description": "Test Description"
+        }
+      },
+      "expected_result": "Success response with valid data",
+      "tags": [
+        "smoke",
+        "regression"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-006-TC-017",
+      "requirementId": "REQ-USER-MANAGEMENT-API-006",
+      "title": "POST /auth/login - Invalid Data",
+      "description": "Test POST operation with invalid data",
+      "category": "Authentication",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/auth/login",
+      "test_type": "negative",
+      "test_data": {
+        "body": {
+          "invalidField": "test"
+        }
+      },
+      "expected_result": "Error response with appropriate status code",
+      "tags": [
+        "regression",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "REQ-USER-MANAGEMENT-API-006-TC-018",
+      "requirementId": "REQ-USER-MANAGEMENT-API-006",
+      "title": "POST /auth/login - Edge Case",
+      "description": "Test POST operation edge cases",
+      "category": "Authentication",
+      "priority": "High",
+      "method": "POST",
+      "endpoint": "/auth/login",
+      "test_type": "boundary",
+      "test_data": {
+        "body": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "expected_result": "Proper handling of edge case scenarios",
+      "tags": [
+        "edge-case",
+        "regression"
+      ]
+    }
+  ]
+}

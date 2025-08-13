@@ -1,0 +1,826 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-12T22:54:05.073Z",
+    "total_test_cases": 58,
+    "test_types": {
+      "positive": 20,
+      "negative": 23,
+      "boundary": 6,
+      "security": 9
+    }
+  },
+  "testCases": [
+    {
+      "testCaseId": "REQ-PET-001-TC-001",
+      "requirementId": "REQ-PET-001",
+      "title": "uploads an image - Valid Request",
+      "description": "Verify uploads an image with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet/{petId}/uploadImage",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-001-TC-002",
+      "requirementId": "REQ-PET-001",
+      "title": "uploads an image - Unauthorized Access",
+      "description": "Verify uploads an image requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet/{petId}/uploadImage without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-001-TC-003",
+      "requirementId": "REQ-PET-001",
+      "title": "uploads an image - Boundary Values",
+      "description": "Verify uploads an image with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send POST request to /pet/{petId}/uploadImage",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-PET-002-TC-001",
+      "requirementId": "REQ-PET-002",
+      "title": "Add a new pet to the store - Valid Request",
+      "description": "Verify add a new pet to the store with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-002-TC-002",
+      "requirementId": "REQ-PET-002",
+      "title": "Add a new pet to the store - Error 405",
+      "description": "Verify add a new pet to the store returns 405 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send POST request to /pet",
+        "Validate 405 response"
+      ],
+      "expectedResult": "Should return 405 status code: Invalid input"
+    },
+    {
+      "testCaseId": "REQ-PET-002-TC-003",
+      "requirementId": "REQ-PET-002",
+      "title": "Add a new pet to the store - Unauthorized Access",
+      "description": "Verify add a new pet to the store requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-003-TC-001",
+      "requirementId": "REQ-PET-003",
+      "title": "Update an existing pet - Valid Request",
+      "description": "Verify update an existing pet with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send PUT request to /pet",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-003-TC-002",
+      "requirementId": "REQ-PET-003",
+      "title": "Update an existing pet - Error 400",
+      "description": "Verify update an existing pet returns 400 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send PUT request to /pet",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid ID supplied"
+    },
+    {
+      "testCaseId": "REQ-PET-003-TC-003",
+      "requirementId": "REQ-PET-003",
+      "title": "Update an existing pet - Error 404",
+      "description": "Verify update an existing pet returns 404 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send PUT request to /pet",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: Pet not found"
+    },
+    {
+      "testCaseId": "REQ-PET-003-TC-004",
+      "requirementId": "REQ-PET-003",
+      "title": "Update an existing pet - Error 405",
+      "description": "Verify update an existing pet returns 405 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send PUT request to /pet",
+        "Validate 405 response"
+      ],
+      "expectedResult": "Should return 405 status code: Validation exception"
+    },
+    {
+      "testCaseId": "REQ-PET-003-TC-005",
+      "requirementId": "REQ-PET-003",
+      "title": "Update an existing pet - Unauthorized Access",
+      "description": "Verify update an existing pet requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send PUT request to /pet without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-004-TC-001",
+      "requirementId": "REQ-PET-004",
+      "title": "Finds Pets by status - Valid Request",
+      "description": "Verify finds pets by status with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/findByStatus",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-004-TC-002",
+      "requirementId": "REQ-PET-004",
+      "title": "Finds Pets by status - Error 400",
+      "description": "Verify finds pets by status returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /pet/findByStatus",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid status value"
+    },
+    {
+      "testCaseId": "REQ-PET-004-TC-003",
+      "requirementId": "REQ-PET-004",
+      "title": "Finds Pets by status - Unauthorized Access",
+      "description": "Verify finds pets by status requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/findByStatus without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-005-TC-001",
+      "requirementId": "REQ-PET-005",
+      "title": "Finds Pets by tags - Valid Request",
+      "description": "Verify finds pets by tags with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/findByTags",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-005-TC-002",
+      "requirementId": "REQ-PET-005",
+      "title": "Finds Pets by tags - Error 400",
+      "description": "Verify finds pets by tags returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /pet/findByTags",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid tag value"
+    },
+    {
+      "testCaseId": "REQ-PET-005-TC-003",
+      "requirementId": "REQ-PET-005",
+      "title": "Finds Pets by tags - Unauthorized Access",
+      "description": "Verify finds pets by tags requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/findByTags without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-006-TC-001",
+      "requirementId": "REQ-PET-006",
+      "title": "Find pet by ID - Valid Request",
+      "description": "Verify find pet by id with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/{petId}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-006-TC-002",
+      "requirementId": "REQ-PET-006",
+      "title": "Find pet by ID - Error 400",
+      "description": "Verify find pet by id returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /pet/{petId}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid ID supplied"
+    },
+    {
+      "testCaseId": "REQ-PET-006-TC-003",
+      "requirementId": "REQ-PET-006",
+      "title": "Find pet by ID - Error 404",
+      "description": "Verify find pet by id returns 404 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /pet/{petId}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: Pet not found"
+    },
+    {
+      "testCaseId": "REQ-PET-006-TC-004",
+      "requirementId": "REQ-PET-006",
+      "title": "Find pet by ID - Unauthorized Access",
+      "description": "Verify find pet by id requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /pet/{petId} without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-006-TC-005",
+      "requirementId": "REQ-PET-006",
+      "title": "Find pet by ID - Boundary Values",
+      "description": "Verify find pet by id with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send GET request to /pet/{petId}",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-PET-007-TC-001",
+      "requirementId": "REQ-PET-007",
+      "title": "Updates a pet in the store with form data - Valid Request",
+      "description": "Verify updates a pet in the store with form data with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet/{petId}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-007-TC-002",
+      "requirementId": "REQ-PET-007",
+      "title": "Updates a pet in the store with form data - Error 405",
+      "description": "Verify updates a pet in the store with form data returns 405 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send POST request to /pet/{petId}",
+        "Validate 405 response"
+      ],
+      "expectedResult": "Should return 405 status code: Invalid input"
+    },
+    {
+      "testCaseId": "REQ-PET-007-TC-003",
+      "requirementId": "REQ-PET-007",
+      "title": "Updates a pet in the store with form data - Unauthorized Access",
+      "description": "Verify updates a pet in the store with form data requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /pet/{petId} without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-007-TC-004",
+      "requirementId": "REQ-PET-007",
+      "title": "Updates a pet in the store with form data - Boundary Values",
+      "description": "Verify updates a pet in the store with form data with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send POST request to /pet/{petId}",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-PET-008-TC-001",
+      "requirementId": "REQ-PET-008",
+      "title": "Deletes a pet - Valid Request",
+      "description": "Verify deletes a pet with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send DELETE request to /pet/{petId}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-PET-008-TC-002",
+      "requirementId": "REQ-PET-008",
+      "title": "Deletes a pet - Error 400",
+      "description": "Verify deletes a pet returns 400 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /pet/{petId}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid ID supplied"
+    },
+    {
+      "testCaseId": "REQ-PET-008-TC-003",
+      "requirementId": "REQ-PET-008",
+      "title": "Deletes a pet - Error 404",
+      "description": "Verify deletes a pet returns 404 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /pet/{petId}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: Pet not found"
+    },
+    {
+      "testCaseId": "REQ-PET-008-TC-004",
+      "requirementId": "REQ-PET-008",
+      "title": "Deletes a pet - Unauthorized Access",
+      "description": "Verify deletes a pet requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send DELETE request to /pet/{petId} without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-PET-008-TC-005",
+      "requirementId": "REQ-PET-008",
+      "title": "Deletes a pet - Boundary Values",
+      "description": "Verify deletes a pet with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send DELETE request to /pet/{petId}",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-STO-001-TC-001",
+      "requirementId": "REQ-STO-001",
+      "title": "Returns pet inventories by status - Valid Request",
+      "description": "Verify returns pet inventories by status with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /store/inventory",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-STO-001-TC-002",
+      "requirementId": "REQ-STO-001",
+      "title": "Returns pet inventories by status - Unauthorized Access",
+      "description": "Verify returns pet inventories by status requires proper authentication",
+      "priority": "High",
+      "testType": "security",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /store/inventory without authentication",
+        "Validate unauthorized response"
+      ],
+      "expectedResult": "Should return 401 or 403 status code for unauthorized access"
+    },
+    {
+      "testCaseId": "REQ-STO-002-TC-001",
+      "requirementId": "REQ-STO-002",
+      "title": "Place an order for a pet - Valid Request",
+      "description": "Verify place an order for a pet with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /store/order",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-STO-002-TC-002",
+      "requirementId": "REQ-STO-002",
+      "title": "Place an order for a pet - Error 400",
+      "description": "Verify place an order for a pet returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send POST request to /store/order",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid Order"
+    },
+    {
+      "testCaseId": "REQ-STO-003-TC-001",
+      "requirementId": "REQ-STO-003",
+      "title": "Find purchase order by ID - Valid Request",
+      "description": "Verify find purchase order by id with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /store/order/{orderId}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-STO-003-TC-002",
+      "requirementId": "REQ-STO-003",
+      "title": "Find purchase order by ID - Error 400",
+      "description": "Verify find purchase order by id returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /store/order/{orderId}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid ID supplied"
+    },
+    {
+      "testCaseId": "REQ-STO-003-TC-003",
+      "requirementId": "REQ-STO-003",
+      "title": "Find purchase order by ID - Error 404",
+      "description": "Verify find purchase order by id returns 404 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /store/order/{orderId}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: Order not found"
+    },
+    {
+      "testCaseId": "REQ-STO-003-TC-004",
+      "requirementId": "REQ-STO-003",
+      "title": "Find purchase order by ID - Boundary Values",
+      "description": "Verify find purchase order by id with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send GET request to /store/order/{orderId}",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-STO-004-TC-001",
+      "requirementId": "REQ-STO-004",
+      "title": "Delete purchase order by ID - Valid Request",
+      "description": "Verify delete purchase order by id with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send DELETE request to /store/order/{orderId}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-STO-004-TC-002",
+      "requirementId": "REQ-STO-004",
+      "title": "Delete purchase order by ID - Error 400",
+      "description": "Verify delete purchase order by id returns 400 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /store/order/{orderId}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid ID supplied"
+    },
+    {
+      "testCaseId": "REQ-STO-004-TC-003",
+      "requirementId": "REQ-STO-004",
+      "title": "Delete purchase order by ID - Error 404",
+      "description": "Verify delete purchase order by id returns 404 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /store/order/{orderId}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: Order not found"
+    },
+    {
+      "testCaseId": "REQ-STO-004-TC-004",
+      "requirementId": "REQ-STO-004",
+      "title": "Delete purchase order by ID - Boundary Values",
+      "description": "Verify delete purchase order by id with boundary parameter values",
+      "priority": "Medium",
+      "testType": "boundary",
+      "testSteps": [
+        "Prepare test data with boundary values (min/max)",
+        "Send DELETE request to /store/order/{orderId}",
+        "Validate boundary value handling"
+      ],
+      "expectedResult": "Should handle boundary values appropriately"
+    },
+    {
+      "testCaseId": "REQ-USE-001-TC-001",
+      "requirementId": "REQ-USE-001",
+      "title": "Creates list of users with given input array - Valid Request",
+      "description": "Verify creates list of users with given input array with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /user/createWithList",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-002-TC-001",
+      "requirementId": "REQ-USE-002",
+      "title": "Get user by user name - Valid Request",
+      "description": "Verify get user by user name with valid data",
+      "priority": "Medium",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /user/{username}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-002-TC-002",
+      "requirementId": "REQ-USE-002",
+      "title": "Get user by user name - Error 400",
+      "description": "Verify get user by user name returns 400 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /user/{username}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid username supplied"
+    },
+    {
+      "testCaseId": "REQ-USE-002-TC-003",
+      "requirementId": "REQ-USE-002",
+      "title": "Get user by user name - Error 404",
+      "description": "Verify get user by user name returns 404 for invalid input",
+      "priority": "Medium",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /user/{username}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: User not found"
+    },
+    {
+      "testCaseId": "REQ-USE-003-TC-001",
+      "requirementId": "REQ-USE-003",
+      "title": "Updated user - Valid Request",
+      "description": "Verify updated user with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send PUT request to /user/{username}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-003-TC-002",
+      "requirementId": "REQ-USE-003",
+      "title": "Updated user - Error 400",
+      "description": "Verify updated user returns 400 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send PUT request to /user/{username}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid user supplied"
+    },
+    {
+      "testCaseId": "REQ-USE-003-TC-003",
+      "requirementId": "REQ-USE-003",
+      "title": "Updated user - Error 404",
+      "description": "Verify updated user returns 404 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send PUT request to /user/{username}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: User not found"
+    },
+    {
+      "testCaseId": "REQ-USE-004-TC-001",
+      "requirementId": "REQ-USE-004",
+      "title": "Delete user - Valid Request",
+      "description": "Verify delete user with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send DELETE request to /user/{username}",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-004-TC-002",
+      "requirementId": "REQ-USE-004",
+      "title": "Delete user - Error 400",
+      "description": "Verify delete user returns 400 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /user/{username}",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid username supplied"
+    },
+    {
+      "testCaseId": "REQ-USE-004-TC-003",
+      "requirementId": "REQ-USE-004",
+      "title": "Delete user - Error 404",
+      "description": "Verify delete user returns 404 for invalid input",
+      "priority": "High",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send DELETE request to /user/{username}",
+        "Validate 404 response"
+      ],
+      "expectedResult": "Should return 404 status code: User not found"
+    },
+    {
+      "testCaseId": "REQ-USE-005-TC-001",
+      "requirementId": "REQ-USE-005",
+      "title": "Logs user into the system - Valid Request",
+      "description": "Verify logs user into the system with valid data",
+      "priority": "Critical",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /user/login",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-005-TC-002",
+      "requirementId": "REQ-USE-005",
+      "title": "Logs user into the system - Error 400",
+      "description": "Verify logs user into the system returns 400 for invalid input",
+      "priority": "Critical",
+      "testType": "negative",
+      "testSteps": [
+        "Prepare invalid test data (based on error scenario)",
+        "Send GET request to /user/login",
+        "Validate 400 response"
+      ],
+      "expectedResult": "Should return 400 status code: Invalid username/password supplied"
+    },
+    {
+      "testCaseId": "REQ-USE-006-TC-001",
+      "requirementId": "REQ-USE-006",
+      "title": "Logs out current logged in user session - Valid Request",
+      "description": "Verify logs out current logged in user session with valid data",
+      "priority": "Critical",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send GET request to /user/logout",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-007-TC-001",
+      "requirementId": "REQ-USE-007",
+      "title": "Creates list of users with given input array - Valid Request",
+      "description": "Verify creates list of users with given input array with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /user/createWithArray",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    },
+    {
+      "testCaseId": "REQ-USE-008-TC-001",
+      "requirementId": "REQ-USE-008",
+      "title": "Create user - Valid Request",
+      "description": "Verify create user with valid data",
+      "priority": "High",
+      "testType": "positive",
+      "testSteps": [
+        "Prepare valid test data",
+        "Send POST request to /user",
+        "Validate response status and data"
+      ],
+      "expectedResult": "Should return successful response as per acceptance criteria"
+    }
+  ]
+}

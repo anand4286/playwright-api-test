@@ -1,27 +1,850 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="5.470451">
-<testsuite name="real-working/final-working-tests.spec.ts" timestamp="2025-08-11T13:36:26.429Z" hostname="dev-api-tests" tests="3" failures="0" skipped="0" time="2.761" errors="0">
-<testcase name="Final Real Working Tests › User Registration Test @smoke @registration" classname="real-working/final-working-tests.spec.ts" time="0.854">
-<properties>
-<property name="user-id" value="11">
-</property>
-</properties>
+<testsuites id="" name="" tests="249" failures="10" skipped="239" errors="0" time="8.23386">
+<testsuite name="advanced/chained-test-clean.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="4" failures="1" skipped="3" time="0.038" errors="0">
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 1: should register user and generate authentication tokens @smoke @chain" classname="advanced/chained-test-clean.spec.ts" time="0.038">
+<failure message="chained-test-clean.spec.ts:54:7 Step 1: should register user and generate authentication tokens @smoke @chain" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/chained-test-clean.spec.ts:54:7 › Chained Test Flow - User Registration to Profile Management › Step 1: should register user and generate authentication tokens @smoke @chain 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts:67:43
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts:67:43
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts:67:43
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts:67:43
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
 <system-out>
 <![CDATA[
-📍 TEST STEP: Test User Registration
-⏰ Step Started: 2025-08-11T13:36:26.723Z
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.223Z
 ────────────────────────────────────────────────────────────
 
 
 
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.607Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.966Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.340Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-test-clea-65c1b-tication-tokens-smoke-chain-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 2: should access user profile with authentication token @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 3: should update profile with authenticated session @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 4: should verify complete user journey and cleanup session @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/chained-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="3" failures="3" skipped="0" time="0.208" errors="0">
+<testcase name="🔗 Chained Test Scenarios › should execute complete user journey chain with token passing @smoke @chained" classname="advanced/chained-tests.spec.ts" time="0.064">
+<failure message="chained-tests.spec.ts:63:7 should execute complete user journey chain with token passing @smoke @chained" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/chained-tests.spec.ts:63:7 › 🔗 Chained Test Scenarios › should execute complete user journey chain with token passing @smoke @chained 
+
+    TypeError: Cannot read properties of undefined (reading 'userJourney')
+
+      64 |     console.log('🚀 Starting complete user journey chained test');
+      65 |     
+    > 66 |     const userJourneyData = testData.chainedTestData.userJourney;
+         |                                                      ^
+      67 |     console.log('👤 User Journey Data:', JSON.stringify(userJourneyData, null, 2));
+      68 |     
+      69 |     const chainedSteps = [
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:66:54
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'userJourney')
+
+      64 |     console.log('🚀 Starting complete user journey chained test');
+      65 |     
+    > 66 |     const userJourneyData = testData.chainedTestData.userJourney;
+         |                                                      ^
+      67 |     console.log('👤 User Journey Data:', JSON.stringify(userJourneyData, null, 2));
+      68 |     
+      69 |     const chainedSteps = [
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:66:54
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'userJourney')
+
+      64 |     console.log('🚀 Starting complete user journey chained test');
+      65 |     
+    > 66 |     const userJourneyData = testData.chainedTestData.userJourney;
+         |                                                      ^
+      67 |     console.log('👤 User Journey Data:', JSON.stringify(userJourneyData, null, 2));
+      68 |     
+      69 |     const chainedSteps = [
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:66:54
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'userJourney')
+
+      64 |     console.log('🚀 Starting complete user journey chained test');
+      65 |     
+    > 66 |     const userJourneyData = testData.chainedTestData.userJourney;
+         |                                                      ^
+      67 |     console.log('👤 User Journey Data:', JSON.stringify(userJourneyData, null, 2));
+      68 |     
+      69 |     const chainedSteps = [
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:66:54
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🚀 Starting complete user journey chained test
+🚀 Starting complete user journey chained test
+🚀 Starting complete user journey chained test
+🚀 Starting complete user journey chained test
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--d15e8-token-passing-smoke-chained-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="🔗 Chained Test Scenarios › should execute authenticated API operations chain with token management @regression @chained" classname="advanced/chained-tests.spec.ts" time="0.074">
+<failure message="chained-tests.spec.ts:247:7 should execute authenticated API operations chain with token management @regression @chained" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/chained-tests.spec.ts:247:7 › 🔗 Chained Test Scenarios › should execute authenticated API operations chain with token management @regression @chained 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:251:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:251:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:251:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:251:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🚀 Starting authenticated API operations chain
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.209Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting authenticated API operations chain
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.589Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting authenticated API operations chain
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.960Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting authenticated API operations chain
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.320Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--93d26-nagement-regression-chained-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="🔗 Chained Test Scenarios › should handle error recovery in chained operations @regression @chained" classname="advanced/chained-tests.spec.ts" time="0.07">
+<failure message="chained-tests.spec.ts:415:7 should handle error recovery in chained operations @regression @chained" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/chained-tests.spec.ts:415:7 › 🔗 Chained Test Scenarios › should handle error recovery in chained operations @regression @chained 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:418:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:418:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:418:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts:418:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🚀 Starting error recovery chain test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.217Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting error recovery chain test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.589Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting error recovery chain test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:41.957Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting error recovery chain test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.332Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-chained-tests-🔗--161e6-erations-regression-chained-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="advanced/data-driven-clean.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="4" failures="4" skipped="0" time="1.596" errors="0">
+<testcase name="Data-Driven User Profile Tests › should create and validate multiple user profiles with different data sets @regression" classname="advanced/data-driven-clean.spec.ts" time="0.037">
+<failure message="data-driven-clean.spec.ts:40:7 should create and validate multiple user profiles with different data sets @regression" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-clean.spec.ts:40:7 › Data-Driven User Profile Tests › should create and validate multiple user profiles with different data sets @regression 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:57:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:57:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:57:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:57:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.690Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.023Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.387Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.716Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-28906-ferent-data-sets-regression-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="Data-Driven User Profile Tests › should authenticate multiple users with different credential sets @regression" classname="advanced/data-driven-clean.spec.ts" time="0.037">
+<failure message="data-driven-clean.spec.ts:82:7 should authenticate multiple users with different credential sets @regression" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-clean.spec.ts:82:7 › Data-Driven User Profile Tests › should authenticate multiple users with different credential sets @regression 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:99:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:99:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:99:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:99:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.690Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.031Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.395Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.716Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-2a444--credential-sets-regression-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="Data-Driven User Profile Tests › should update user profiles with various data combinations @regression" classname="advanced/data-driven-clean.spec.ts" time="1.458">
+<failure message="data-driven-clean.spec.ts:126:7 should update user profiles with various data combinations @regression" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-clean.spec.ts:126:7 › Data-Driven User Profile Tests › should update user profiles with various data combinations @regression 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 300
+    Received:   500
+
+       at ../utils/testFixtures.ts:241
+
+      239 |       assertSuccessResponse(response: ApiHelperResponse): void {
+      240 |         expect(response.status).toBeGreaterThanOrEqual(200);
+    > 241 |         expect(response.status).toBeLessThan(300);
+          |                                 ^
+      242 |       },
+      243 |
+      244 |       assertErrorResponse(response: ApiHelperResponse, expectedStatus: number): void {
+        at Object.assertSuccessResponse (/Users/Anand/github/playwright-api-test/utils/testFixtures.ts:241:33)
+        at TestActions.updateUserProfile (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:195:20)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:143:7
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-71305-ata-combinations-regression-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-71305-ata-combinations-regression-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.705Z
+────────────────────────────────────────────────────────────
+
+
+[2025-08-12T23:28:42.705Z] 👤 Creating test user: Test User
+
 ================================================================================
 📤 HTTP REQUEST
 ================================================================================
-🧪 Test Case: User Registration Test @smoke @registration
-📍 Test Step: Test User Registration
+🧪 Test Case: should update user profiles with various data combinations @regression
+📍 Test Step: Create Test User
 🌐 Method: POST
 🔗 URL: https://jsonplaceholder.typicode.com/users
-⏰ Timestamp: 2025-08-11T13:36:26.723Z
-🏷️  Test ID: 6a7f3291-a4aa-41c7-b524-f8a095ea1731
+⏰ Timestamp: 2025-08-12T23:28:42.705Z
+🏷️  Test ID: 4d3a05e2-a9f3-474b-91f7-68347e7e7137
 🎭 Scenario: User Registration
 
 📋 Request Headers:
@@ -30,8 +853,8 @@
 📤 Request Body:
 {
   "name": "Test User",
-  "username": "user_1754919386722",
-  "email": "test1754919386722@example.com",
+  "username": "user_1755041322705",
+  "email": "test1755041322705@example.com",
   "phone": "+1234567890",
   "website": "https://example.com",
   "address": {
@@ -50,19 +873,19 @@
 ================================================================================
 
 {
-  "timestamp": "13:36:26.723",
+  "timestamp": "23:28:42.705",
   "level": "debug",
   "message": "🔄 API Request",
   "type": "api_request",
-  "testCase": "User Registration Test @smoke @registration",
-  "testStep": "Test User Registration",
+  "testCase": "should update user profiles with various data combinations @regression",
+  "testStep": "Create Test User",
   "method": "POST",
   "url": "https://jsonplaceholder.typicode.com/users",
   "headers": {},
   "body": {
     "name": "Test User",
-    "username": "user_1754919386722",
-    "email": "test1754919386722@example.com",
+    "username": "user_1755041322705",
+    "email": "test1755041322705@example.com",
     "phone": "+1234567890",
     "website": "https://example.com",
     "address": {
@@ -78,449 +901,37 @@
       "jobTitle": "Software Developer"
     }
   },
-  "testId": "6a7f3291-a4aa-41c7-b524-f8a095ea1731",
+  "testId": "4d3a05e2-a9f3-474b-91f7-68347e7e7137",
   "scenarioName": "User Registration"
 }
 
 ================================================================================
 📥 HTTP RESPONSE
 ================================================================================
-🧪 Test Case: User Registration Test @smoke @registration
-📍 Test Step: Test User Registration
+🧪 Test Case: should update user profiles with various data combinations @regression
+📍 Test Step: Create Test User
 📊 Status: 201 Created
-⏱️  Response Time: 819ms
-⏰ Timestamp: 2025-08-11T13:36:27.544Z
-🏷️  Test ID: 6a7f3291-a4aa-41c7-b524-f8a095ea1731
+⏱️  Response Time: 751ms
+⏰ Timestamp: 2025-08-12T23:28:43.457Z
+🏷️  Test ID: 4d3a05e2-a9f3-474b-91f7-68347e7e7137
 🎭 Scenario: User Registration
 
 📋 Response Headers:
 {
-  "date": "Mon, 11 Aug 2025 13:36:27 GMT",
+  "date": "Tue, 12 Aug 2025 23:28:43 GMT",
   "content-type": "application/json; charset=utf-8",
   "content-length": "452",
   "connection": "keep-alive",
   "access-control-allow-credentials": "true",
   "access-control-expose-headers": "Location",
   "cache-control": "no-cache",
-  "etag": "W/\"1c4-73nXxKJQlFoSg+puNEG4Jm2NdCU\"",
+  "etag": "W/\"1c4-8RW+mumCpGtP7lWHXMpzexaXV+c\"",
   "expires": "-1",
   "location": "https://jsonplaceholder.typicode.com/users/11",
   "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
   "pragma": "no-cache",
-  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
-  "server": "cloudflare",
-  "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-  "via": "2.0 heroku-router",
-  "x-content-type-options": "nosniff",
-  "x-powered-by": "Express",
-  "x-ratelimit-limit": "1000",
-  "x-ratelimit-remaining": "997",
-  "x-ratelimit-reset": "1754919407",
-  "cf-cache-status": "DYNAMIC",
-  "cf-ray": "96d81f379cb1cfbb-MEL",
-  "alt-svc": "h3=\":443\"; ma=86400"
-}
-
-📥 Response Body:
-{
-  "name": "Test User",
-  "username": "user_1754919386722",
-  "email": "test1754919386722@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  },
-  "id": 11
-}
-================================================================================
-
-{
-  "timestamp": "13:36:27.545",
-  "level": "debug",
-  "message": "✅ API Response",
-  "type": "api_response",
-  "testCase": "User Registration Test @smoke @registration",
-  "testStep": "Test User Registration",
-  "status": 201,
-  "statusText": "Created",
-  "headers": {
-    "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-    "content-type": "application/json; charset=utf-8",
-    "content-length": "452",
-    "connection": "keep-alive",
-    "access-control-allow-credentials": "true",
-    "access-control-expose-headers": "Location",
-    "cache-control": "no-cache",
-    "etag": "W/\"1c4-73nXxKJQlFoSg+puNEG4Jm2NdCU\"",
-    "expires": "-1",
-    "location": "https://jsonplaceholder.typicode.com/users/11",
-    "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-    "pragma": "no-cache",
-    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
-    "server": "cloudflare",
-    "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-    "via": "2.0 heroku-router",
-    "x-content-type-options": "nosniff",
-    "x-powered-by": "Express",
-    "x-ratelimit-limit": "1000",
-    "x-ratelimit-remaining": "997",
-    "x-ratelimit-reset": "1754919407",
-    "cf-cache-status": "DYNAMIC",
-    "cf-ray": "96d81f379cb1cfbb-MEL",
-    "alt-svc": "h3=\":443\"; ma=86400"
-  },
-  "body": {
-    "name": "Test User",
-    "username": "user_1754919386722",
-    "email": "test1754919386722@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    },
-    "id": 11
-  },
-  "responseTime": 819,
-  "testId": "6a7f3291-a4aa-41c7-b524-f8a095ea1731",
-  "scenarioName": "User Registration"
-}
-
-[[ATTACHMENT|../test-results/dev/real-working-final-working-73837-ion-Test-smoke-registration-dev-api-tests/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Final Real Working Tests › User Registration with Validation @regression" classname="real-working/final-working-tests.spec.ts" time="0.441">
-<system-out>
-<![CDATA[
-📍 TEST STEP: Test User Registration
-⏰ Step Started: 2025-08-11T13:36:26.725Z
-────────────────────────────────────────────────────────────
-
-
-
-================================================================================
-📤 HTTP REQUEST
-================================================================================
-🧪 Test Case: User Registration with Validation @regression
-📍 Test Step: Test User Registration
-🌐 Method: POST
-🔗 URL: https://jsonplaceholder.typicode.com/users
-⏰ Timestamp: 2025-08-11T13:36:26.725Z
-🏷️  Test ID: f741ec30-6d79-41ef-b14a-9af3035d9c0b
-🎭 Scenario: User Registration
-
-📋 Request Headers:
-{}
-
-📤 Request Body:
-{
-  "name": "Test User",
-  "username": "user_1754919386724",
-  "email": "test1754919386724@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  }
-}
-================================================================================
-
-{
-  "timestamp": "13:36:26.725",
-  "level": "debug",
-  "message": "🔄 API Request",
-  "type": "api_request",
-  "testCase": "User Registration with Validation @regression",
-  "testStep": "Test User Registration",
-  "method": "POST",
-  "url": "https://jsonplaceholder.typicode.com/users",
-  "headers": {},
-  "body": {
-    "name": "Test User",
-    "username": "user_1754919386724",
-    "email": "test1754919386724@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    }
-  },
-  "testId": "f741ec30-6d79-41ef-b14a-9af3035d9c0b",
-  "scenarioName": "User Registration"
-}
-
-================================================================================
-📥 HTTP RESPONSE
-================================================================================
-🧪 Test Case: User Registration with Validation @regression
-📍 Test Step: Test User Registration
-📊 Status: 201 Created
-⏱️  Response Time: 407ms
-⏰ Timestamp: 2025-08-11T13:36:27.135Z
-🏷️  Test ID: f741ec30-6d79-41ef-b14a-9af3035d9c0b
-🎭 Scenario: User Registration
-
-📋 Response Headers:
-{
-  "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-  "content-type": "application/json; charset=utf-8",
-  "content-length": "452",
-  "connection": "keep-alive",
-  "access-control-allow-credentials": "true",
-  "access-control-expose-headers": "Location",
-  "cache-control": "no-cache",
-  "etag": "W/\"1c4-MqdukKrBEeqxrF4ojQypARDVYuc\"",
-  "expires": "-1",
-  "location": "https://jsonplaceholder.typicode.com/users/11",
-  "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-  "pragma": "no-cache",
-  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919386\"}],\"max_age\":3600}",
-  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\"",
-  "server": "cloudflare",
-  "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-  "via": "2.0 heroku-router",
-  "x-content-type-options": "nosniff",
-  "x-powered-by": "Express",
-  "x-ratelimit-limit": "1000",
-  "x-ratelimit-remaining": "998",
-  "x-ratelimit-reset": "1754919407",
-  "cf-cache-status": "DYNAMIC",
-  "cf-ray": "96d81f379895e6b1-MEL",
-  "alt-svc": "h3=\":443\"; ma=86400"
-}
-
-📥 Response Body:
-{
-  "name": "Test User",
-  "username": "user_1754919386724",
-  "email": "test1754919386724@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  },
-  "id": 11
-}
-================================================================================
-
-{
-  "timestamp": "13:36:27.135",
-  "level": "debug",
-  "message": "✅ API Response",
-  "type": "api_response",
-  "testCase": "User Registration with Validation @regression",
-  "testStep": "Test User Registration",
-  "status": 201,
-  "statusText": "Created",
-  "headers": {
-    "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-    "content-type": "application/json; charset=utf-8",
-    "content-length": "452",
-    "connection": "keep-alive",
-    "access-control-allow-credentials": "true",
-    "access-control-expose-headers": "Location",
-    "cache-control": "no-cache",
-    "etag": "W/\"1c4-MqdukKrBEeqxrF4ojQypARDVYuc\"",
-    "expires": "-1",
-    "location": "https://jsonplaceholder.typicode.com/users/11",
-    "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-    "pragma": "no-cache",
-    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919386\"}],\"max_age\":3600}",
-    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\"",
-    "server": "cloudflare",
-    "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-    "via": "2.0 heroku-router",
-    "x-content-type-options": "nosniff",
-    "x-powered-by": "Express",
-    "x-ratelimit-limit": "1000",
-    "x-ratelimit-remaining": "998",
-    "x-ratelimit-reset": "1754919407",
-    "cf-cache-status": "DYNAMIC",
-    "cf-ray": "96d81f379895e6b1-MEL",
-    "alt-svc": "h3=\":443\"; ma=86400"
-  },
-  "body": {
-    "name": "Test User",
-    "username": "user_1754919386724",
-    "email": "test1754919386724@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    },
-    "id": 11
-  },
-  "responseTime": 407,
-  "testId": "f741ec30-6d79-41ef-b14a-9af3035d9c0b",
-  "scenarioName": "User Registration"
-}
-
-[[ATTACHMENT|../test-results/dev/real-working-final-working-9294a--with-Validation-regression-dev-api-tests/trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Final Real Working Tests › Multiple User Registration @performance" classname="real-working/final-working-tests.spec.ts" time="1.466">
-<system-out>
-<![CDATA[
-📍 TEST STEP: Test User Registration
-⏰ Step Started: 2025-08-11T13:36:26.724Z
-────────────────────────────────────────────────────────────
-
-
-
-================================================================================
-📤 HTTP REQUEST
-================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-🌐 Method: POST
-🔗 URL: https://jsonplaceholder.typicode.com/users
-⏰ Timestamp: 2025-08-11T13:36:26.725Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
-
-📋 Request Headers:
-{}
-
-📤 Request Body:
-{
-  "name": "Test User",
-  "username": "user01754919386724",
-  "email": "test01754919386724@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  }
-}
-================================================================================
-
-{
-  "timestamp": "13:36:26.725",
-  "level": "debug",
-  "message": "🔄 API Request",
-  "type": "api_request",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
-  "method": "POST",
-  "url": "https://jsonplaceholder.typicode.com/users",
-  "headers": {},
-  "body": {
-    "name": "Test User",
-    "username": "user01754919386724",
-    "email": "test01754919386724@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    }
-  },
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
-  "scenarioName": "User Registration"
-}
-
-================================================================================
-📥 HTTP RESPONSE
-================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-📊 Status: 201 Created
-⏱️  Response Time: 407ms
-⏰ Timestamp: 2025-08-11T13:36:27.134Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
-
-📋 Response Headers:
-{
-  "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-  "content-type": "application/json; charset=utf-8",
-  "content-length": "453",
-  "connection": "keep-alive",
-  "access-control-allow-credentials": "true",
-  "access-control-expose-headers": "Location",
-  "cache-control": "no-cache",
-  "etag": "W/\"1c5-A0vjIWMDIETrQUvmsMj/uH5l2Do\"",
-  "expires": "-1",
-  "location": "https://jsonplaceholder.typicode.com/users/11",
-  "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-  "pragma": "no-cache",
-  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919386\"}],\"max_age\":3600}",
-  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\"",
+  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=K8V6ItSbd7z3opbSNMR6BifCEPNmbLOxl0SbqNqCLOQ%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1755041323\"}],\"max_age\":3600}",
+  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=K8V6ItSbd7z3opbSNMR6BifCEPNmbLOxl0SbqNqCLOQ%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1755041323\"",
   "server": "cloudflare",
   "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
   "via": "2.0 heroku-router",
@@ -528,17 +939,17 @@
   "x-powered-by": "Express",
   "x-ratelimit-limit": "1000",
   "x-ratelimit-remaining": "999",
-  "x-ratelimit-reset": "1754919407",
+  "x-ratelimit-reset": "1755041357",
   "cf-cache-status": "DYNAMIC",
-  "cf-ray": "96d81f379c39f7b6-MEL",
+  "cf-ray": "96e3c02bad4c90a0-MEL",
   "alt-svc": "h3=\":443\"; ma=86400"
 }
 
 📥 Response Body:
 {
   "name": "Test User",
-  "username": "user01754919386724",
-  "email": "test01754919386724@example.com",
+  "username": "user_1755041322705",
+  "email": "test1755041322705@example.com",
   "phone": "+1234567890",
   "website": "https://example.com",
   "address": {
@@ -558,29 +969,29 @@
 ================================================================================
 
 {
-  "timestamp": "13:36:27.135",
+  "timestamp": "23:28:43.457",
   "level": "debug",
   "message": "✅ API Response",
   "type": "api_response",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
+  "testCase": "should update user profiles with various data combinations @regression",
+  "testStep": "Create Test User",
   "status": 201,
   "statusText": "Created",
   "headers": {
-    "date": "Mon, 11 Aug 2025 13:36:27 GMT",
+    "date": "Tue, 12 Aug 2025 23:28:43 GMT",
     "content-type": "application/json; charset=utf-8",
-    "content-length": "453",
+    "content-length": "452",
     "connection": "keep-alive",
     "access-control-allow-credentials": "true",
     "access-control-expose-headers": "Location",
     "cache-control": "no-cache",
-    "etag": "W/\"1c5-A0vjIWMDIETrQUvmsMj/uH5l2Do\"",
+    "etag": "W/\"1c4-8RW+mumCpGtP7lWHXMpzexaXV+c\"",
     "expires": "-1",
     "location": "https://jsonplaceholder.typicode.com/users/11",
     "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
     "pragma": "no-cache",
-    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919386\"}],\"max_age\":3600}",
-    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=ue9RJo51YGGM2TTf4RRZ%2BZrhJ3TEpOhS%2FKFFZUi%2F3ZM%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919386\"",
+    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=K8V6ItSbd7z3opbSNMR6BifCEPNmbLOxl0SbqNqCLOQ%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1755041323\"}],\"max_age\":3600}",
+    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=K8V6ItSbd7z3opbSNMR6BifCEPNmbLOxl0SbqNqCLOQ%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1755041323\"",
     "server": "cloudflare",
     "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
     "via": "2.0 heroku-router",
@@ -588,15 +999,15 @@
     "x-powered-by": "Express",
     "x-ratelimit-limit": "1000",
     "x-ratelimit-remaining": "999",
-    "x-ratelimit-reset": "1754919407",
+    "x-ratelimit-reset": "1755041357",
     "cf-cache-status": "DYNAMIC",
-    "cf-ray": "96d81f379c39f7b6-MEL",
+    "cf-ray": "96e3c02bad4c90a0-MEL",
     "alt-svc": "h3=\":443\"; ma=86400"
   },
   "body": {
     "name": "Test User",
-    "username": "user01754919386724",
-    "email": "test01754919386724@example.com",
+    "username": "user_1755041322705",
+    "email": "test1755041322705@example.com",
     "phone": "+1234567890",
     "website": "https://example.com",
     "address": {
@@ -613,13 +1024,14 @@
     },
     "id": 11
   },
-  "responseTime": 407,
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
+  "responseTime": 751,
+  "testId": "4d3a05e2-a9f3-474b-91f7-68347e7e7137",
   "scenarioName": "User Registration"
 }
+[2025-08-12T23:28:43.457Z] ✅ User created with ID: 11
 
-📍 TEST STEP: Test User Registration
-⏰ Step Started: 2025-08-11T13:36:27.144Z
+📍 TEST STEP: Update User Profile
+⏰ Step Started: 2025-08-12T23:28:43.457Z
 ────────────────────────────────────────────────────────────
 
 
@@ -627,398 +1039,1538 @@
 ================================================================================
 📤 HTTP REQUEST
 ================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-🌐 Method: POST
-🔗 URL: https://jsonplaceholder.typicode.com/users
-⏰ Timestamp: 2025-08-11T13:36:27.144Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
+🧪 Test Case: should update user profiles with various data combinations @regression
+📍 Test Step: Update User Profile
+🌐 Method: PUT
+🔗 URL: https://jsonplaceholder.typicode.com/users/11
+⏰ Timestamp: 2025-08-12T23:28:43.457Z
+🏷️  Test ID: 4d3a05e2-a9f3-474b-91f7-68347e7e7137
+🎭 Scenario: Profile Update
 
 📋 Request Headers:
 {}
 
 📤 Request Body:
 {
-  "name": "Test User",
-  "username": "user11754919387144",
-  "email": "test11754919387144@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  }
+  "fullName": "John Smith",
+  "website": "https://johnsmith.dev",
+  "phone": "+1-555-0101"
 }
 ================================================================================
 
 {
-  "timestamp": "13:36:27.144",
+  "timestamp": "23:28:43.457",
   "level": "debug",
   "message": "🔄 API Request",
   "type": "api_request",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
-  "method": "POST",
-  "url": "https://jsonplaceholder.typicode.com/users",
+  "testCase": "should update user profiles with various data combinations @regression",
+  "testStep": "Update User Profile",
+  "method": "PUT",
+  "url": "https://jsonplaceholder.typicode.com/users/11",
   "headers": {},
   "body": {
-    "name": "Test User",
-    "username": "user11754919387144",
-    "email": "test11754919387144@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    }
+    "fullName": "John Smith",
+    "website": "https://johnsmith.dev",
+    "phone": "+1-555-0101"
   },
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
-  "scenarioName": "User Registration"
+  "testId": "4d3a05e2-a9f3-474b-91f7-68347e7e7137",
+  "scenarioName": "Profile Update"
 }
 
 ================================================================================
 📥 HTTP RESPONSE
 ================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-📊 Status: 201 Created
-⏱️  Response Time: 662ms
-⏰ Timestamp: 2025-08-11T13:36:27.808Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
+🧪 Test Case: should update user profiles with various data combinations @regression
+📍 Test Step: Update User Profile
+📊 Status: 500 Internal Server Error
+⏱️  Response Time: 693ms
+⏰ Timestamp: 2025-08-12T23:28:44.151Z
+🏷️  Test ID: 4d3a05e2-a9f3-474b-91f7-68347e7e7137
+🎭 Scenario: Profile Update
 
 📋 Response Headers:
 {
-  "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-  "content-type": "application/json; charset=utf-8",
-  "content-length": "453",
+  "date": "Tue, 12 Aug 2025 23:28:44 GMT",
+  "content-type": "text/html; charset=utf-8",
+  "content-length": "819",
   "connection": "keep-alive",
   "access-control-allow-credentials": "true",
-  "access-control-expose-headers": "Location",
   "cache-control": "no-cache",
-  "etag": "W/\"1c5-6sR2kw08x/NzRJ3chR8gKj3jorI\"",
+  "etag": "W/\"333-hUw8JUX24BjghGOYHTH5xx+nCFo\"",
   "expires": "-1",
-  "location": "https://jsonplaceholder.typicode.com/users/11",
   "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
   "pragma": "no-cache",
-  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
+  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=tS3hSs3fVZUBX%2BfMi%2BDoL8n8pro2x8s939A9F7YX8qg%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1755041324\"}],\"max_age\":3600}",
+  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=tS3hSs3fVZUBX%2BfMi%2BDoL8n8pro2x8s939A9F7YX8qg%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1755041324\"",
   "server": "cloudflare",
-  "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
+  "vary": "Origin, Accept-Encoding",
   "via": "2.0 heroku-router",
-  "x-content-type-options": "nosniff",
   "x-powered-by": "Express",
   "x-ratelimit-limit": "1000",
-  "x-ratelimit-remaining": "996",
-  "x-ratelimit-reset": "1754919407",
+  "x-ratelimit-remaining": "998",
+  "x-ratelimit-reset": "1755041357",
   "cf-cache-status": "DYNAMIC",
-  "cf-ray": "96d81f39e86ef7b6-MEL",
+  "cf-ray": "96e3c02fefb190a0-MEL",
   "alt-svc": "h3=\":443\"; ma=86400"
 }
 
 📥 Response Body:
-{
-  "name": "Test User",
-  "username": "user11754919387144",
-  "email": "test11754919387144@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  },
-  "id": 11
-}
+"TypeError: Cannot read properties of undefined (reading 'id')\n    at update (/app/node_modules/json-server/lib/server/router/plural.js:262:24)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at next (/app/node_modules/express/lib/router/route.js:137:13)\n    at next (/app/node_modules/express/lib/router/route.js:131:14)\n    at Route.dispatch (/app/node_modules/express/lib/router/route.js:112:3)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at /app/node_modules/express/lib/router/index.js:281:22\n    at param (/app/node_modules/express/lib/router/index.js:354:14)\n    at param (/app/node_modules/express/lib/router/index.js:365:14)\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:410:3)"
 ================================================================================
 
 {
-  "timestamp": "13:36:27.808",
+  "timestamp": "23:28:44.151",
   "level": "debug",
   "message": "✅ API Response",
   "type": "api_response",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
-  "status": 201,
-  "statusText": "Created",
+  "testCase": "should update user profiles with various data combinations @regression",
+  "testStep": "Update User Profile",
+  "status": 500,
+  "statusText": "Internal Server Error",
   "headers": {
-    "date": "Mon, 11 Aug 2025 13:36:27 GMT",
-    "content-type": "application/json; charset=utf-8",
-    "content-length": "453",
+    "date": "Tue, 12 Aug 2025 23:28:44 GMT",
+    "content-type": "text/html; charset=utf-8",
+    "content-length": "819",
     "connection": "keep-alive",
     "access-control-allow-credentials": "true",
-    "access-control-expose-headers": "Location",
     "cache-control": "no-cache",
-    "etag": "W/\"1c5-6sR2kw08x/NzRJ3chR8gKj3jorI\"",
+    "etag": "W/\"333-hUw8JUX24BjghGOYHTH5xx+nCFo\"",
     "expires": "-1",
-    "location": "https://jsonplaceholder.typicode.com/users/11",
     "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
     "pragma": "no-cache",
-    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
+    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=tS3hSs3fVZUBX%2BfMi%2BDoL8n8pro2x8s939A9F7YX8qg%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1755041324\"}],\"max_age\":3600}",
+    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=tS3hSs3fVZUBX%2BfMi%2BDoL8n8pro2x8s939A9F7YX8qg%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1755041324\"",
     "server": "cloudflare",
-    "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
+    "vary": "Origin, Accept-Encoding",
     "via": "2.0 heroku-router",
-    "x-content-type-options": "nosniff",
     "x-powered-by": "Express",
     "x-ratelimit-limit": "1000",
-    "x-ratelimit-remaining": "996",
-    "x-ratelimit-reset": "1754919407",
+    "x-ratelimit-remaining": "998",
+    "x-ratelimit-reset": "1755041357",
     "cf-cache-status": "DYNAMIC",
-    "cf-ray": "96d81f39e86ef7b6-MEL",
+    "cf-ray": "96e3c02fefb190a0-MEL",
     "alt-svc": "h3=\":443\"; ma=86400"
   },
-  "body": {
-    "name": "Test User",
-    "username": "user11754919387144",
-    "email": "test11754919387144@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    },
-    "id": 11
-  },
-  "responseTime": 662,
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
-  "scenarioName": "User Registration"
+  "body": "TypeError: Cannot read properties of undefined (reading 'id')\n    at update (/app/node_modules/json-server/lib/server/router/plural.js:262:24)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at next (/app/node_modules/express/lib/router/route.js:137:13)\n    at next (/app/node_modules/express/lib/router/route.js:131:14)\n    at Route.dispatch (/app/node_modules/express/lib/router/route.js:112:3)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at /app/node_modules/express/lib/router/index.js:281:22\n    at param (/app/node_modules/express/lib/router/index.js:354:14)\n    at param (/app/node_modules/express/lib/router/index.js:365:14)\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:410:3)",
+  "responseTime": 693,
+  "testId": "4d3a05e2-a9f3-474b-91f7-68347e7e7137",
+  "scenarioName": "Profile Update"
 }
-
-📍 TEST STEP: Test User Registration
-⏰ Step Started: 2025-08-11T13:36:27.815Z
-────────────────────────────────────────────────────────────
-
-
-
-================================================================================
-📤 HTTP REQUEST
-================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-🌐 Method: POST
-🔗 URL: https://jsonplaceholder.typicode.com/users
-⏰ Timestamp: 2025-08-11T13:36:27.816Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
-
-📋 Request Headers:
-{}
-
-📤 Request Body:
-{
-  "name": "Test User",
-  "username": "user21754919387815",
-  "email": "test21754919387815@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  }
-}
-================================================================================
-
-{
-  "timestamp": "13:36:27.816",
-  "level": "debug",
-  "message": "🔄 API Request",
-  "type": "api_request",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
-  "method": "POST",
-  "url": "https://jsonplaceholder.typicode.com/users",
-  "headers": {},
-  "body": {
-    "name": "Test User",
-    "username": "user21754919387815",
-    "email": "test21754919387815@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    }
-  },
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
-  "scenarioName": "User Registration"
-}
-
-================================================================================
-📥 HTTP RESPONSE
-================================================================================
-🧪 Test Case: Multiple User Registration @performance
-📍 Test Step: Test User Registration
-📊 Status: 201 Created
-⏱️  Response Time: 334ms
-⏰ Timestamp: 2025-08-11T13:36:28.151Z
-🏷️  Test ID: 4407685f-c650-4910-8b1d-a1559c9374b6
-🎭 Scenario: User Registration
-
-📋 Response Headers:
-{
-  "date": "Mon, 11 Aug 2025 13:36:28 GMT",
-  "content-type": "application/json; charset=utf-8",
-  "content-length": "453",
-  "connection": "keep-alive",
-  "access-control-allow-credentials": "true",
-  "access-control-expose-headers": "Location",
-  "cache-control": "no-cache",
-  "etag": "W/\"1c5-ijyv/IOZZ72cueaozBmsYWUs1bo\"",
-  "expires": "-1",
-  "location": "https://jsonplaceholder.typicode.com/users/11",
-  "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-  "pragma": "no-cache",
-  "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-  "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
-  "server": "cloudflare",
-  "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-  "via": "2.0 heroku-router",
-  "x-content-type-options": "nosniff",
-  "x-powered-by": "Express",
-  "x-ratelimit-limit": "1000",
-  "x-ratelimit-remaining": "995",
-  "x-ratelimit-reset": "1754919407",
-  "cf-cache-status": "DYNAMIC",
-  "cf-ray": "96d81f3e1ff4f7b6-MEL",
-  "alt-svc": "h3=\":443\"; ma=86400"
-}
-
-📥 Response Body:
-{
-  "name": "Test User",
-  "username": "user21754919387815",
-  "email": "test21754919387815@example.com",
-  "phone": "+1234567890",
-  "website": "https://example.com",
-  "address": {
-    "street": "123 Test St",
-    "city": "Test City",
-    "state": "Test State",
-    "zipCode": "12345",
-    "country": "Test Country"
-  },
-  "company": {
-    "name": "Test Company",
-    "department": "Engineering",
-    "jobTitle": "Software Developer"
-  },
-  "id": 11
-}
-================================================================================
-
-{
-  "timestamp": "13:36:28.152",
-  "level": "debug",
-  "message": "✅ API Response",
-  "type": "api_response",
-  "testCase": "Multiple User Registration @performance",
-  "testStep": "Test User Registration",
-  "status": 201,
-  "statusText": "Created",
-  "headers": {
-    "date": "Mon, 11 Aug 2025 13:36:28 GMT",
-    "content-type": "application/json; charset=utf-8",
-    "content-length": "453",
-    "connection": "keep-alive",
-    "access-control-allow-credentials": "true",
-    "access-control-expose-headers": "Location",
-    "cache-control": "no-cache",
-    "etag": "W/\"1c5-ijyv/IOZZ72cueaozBmsYWUs1bo\"",
-    "expires": "-1",
-    "location": "https://jsonplaceholder.typicode.com/users/11",
-    "nel": "{\"report_to\":\"heroku-nel\",\"response_headers\":[\"Via\"],\"max_age\":3600,\"success_fraction\":0.01,\"failure_fraction\":0.1}",
-    "pragma": "no-cache",
-    "report-to": "{\"group\":\"heroku-nel\",\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1754919387\"}],\"max_age\":3600}",
-    "reporting-endpoints": "heroku-nel=\"https://nel.heroku.com/reports?s=xDBZD%2BA6QcSGHmbswTP8H8H%2BujVXXcVDHLMjuzmgRHE%3D&sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&ts=1754919387\"",
-    "server": "cloudflare",
-    "vary": "Origin, X-HTTP-Method-Override, Accept-Encoding",
-    "via": "2.0 heroku-router",
-    "x-content-type-options": "nosniff",
-    "x-powered-by": "Express",
-    "x-ratelimit-limit": "1000",
-    "x-ratelimit-remaining": "995",
-    "x-ratelimit-reset": "1754919407",
-    "cf-cache-status": "DYNAMIC",
-    "cf-ray": "96d81f3e1ff4f7b6-MEL",
-    "alt-svc": "h3=\":443\"; ma=86400"
-  },
-  "body": {
-    "name": "Test User",
-    "username": "user21754919387815",
-    "email": "test21754919387815@example.com",
-    "phone": "+1234567890",
-    "website": "https://example.com",
-    "address": {
-      "street": "123 Test St",
-      "city": "Test City",
-      "state": "Test State",
-      "zipCode": "12345",
-      "country": "Test Country"
-    },
-    "company": {
-      "name": "Test Company",
-      "department": "Engineering",
-      "jobTitle": "Software Developer"
-    },
-    "id": 11
-  },
-  "responseTime": 334,
-  "testId": "4407685f-c650-4910-8b1d-a1559c9374b6",
-  "scenarioName": "User Registration"
-}
-
-[[ATTACHMENT|../test-results/dev/real-working-final-working-cb79a-er-Registration-performance-dev-api-tests/trace.zip]]
 ]]>
 </system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-71305-ata-combinations-regression-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-71305-ata-combinations-regression-dev-api-tests-retry1/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="Bulk Operations Testing › should handle multiple concurrent user operations @performance" classname="advanced/data-driven-clean.spec.ts" time="0.064">
+<failure message="data-driven-clean.spec.ts:174:7 should handle multiple concurrent user operations @performance" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-clean.spec.ts:174:7 › Bulk Operations Testing › should handle multiple concurrent user operations @performance 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:188:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:188:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:188:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #3 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts:188:45
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.665Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.666Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.666Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.666Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:42.666Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.007Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.007Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.007Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.007Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.007Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.370Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.370Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.370Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.370Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.370Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.689Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.689Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.689Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.689Z
+────────────────────────────────────────────────────────────
+
+
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:43.689Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry1/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry2/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-clean-0ffdf-user-operations-performance-dev-api-tests-retry3/trace.zip is missing]]>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="advanced/data-driven-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="3" failures="2" skipped="1" time="0.426" errors="0">
+<testcase name="📊 Data-Driven Test Scenarios › should execute multiple user registration scenarios with for loop validation @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0.027">
+<failure message="data-driven-tests.spec.ts:59:7 should execute multiple user registration scenarios with for loop validation @regression @data-driven" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-tests.spec.ts:59:7 › 📊 Data-Driven Test Scenarios › should execute multiple user registration scenarios with for loop validation @regression @data-driven 
+
+    TypeError: Cannot read properties of undefined (reading 'length')
+
+      61 |     
+      62 |     const registrationScenarios = testData.dataSetTests.multipleUserRegistrations;
+    > 63 |     console.log(`📊 Total registration scenarios to test: ${registrationScenarios.length}`);
+         |                                                                                   ^
+      64 |     
+      65 |     const results = await advancedUtils.executeDataDrivenTest(
+      66 |       registrationScenarios,
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts:63:83
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'length')
+
+      61 |     
+      62 |     const registrationScenarios = testData.dataSetTests.multipleUserRegistrations;
+    > 63 |     console.log(`📊 Total registration scenarios to test: ${registrationScenarios.length}`);
+         |                                                                                   ^
+      64 |     
+      65 |     const results = await advancedUtils.executeDataDrivenTest(
+      66 |       registrationScenarios,
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts:63:83
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🚀 Starting multiple user registration data-driven test
+🚀 Starting multiple user registration data-driven test
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-tests-6610e-tion-regression-data-driven-dev-api-tests-retry1/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="📊 Data-Driven Test Scenarios › should execute bulk profile update scenarios with validation @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0.027">
+<failure message="data-driven-tests.spec.ts:153:7 should execute bulk profile update scenarios with validation @regression @data-driven" type="FAILURE">
+<![CDATA[  [dev-api-tests] › advanced/data-driven-tests.spec.ts:153:7 › 📊 Data-Driven Test Scenarios › should execute bulk profile update scenarios with validation @regression @data-driven 
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts:157:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    TypeError: Cannot read properties of undefined (reading 'fullName')
+
+       at ../utils/test-actions.ts:80
+
+      78 |     
+      79 |     if (this.logConfig.enableFullLogs) {
+    > 80 |       logToConsole(`👤 Creating test user: ${testUser.fullName}`);
+         |                                                       ^
+      81 |     }
+      82 |     
+      83 |     const registrationResult = await this.apiHelper.registerUser(testUser);
+        at TestActions.createTestUser (/Users/Anand/github/playwright-api-test/utils/test-actions.ts:80:55)
+        at /Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts:157:40
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🚀 Starting bulk profile update data-driven test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:44.036Z
+────────────────────────────────────────────────────────────
+
+
+🚀 Starting bulk profile update data-driven test
+
+📍 TEST STEP: Create Test User
+⏰ Step Started: 2025-08-12T23:28:44.354Z
+────────────────────────────────────────────────────────────
+
+
+]]>
+</system-out>
+<system-err>
+<![CDATA[
+Warning: attachment ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests/trace.zip is missing
+Warning: attachment ../test-results/dev/advanced-data-driven-tests-238d5-tion-regression-data-driven-dev-api-tests-retry1/trace.zip is missing]]>
+</system-err>
+</testcase>
+<testcase name="📊 Data-Driven Test Scenarios › should validate data consistency across different formats @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0.372">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/header-validation.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Request Header Validation › should include all required headers in API requests @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Request Header Validation › should handle authentication headers correctly @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Request Header Validation › should set correct Content-Type headers for different operations @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should return all expected headers in API responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should include proper CORS headers in responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should include security headers in responses @regression @headers @security" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should handle API version headers correctly @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should include rate limiting headers in responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should include request tracking headers @regression @headers @tracking" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/negative-scenarios.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Invalid Data Validation Tests › should reject user creation with invalid data combinations @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invalid Data Validation Tests › should handle authentication failures correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Not Found Tests › should return 404 for non-existent user access @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Not Found Tests › should handle invalid resource operations correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Unauthorized Access Tests › should reject access with invalid authentication tokens @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Unauthorized Access Tests › should reject authentication with incomplete credentials @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Case and Boundary Tests › should handle empty and null values appropriately @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Case and Boundary Tests › should handle malformed request data correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/performance-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Concurrent Request Performance › should handle concurrent user creation efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle concurrent read operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle mixed concurrent operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain performance with bulk data processing @performance @bulk" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should handle large data sets efficiently @performance @memory" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain consistent response times @performance @consistency" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should handle timeouts gracefully @performance @timeout" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently manage connection pools @performance @connections" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently clean up resources @performance @cleanup" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth/authentication.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="Authentication Flow › should authenticate user with valid credentials @smoke @critical-path" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › should reject invalid credentials @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › should handle missing credentials @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should maintain session with valid token @smoke" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should refresh authentication token @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should handle session timeout scenarios @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should logout user successfully @smoke" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should change password with valid current password @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should reject password change with invalid current password @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should handle forgot password request @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should reset password with valid token @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Dashboard Demo Data › API test to populate dashboard @smoke" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Demo Data › API error handling test @regression" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Demo Data › Performance test for dashboard metrics @performance" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/pet-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-001: Add a new pet to the store - Valid Request @smoke @regression" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-002: Add pet with invalid data - Error Handling" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-003: Add pet without required fields - Validation" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-002-TC-001: Update an existing pet @regression" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-003-TC-001: Find pets by status @smoke" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-004-TC-001: Find pet by ID - Valid ID" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-004-TC-002: Find pet by invalid ID - Error Handling" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-005-TC-001: Delete pet - Valid Request" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/store-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-001-TC-001: Get store inventory @smoke" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-002-TC-001: Place order for pet - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-002-TC-002: Place order with invalid data - Error Handling" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-003-TC-001: Find order by ID - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-003-TC-002: Find order by invalid ID - Error Handling" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-004-TC-001: Delete order - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/user-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-001-TC-001: Create user - Valid Request @smoke" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-001-TC-002: Create user with invalid data - Error Handling" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-002-TC-001: Create users with array - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-003-TC-001: Create users with list - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-004-TC-001: Get user by username - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-004-TC-002: Get user by non-existent username - Error Handling" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-005-TC-001: Update user - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-006-TC-001: Delete user - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-007-TC-001: User login - Valid Credentials @critical" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-007-TC-002: User login - Invalid Credentials" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-008-TC-001: User logout @critical" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="migration/simple-supertest-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Simple Supertest Format Demo › should generate logs in Supertest format @supertest" classname="migration/simple-supertest-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="migration/supertest-roundtrip-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Supertest Round-Trip Migration Demo › should authenticate user with valid credentials for migration demo @supertest @migration" classname="migration/supertest-roundtrip-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Supertest Round-Trip Migration Demo › should update user profile successfully for migration demo @supertest @migration" classname="migration/supertest-roundtrip-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="profile/profileManagement.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Profile Management › should get user profile information @smoke" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Management › should update basic profile information @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should update email address @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should validate email format during update @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should handle duplicate email update @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should verify email change confirmation @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should update phone number @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should validate phone number format @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should handle international phone numbers @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should verify phone number change @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Address Management › should update address information @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Address Management › should handle partial address updates @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Picture Management › should update profile picture URL @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Picture Management › should handle avatar upload simulation @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/authentication-and-session-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Authentication and Session Management › Authentication and Session Management @auth @session @security" classname="real-working/authentication-and-session-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/avatar-and-file-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Avatar and File Operations › Avatar and File Operations @files @avatar @upload" classname="real-working/avatar-and-file-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/error-handling-and-edge-cases.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Error Handling and Edge Cases › Error Handling and Edge Cases @negative @error @edge-cases" classname="real-working/error-handling-and-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/final-working-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Final Real Working Tests › User Registration Test @smoke @registration" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Final Real Working Tests › User Registration with Validation @regression" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Final Real Working Tests › Multiple User Registration @performance" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/profile-management-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Profile Management Operations › Profile Management Operations @profile @update @regression" classname="real-working/profile-management-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/simple-working-test.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Simple Real Working Test › should register a new user successfully (copy of working test) @smoke @regression" classname="real-working/simple-working-test.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Simple Real Working Test › should create and manage user (copy working pattern) @smoke" classname="real-working/simple-working-test.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/user-list-and-bulk-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="User List and Bulk Operations › User List and Bulk Operations @bulk @performance @users" classname="real-working/user-list-and-bulk-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/user-registration-and-profile-flow.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="User Registration and Profile Flow › User Registration and Profile Flow @smoke @registration @auth" classname="real-working/user-registration-and-profile-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reality-check/converted-test-reality.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Sample Supertest Iblogin - Reality Check › Sample Supertest Iblogin Reality Check @iblogin @auth @headers @testcase" classname="reality-check/converted-test-reality.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="simple.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Simple API Test › should make a basic API call" classname="simple.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="trace-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Trace Demo › simple API test for trace demonstration @smoke" classname="trace-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Trace Demo › API test with multiple requests for trace analysis @regression" classname="trace-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-management/userRegistration.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="User Registration Flow › should register a new user successfully @smoke @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Registration Flow › should handle duplicate email registration @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Registration Flow › should validate required fields during registration @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should retrieve user profile @smoke" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should update user profile successfully @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should handle user not found scenario @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should delete user account @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bulk User Operations › should handle multiple user creation @performance" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bulk User Operations › should retrieve list of users @smoke" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/chained-test-clean.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 1: should register user and generate authentication tokens @smoke @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 2: should access user profile with authentication token @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 3: should update profile with authenticated session @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Chained Test Flow - User Registration to Profile Management › Step 4: should verify complete user journey and cleanup session @regression @chain" classname="advanced/chained-test-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/chained-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="🔗 Chained Test Scenarios › should execute complete user journey chain with token passing @smoke @chained" classname="advanced/chained-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="🔗 Chained Test Scenarios › should execute authenticated API operations chain with token management @regression @chained" classname="advanced/chained-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="🔗 Chained Test Scenarios › should handle error recovery in chained operations @regression @chained" classname="advanced/chained-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/data-driven-clean.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Data-Driven User Profile Tests › should create and validate multiple user profiles with different data sets @regression" classname="advanced/data-driven-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Data-Driven User Profile Tests › should authenticate multiple users with different credential sets @regression" classname="advanced/data-driven-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Data-Driven User Profile Tests › should update user profiles with various data combinations @regression" classname="advanced/data-driven-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bulk Operations Testing › should handle multiple concurrent user operations @performance" classname="advanced/data-driven-clean.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/data-driven-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="📊 Data-Driven Test Scenarios › should execute multiple user registration scenarios with for loop validation @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="📊 Data-Driven Test Scenarios › should execute bulk profile update scenarios with validation @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="📊 Data-Driven Test Scenarios › should validate data consistency across different formats @regression @data-driven" classname="advanced/data-driven-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/header-validation.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Request Header Validation › should include all required headers in API requests @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Request Header Validation › should handle authentication headers correctly @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Request Header Validation › should set correct Content-Type headers for different operations @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should return all expected headers in API responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should include proper CORS headers in responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Response Header Validation › should include security headers in responses @regression @headers @security" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should handle API version headers correctly @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should include rate limiting headers in responses @regression @headers" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Custom Header Testing › should include request tracking headers @regression @headers @tracking" classname="advanced/header-validation.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/negative-scenarios.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Invalid Data Validation Tests › should reject user creation with invalid data combinations @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Invalid Data Validation Tests › should handle authentication failures correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Not Found Tests › should return 404 for non-existent user access @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Not Found Tests › should handle invalid resource operations correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Unauthorized Access Tests › should reject access with invalid authentication tokens @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Unauthorized Access Tests › should reject authentication with incomplete credentials @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Case and Boundary Tests › should handle empty and null values appropriately @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Case and Boundary Tests › should handle malformed request data correctly @regression @negative" classname="advanced/negative-scenarios.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/performance-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Concurrent Request Performance › should handle concurrent user creation efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle concurrent read operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle mixed concurrent operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain performance with bulk data processing @performance @bulk" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should handle large data sets efficiently @performance @memory" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain consistent response times @performance @consistency" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should handle timeouts gracefully @performance @timeout" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently manage connection pools @performance @connections" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently clean up resources @performance @cleanup" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth/authentication.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="Authentication Flow › should authenticate user with valid credentials @smoke @critical-path" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › should reject invalid credentials @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › should handle missing credentials @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should maintain session with valid token @smoke" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should refresh authentication token @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should handle session timeout scenarios @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Session Management › should logout user successfully @smoke" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should change password with valid current password @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should reject password change with invalid current password @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should handle forgot password request @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Password Management › should reset password with valid token @regression" classname="auth/authentication.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dashboard-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Dashboard Demo Data › API test to populate dashboard @smoke" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Demo Data › API error handling test @regression" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Demo Data › Performance test for dashboard metrics @performance" classname="dashboard-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/pet-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="8" failures="0" skipped="8" time="0" errors="0">
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-001: Add a new pet to the store - Valid Request @smoke @regression" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-002: Add pet with invalid data - Error Handling" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-001-TC-003: Add pet without required fields - Validation" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-002-TC-001: Update an existing pet @regression" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-003-TC-001: Find pets by status @smoke" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-004-TC-001: Find pet by ID - Valid ID" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-004-TC-002: Find pet by invalid ID - Error Handling" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Pet Management API Tests - Requirements Coverage › REQ-PET-005-TC-001: Delete pet - Valid Request" classname="generated/pet-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/store-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="6" failures="0" skipped="6" time="0" errors="0">
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-001-TC-001: Get store inventory @smoke" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-002-TC-001: Place order for pet - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-002-TC-002: Place order with invalid data - Error Handling" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-003-TC-001: Find order by ID - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-003-TC-002: Find order by invalid ID - Error Handling" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Store Management API Tests - Requirements Coverage › REQ-STO-004-TC-001: Delete order - Valid Request" classname="generated/store-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="generated/user-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-001-TC-001: Create user - Valid Request @smoke" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-001-TC-002: Create user with invalid data - Error Handling" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-002-TC-001: Create users with array - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-003-TC-001: Create users with list - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-004-TC-001: Get user by username - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-004-TC-002: Get user by non-existent username - Error Handling" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-005-TC-001: Update user - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-006-TC-001: Delete user - Valid Request" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-007-TC-001: User login - Valid Credentials @critical" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-007-TC-002: User login - Invalid Credentials" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management API Tests - Requirements Coverage › REQ-USE-008-TC-001: User logout @critical" classname="generated/user-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="migration/simple-supertest-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Simple Supertest Format Demo › should generate logs in Supertest format @supertest" classname="migration/simple-supertest-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="migration/supertest-roundtrip-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Supertest Round-Trip Migration Demo › should authenticate user with valid credentials for migration demo @supertest @migration" classname="migration/supertest-roundtrip-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Supertest Round-Trip Migration Demo › should update user profile successfully for migration demo @supertest @migration" classname="migration/supertest-roundtrip-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="profile/profileManagement.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="Profile Management › should get user profile information @smoke" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Management › should update basic profile information @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should update email address @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should validate email format during update @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should handle duplicate email update @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Email Management › should verify email change confirmation @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should update phone number @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should validate phone number format @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should handle international phone numbers @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Phone Number Management › should verify phone number change @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Address Management › should update address information @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Address Management › should handle partial address updates @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Picture Management › should update profile picture URL @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Profile Picture Management › should handle avatar upload simulation @regression" classname="profile/profileManagement.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/authentication-and-session-management.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Authentication and Session Management › Authentication and Session Management @auth @session @security" classname="real-working/authentication-and-session-management.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/avatar-and-file-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Avatar and File Operations › Avatar and File Operations @files @avatar @upload" classname="real-working/avatar-and-file-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/error-handling-and-edge-cases.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Error Handling and Edge Cases › Error Handling and Edge Cases @negative @error @edge-cases" classname="real-working/error-handling-and-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/final-working-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Final Real Working Tests › User Registration Test @smoke @registration" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Final Real Working Tests › User Registration with Validation @regression" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Final Real Working Tests › Multiple User Registration @performance" classname="real-working/final-working-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/profile-management-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Profile Management Operations › Profile Management Operations @profile @update @regression" classname="real-working/profile-management-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/simple-working-test.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Simple Real Working Test › should register a new user successfully (copy of working test) @smoke @regression" classname="real-working/simple-working-test.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Simple Real Working Test › should create and manage user (copy working pattern) @smoke" classname="real-working/simple-working-test.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/user-list-and-bulk-operations.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="User List and Bulk Operations › User List and Bulk Operations @bulk @performance @users" classname="real-working/user-list-and-bulk-operations.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="real-working/user-registration-and-profile-flow.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="User Registration and Profile Flow › User Registration and Profile Flow @smoke @registration @auth" classname="real-working/user-registration-and-profile-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="reality-check/converted-test-reality.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Sample Supertest Iblogin - Reality Check › Sample Supertest Iblogin Reality Check @iblogin @auth @headers @testcase" classname="reality-check/converted-test-reality.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="simple.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Simple API Test › should make a basic API call" classname="simple.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="trace-demo.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="Trace Demo › simple API test for trace demonstration @smoke" classname="trace-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Trace Demo › API test with multiple requests for trace analysis @regression" classname="trace-demo.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="user-management/userRegistration.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-api-tests-debug" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="User Registration Flow › should register a new user successfully @smoke @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Registration Flow › should handle duplicate email registration @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Registration Flow › should validate required fields during registration @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should retrieve user profile @smoke" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should update user profile successfully @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should handle user not found scenario @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Management Operations › should delete user account @regression" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bulk User Operations › should handle multiple user creation @performance" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Bulk User Operations › should retrieve list of users @smoke" classname="user-management/userRegistration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="advanced/performance-tests.spec.ts" timestamp="2025-08-12T23:28:40.859Z" hostname="dev-performance-tests" tests="9" failures="0" skipped="9" time="0" errors="0">
+<testcase name="Concurrent Request Performance › should handle concurrent user creation efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle concurrent read operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Concurrent Request Performance › should handle mixed concurrent operations efficiently @performance @concurrent" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain performance with bulk data processing @performance @bulk" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should handle large data sets efficiently @performance @memory" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Load Testing with Data Sets › should maintain consistent response times @performance @consistency" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should handle timeouts gracefully @performance @timeout" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently manage connection pools @performance @connections" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Resource Usage Testing › should efficiently clean up resources @performance @cleanup" classname="advanced/performance-tests.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>

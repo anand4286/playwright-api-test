@@ -1,0 +1,1 @@
+{"requirementId":"REQ-PET-003","testCaseId":"REQ-PET-003-TC-001","testName":"Find pets by status","status":"PASS","executionTime":1724,"details":"Found 197 pets with available status","timestamp":1755041358174,"environment":"dev","cycle":"cycle-1755041356450"}

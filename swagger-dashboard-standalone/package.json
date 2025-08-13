@@ -1,0 +1,64 @@
+{
+  "name": "@anand4286/swagger-dashboard",
+  "version": "1.0.0",
+  "description": "Universal OpenAPI testing framework with interactive dashboard for processing 100+ API specifications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "swagger-dashboard": "dist/cli.js",
+    "swagger-batch": "dist/batch-cli.js",
+    "swagger-generate": "dist/generate-cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js",
+    "cli": "tsx src/cli.ts",
+    "batch": "tsx src/batch-cli.ts",
+    "generate": "tsx src/generate-cli.ts",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "swagger",
+    "openapi",
+    "api-testing",
+    "dashboard",
+    "test-automation",
+    "requirements-generation",
+    "api-documentation",
+    "testing-framework"
+  ],
+  "author": "Anand",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anand4286/swagger-dashboard.git"
+  },
+  "files": [
+    "dist/**/*",
+    "public/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "express": "^4.18.2",
+    "js-yaml": "^4.1.0",
+    "cors": "^2.8.5",
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/js-yaml": "^4.0.5",
+    "@types/cors": "^2.8.13",
+    "@types/node": "^20.4.2",
+    "typescript": "^5.1.6",
+    "tsx": "^3.12.7",
+    "jest": "^29.6.1",
+    "@types/jest": "^29.5.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -31,25 +31,25 @@
     <div class="container">
         <div class="header">
             <h1>Playwright API Test Execution Report</h1>
-            <p>Generated on: 8/11/2025, 11:36:32 PM</p>
-            <p>Duration: 5596ms</p>
+            <p>Generated on: 8/13/2025, 9:28:48 AM</p>
+            <p>Duration: 8299ms</p>
         </div>
         
         <div class="summary">
             <div class="card">
-                <h3>3</h3>
+                <h3>249</h3>
                 <p>Total Tests</p>
             </div>
             <div class="card passed">
-                <h3>3</h3>
+                <h3>0</h3>
                 <p>Passed</p>
             </div>
             <div class="card failed">
-                <h3>0</h3>
+                <h3>33</h3>
                 <p>Failed</p>
             </div>
             <div class="card skipped">
-                <h3>0</h3>
+                <h3>13</h3>
                 <p>Skipped</p>
             </div>
         </div>
@@ -68,33 +68,473 @@
             <tbody>
                 
                     <tr>
-                        <td>User Registration with Validation</td>
-                        <td><span class="status passed">PASSED</span></td>
-                        <td>441ms</td>
+                        <td>should execute authenticated API operations chain with token management</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>20ms</td>
                         <td class="tags">
-                            <span class="tag">regression</span>
+                            <span class="tag">regression</span><span class="tag">chained</span>
                         </td>
-                        <td>final-working-tests.spec.ts</td>
+                        <td>chained-tests.spec.ts</td>
                     </tr>
                 
                     <tr>
-                        <td>User Registration Test</td>
-                        <td><span class="status passed">PASSED</span></td>
-                        <td>854ms</td>
+                        <td>should handle error recovery in chained operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>19ms</td>
                         <td class="tags">
-                            <span class="tag">smoke</span><span class="tag">registration</span>
+                            <span class="tag">regression</span><span class="tag">chained</span>
                         </td>
-                        <td>final-working-tests.spec.ts</td>
+                        <td>chained-tests.spec.ts</td>
                     </tr>
                 
                     <tr>
-                        <td>Multiple User Registration</td>
-                        <td><span class="status passed">PASSED</span></td>
-                        <td>1466ms</td>
+                        <td>Step 1: should register user and generate authentication tokens</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>9ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 2: should access user profile with authentication token</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 3: should update profile with authenticated session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 4: should verify complete user journey and cleanup session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute complete user journey chain with token passing</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>16ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute complete user journey chain with token passing</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>13ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle error recovery in chained operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>17ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute authenticated API operations chain with token management</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>19ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 1: should register user and generate authentication tokens</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>9ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 2: should access user profile with authentication token</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 3: should update profile with authenticated session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 4: should verify complete user journey and cleanup session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute complete user journey chain with token passing</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>14ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle error recovery in chained operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>16ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute authenticated API operations chain with token management</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>18ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 1: should register user and generate authentication tokens</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>10ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 2: should access user profile with authentication token</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 3: should update profile with authenticated session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 4: should verify complete user journey and cleanup session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute complete user journey chain with token passing</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>21ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute authenticated API operations chain with token management</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>17ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle error recovery in chained operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>18ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chained</span>
+                        </td>
+                        <td>chained-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 1: should register user and generate authentication tokens</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>10ms</td>
+                        <td class="tags">
+                            <span class="tag">smoke</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 2: should access user profile with authentication token</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 3: should update profile with authenticated session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>Step 4: should verify complete user journey and cleanup session</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">chain</span>
+                        </td>
+                        <td>chained-test-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle multiple concurrent user operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>19ms</td>
                         <td class="tags">
                             <span class="tag">performance</span>
                         </td>
-                        <td>final-working-tests.spec.ts</td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should create and validate multiple user profiles with different data sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>13ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should authenticate multiple users with different credential sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>11ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle multiple concurrent user operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>15ms</td>
+                        <td class="tags">
+                            <span class="tag">performance</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should create and validate multiple user profiles with different data sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>8ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should authenticate multiple users with different credential sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>8ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle multiple concurrent user operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>15ms</td>
+                        <td class="tags">
+                            <span class="tag">performance</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should create and validate multiple user profiles with different data sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>7ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should authenticate multiple users with different credential sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>9ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should handle multiple concurrent user operations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>15ms</td>
+                        <td class="tags">
+                            <span class="tag">performance</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should create and validate multiple user profiles with different data sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>9ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should authenticate multiple users with different credential sets</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>9ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute multiple user registration scenarios with for loop validation  -driven</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>15ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">data</span>
+                        </td>
+                        <td>data-driven-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute bulk profile update scenarios with validation  -driven</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>14ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">data</span>
+                        </td>
+                        <td>data-driven-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should update user profiles with various data combinations</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>1458ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute multiple user registration scenarios with for loop validation  -driven</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>12ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">data</span>
+                        </td>
+                        <td>data-driven-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should execute bulk profile update scenarios with validation  -driven</td>
+                        <td><span class="status failed">FAILED</span></td>
+                        <td>13ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">data</span>
+                        </td>
+                        <td>data-driven-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should validate data consistency across different formats  -driven</td>
+                        <td><span class="status interrupted">INTERRUPTED</span></td>
+                        <td>372ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span><span class="tag">data</span>
+                        </td>
+                        <td>data-driven-tests.spec.ts</td>
+                    </tr>
+                
+                    <tr>
+                        <td>should update user profiles with various data combinations</td>
+                        <td><span class="status skipped">SKIPPED</span></td>
+                        <td>0ms</td>
+                        <td class="tags">
+                            <span class="tag">regression</span>
+                        </td>
+                        <td>data-driven-clean.spec.ts</td>
                     </tr>
                 
             </tbody>

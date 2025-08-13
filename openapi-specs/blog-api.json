@@ -1,0 +1,449 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Blog Management API",
+    "version": "1.5.0",
+    "description": "API for managing blog posts, comments, and authors"
+  },
+  "host": "blog-api.example.com",
+  "basePath": "/api/v1",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key"
+    },
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://blog-api.example.com/oauth/authorize",
+      "tokenUrl": "https://blog-api.example.com/oauth/token",
+      "scopes": {
+        "read": "Read access to blog content",
+        "write": "Write access to blog content",
+        "admin": "Admin access to all resources"
+      }
+    }
+  },
+  "paths": {
+    "/posts": {
+      "get": {
+        "summary": "Get all blog posts",
+        "tags": ["Posts"],
+        "parameters": [
+          {
+            "name": "author",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by author ID"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by category"
+          },
+          {
+            "name": "published",
+            "in": "query",
+            "type": "boolean",
+            "description": "Filter by published status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of blog posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BlogPost"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new blog post",
+        "tags": ["Posts"],
+        "security": [
+          {"OAuth2": ["write"]},
+          {"ApiKeyAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateBlogPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Blog post created successfully",
+            "schema": {
+              "$ref": "#/definitions/BlogPost"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/posts/{postId}": {
+      "get": {
+        "summary": "Get blog post by ID",
+        "tags": ["Posts"],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog post details",
+            "schema": {
+              "$ref": "#/definitions/BlogPost"
+            }
+          },
+          "404": {
+            "description": "Blog post not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update blog post",
+        "tags": ["Posts"],
+        "security": [
+          {"OAuth2": ["write"]},
+          {"ApiKeyAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "post",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateBlogPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog post updated successfully",
+            "schema": {
+              "$ref": "#/definitions/BlogPost"
+            }
+          },
+          "404": {
+            "description": "Blog post not found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete blog post",
+        "tags": ["Posts"],
+        "security": [
+          {"OAuth2": ["write", "admin"]},
+          {"ApiKeyAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Blog post deleted successfully"
+          },
+          "404": {
+            "description": "Blog post not found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/posts/{postId}/comments": {
+      "get": {
+        "summary": "Get comments for a blog post",
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of comments",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a comment to a blog post",
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateComment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment created successfully",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/authors": {
+      "get": {
+        "summary": "Get all authors",
+        "tags": ["Authors"],
+        "responses": {
+          "200": {
+            "description": "List of authors",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Author"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BlogPost": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "integer"
+        },
+        "author": {
+          "$ref": "#/definitions/Author"
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreateBlogPost": {
+      "type": "object",
+      "required": ["title", "content", "authorId"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "authorId": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "published": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "UpdateBlogPost": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "published": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "postId": {
+          "type": "integer"
+        },
+        "authorName": {
+          "type": "string"
+        },
+        "authorEmail": {
+          "type": "string",
+          "format": "email"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreateComment": {
+      "type": "object",
+      "required": ["authorName", "authorEmail", "content"],
+      "properties": {
+        "authorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "authorEmail": {
+          "type": "string",
+          "format": "email"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "Author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

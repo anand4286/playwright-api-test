@@ -1,0 +1,452 @@
+[
+  {
+    "cycle": "cycle-1755041330067",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:50.313Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041329528",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:50.488Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041329769",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:50.727Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041331069",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:52.049Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041331210",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:52.175Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041330759",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:52.211Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041331419",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:52.377Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041332838",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:53.840Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041333129",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:54.093Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041332952",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:54.150Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041332990",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:54.432Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041334533",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:55.513Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041334814",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:55.824Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041335133",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:56.165Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041336874",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:57.362Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041336500",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:57.572Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041336819",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:57.795Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041338238",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:28:59.222Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041339394",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:00.154Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041339839",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:01.280Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041340757",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:02.239Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041342839",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:04.565Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041347703",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:08.706Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041348731",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:08.975Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041348720",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:09.441Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041349475",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:09.948Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041349467",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:10.430Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041349685",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:10.645Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041350107",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:11.556Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041351578",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:11.849Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041351110",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:12.090Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041351294",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:12.251Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041352576",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:13.549Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041352272",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:13.702Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041352800",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:13.765Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041352932",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:13.902Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041354313",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:15.282Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041354643",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:15.594Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041354516",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:15.708Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041354452",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:15.887Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041355970",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:16.964Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041356325",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:17.297Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041357577",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:18.287Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041358192",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:18.669Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041357935",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:18.887Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041358960",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:20.445Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041359640",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:20.592Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041361277",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:22.497Z",
+    "passRate": 100,
+    "totalTests": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  {
+    "cycle": "cycle-1755041361177",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:22.637Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  {
+    "cycle": "cycle-1755041363297",
+    "environment": "dev",
+    "timestamp": "2025-08-12T23:29:24.854Z",
+    "passRate": 0,
+    "totalTests": 1,
+    "passed": 0,
+    "failed": 1
+  }
+]

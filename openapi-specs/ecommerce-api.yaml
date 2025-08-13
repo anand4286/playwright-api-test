@@ -1,0 +1,349 @@
+openapi: 3.0.0
+info:
+  title: E-commerce API
+  version: 2.0.0
+  description: Complete e-commerce platform API with products, orders, and payments
+servers:
+  - url: https://api.ecommerce.example.com/v2
+paths:
+  /products:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  total:
+                    type: integer
+                  hasMore:
+                    type: boolean
+    post:
+      summary: Create a new product
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProduct'
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+
+  /products/{productId}:
+    get:
+      summary: Get product by ID
+      tags:
+        - Products
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product not found
+
+  /orders:
+    get:
+      summary: Get user orders
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      summary: Create a new order
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Invalid order data
+
+  /orders/{orderId}:
+    get:
+      summary: Get order by ID
+      tags:
+        - Orders
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+
+  /payments:
+    post:
+      summary: Process payment
+      tags:
+        - Payments
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Payment processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Invalid payment data
+        '402':
+          description: Payment failed
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: decimal
+        category:
+          type: string
+        stock:
+          type: integer
+        images:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    CreateProduct:
+      type: object
+      required:
+        - name
+        - price
+        - category
+        - stock
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+        category:
+          type: string
+        stock:
+          type: integer
+          minimum: 0
+        images:
+          type: array
+          items:
+            type: string
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        totalAmount:
+          type: number
+          format: decimal
+        status:
+          type: string
+          enum: [pending, confirmed, shipped, delivered, cancelled]
+        createdAt:
+          type: string
+          format: date-time
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+
+    CreateOrder:
+      type: object
+      required:
+        - items
+        - shippingAddress
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              quantity:
+                type: integer
+                minimum: 1
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+
+    OrderItem:
+      type: object
+      properties:
+        productId:
+          type: string
+        productName:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+          format: decimal
+
+    Address:
+      type: object
+      required:
+        - street
+        - city
+        - country
+        - postalCode
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+
+    PaymentRequest:
+      type: object
+      required:
+        - orderId
+        - paymentMethod
+        - amount
+      properties:
+        orderId:
+          type: string
+        paymentMethod:
+          type: string
+          enum: [credit_card, debit_card, paypal, stripe]
+        amount:
+          type: number
+          format: decimal
+        cardDetails:
+          type: object
+          properties:
+            cardNumber:
+              type: string
+            expiryMonth:
+              type: integer
+            expiryYear:
+              type: integer
+            cvv:
+              type: string
+
+    PaymentResponse:
+      type: object
+      properties:
+        paymentId:
+          type: string
+        status:
+          type: string
+          enum: [success, failed, pending]
+        transactionId:
+          type: string
+        message:
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []

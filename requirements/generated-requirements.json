@@ -1,0 +1,864 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-12T22:54:05.071Z",
+    "spec_title": "Swagger Petstore",
+    "spec_version": "1.0.7",
+    "total_requirements": 20
+  },
+  "requirements": [
+    {
+      "id": "REQ-PET-001",
+      "category": "Pet Management",
+      "title": "uploads an image",
+      "description": "API operation for uploadFile",
+      "priority": "High",
+      "endpoint": "/pet/{petId}/uploadImage",
+      "method": "POST",
+      "operationId": "uploadFile",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Validate required parameters: petId",
+        "Support optional parameters: additionalMetadata, file",
+        "Require authentication: petstore_auth",
+        "Accept content types: multipart/form-data"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "name": "petId",
+          "in": "path",
+          "description": "ID of pet to update",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        },
+        {
+          "name": "additionalMetadata",
+          "in": "formData",
+          "description": "Additional data to pass to server",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "file",
+          "in": "formData",
+          "description": "file to upload",
+          "required": false,
+          "type": "file"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "$ref": "#/definitions/ApiResponse"
+          }
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-002",
+      "category": "Pet Management",
+      "title": "Add a new pet to the store",
+      "description": "API operation for addPet",
+      "priority": "High",
+      "endpoint": "/pet",
+      "method": "POST",
+      "operationId": "addPet",
+      "acceptance_criteria": [
+        "Return 405 status code: Invalid input",
+        "Validate required parameters: body",
+        "Require authentication: petstore_auth",
+        "Accept content types: application/json, application/xml"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Pet object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Pet"
+          }
+        }
+      ],
+      "responses": {
+        "405": {
+          "description": "Invalid input"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-003",
+      "category": "Pet Management",
+      "title": "Update an existing pet",
+      "description": "API operation for updatePet",
+      "priority": "High",
+      "endpoint": "/pet",
+      "method": "PUT",
+      "operationId": "updatePet",
+      "acceptance_criteria": [
+        "Return 400 status code: Invalid ID supplied",
+        "Return 404 status code: Pet not found",
+        "Return 405 status code: Validation exception",
+        "Validate required parameters: body",
+        "Require authentication: petstore_auth",
+        "Accept content types: application/json, application/xml"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Pet object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Pet"
+          }
+        }
+      ],
+      "responses": {
+        "400": {
+          "description": "Invalid ID supplied"
+        },
+        "404": {
+          "description": "Pet not found"
+        },
+        "405": {
+          "description": "Validation exception"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-004",
+      "category": "Pet Management",
+      "title": "Finds Pets by status",
+      "description": "Multiple status values can be provided with comma separated strings",
+      "priority": "Medium",
+      "endpoint": "/pet/findByStatus",
+      "method": "GET",
+      "operationId": "findPetsByStatus",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid status value",
+        "Validate required parameters: status",
+        "Require authentication: petstore_auth"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "name": "status",
+          "in": "query",
+          "description": "Status values that need to be considered for filter",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ],
+            "default": "available"
+          },
+          "collectionFormat": "multi"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid status value"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-005",
+      "category": "Pet Management",
+      "title": "Finds Pets by tags",
+      "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+      "priority": "Medium",
+      "endpoint": "/pet/findByTags",
+      "method": "GET",
+      "operationId": "findPetsByTags",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid tag value",
+        "Validate required parameters: tags",
+        "Require authentication: petstore_auth"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "name": "tags",
+          "in": "query",
+          "description": "Tags to filter by",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid tag value"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-006",
+      "category": "Pet Management",
+      "title": "Find pet by ID",
+      "description": "Returns a single pet",
+      "priority": "Medium",
+      "endpoint": "/pet/{petId}",
+      "method": "GET",
+      "operationId": "getPetById",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid ID supplied",
+        "Return 404 status code: Pet not found",
+        "Validate required parameters: petId",
+        "Require authentication: api_key"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "api_key"
+      ],
+      "parameters": [
+        {
+          "name": "petId",
+          "in": "path",
+          "description": "ID of pet to return",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "$ref": "#/definitions/Pet"
+          }
+        },
+        "400": {
+          "description": "Invalid ID supplied"
+        },
+        "404": {
+          "description": "Pet not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-007",
+      "category": "Pet Management",
+      "title": "Updates a pet in the store with form data",
+      "description": "API operation for updatePetWithForm",
+      "priority": "High",
+      "endpoint": "/pet/{petId}",
+      "method": "POST",
+      "operationId": "updatePetWithForm",
+      "acceptance_criteria": [
+        "Return 405 status code: Invalid input",
+        "Validate required parameters: petId",
+        "Support optional parameters: name, status",
+        "Require authentication: petstore_auth",
+        "Accept content types: application/x-www-form-urlencoded"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "name": "petId",
+          "in": "path",
+          "description": "ID of pet that needs to be updated",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        },
+        {
+          "name": "name",
+          "in": "formData",
+          "description": "Updated name of the pet",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "in": "formData",
+          "description": "Updated status of the pet",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "405": {
+          "description": "Invalid input"
+        }
+      }
+    },
+    {
+      "id": "REQ-PET-008",
+      "category": "Pet Management",
+      "title": "Deletes a pet",
+      "description": "API operation for deletePet",
+      "priority": "High",
+      "endpoint": "/pet/{petId}",
+      "method": "DELETE",
+      "operationId": "deletePet",
+      "acceptance_criteria": [
+        "Return 400 status code: Invalid ID supplied",
+        "Return 404 status code: Pet not found",
+        "Validate required parameters: petId",
+        "Support optional parameters: api_key",
+        "Require authentication: petstore_auth"
+      ],
+      "tags": [
+        "pet"
+      ],
+      "security": [
+        "petstore_auth"
+      ],
+      "parameters": [
+        {
+          "name": "api_key",
+          "in": "header",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "name": "petId",
+          "in": "path",
+          "description": "Pet id to delete",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "responses": {
+        "400": {
+          "description": "Invalid ID supplied"
+        },
+        "404": {
+          "description": "Pet not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-STO-001",
+      "category": "Store Management",
+      "title": "Returns pet inventories by status",
+      "description": "Returns a map of status codes to quantities",
+      "priority": "Medium",
+      "endpoint": "/store/inventory",
+      "method": "GET",
+      "operationId": "getInventory",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Require authentication: api_key"
+      ],
+      "tags": [
+        "store"
+      ],
+      "security": [
+        "api_key"
+      ],
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "REQ-STO-002",
+      "category": "Store Management",
+      "title": "Place an order for a pet",
+      "description": "API operation for placeOrder",
+      "priority": "Medium",
+      "endpoint": "/store/order",
+      "method": "POST",
+      "operationId": "placeOrder",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid Order",
+        "Validate required parameters: body",
+        "Accept content types: application/json"
+      ],
+      "tags": [
+        "store"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "order placed for purchasing the pet",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "400": {
+          "description": "Invalid Order"
+        }
+      }
+    },
+    {
+      "id": "REQ-STO-003",
+      "category": "Store Management",
+      "title": "Find purchase order by ID",
+      "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+      "priority": "Medium",
+      "endpoint": "/store/order/{orderId}",
+      "method": "GET",
+      "operationId": "getOrderById",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid ID supplied",
+        "Return 404 status code: Order not found",
+        "Validate required parameters: orderId"
+      ],
+      "tags": [
+        "store"
+      ],
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "description": "ID of pet that needs to be fetched",
+          "required": true,
+          "type": "integer",
+          "maximum": 10,
+          "minimum": 1,
+          "format": "int64"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "400": {
+          "description": "Invalid ID supplied"
+        },
+        "404": {
+          "description": "Order not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-STO-004",
+      "category": "Store Management",
+      "title": "Delete purchase order by ID",
+      "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+      "priority": "High",
+      "endpoint": "/store/order/{orderId}",
+      "method": "DELETE",
+      "operationId": "deleteOrder",
+      "acceptance_criteria": [
+        "Return 400 status code: Invalid ID supplied",
+        "Return 404 status code: Order not found",
+        "Validate required parameters: orderId"
+      ],
+      "tags": [
+        "store"
+      ],
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "description": "ID of the order that needs to be deleted",
+          "required": true,
+          "type": "integer",
+          "minimum": 1,
+          "format": "int64"
+        }
+      ],
+      "responses": {
+        "400": {
+          "description": "Invalid ID supplied"
+        },
+        "404": {
+          "description": "Order not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-001",
+      "category": "User Management",
+      "title": "Creates list of users with given input array",
+      "description": "API operation for createUsersWithListInput",
+      "priority": "High",
+      "endpoint": "/user/createWithList",
+      "method": "POST",
+      "operationId": "createUsersWithListInput",
+      "acceptance_criteria": [
+        "Return default status code: successful operation",
+        "Validate required parameters: body",
+        "Accept content types: application/json"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "List of user object",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      ],
+      "responses": {
+        "default": {
+          "description": "successful operation"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-002",
+      "category": "User Management",
+      "title": "Get user by user name",
+      "description": "API operation for getUserByName",
+      "priority": "Medium",
+      "endpoint": "/user/{username}",
+      "method": "GET",
+      "operationId": "getUserByName",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid username supplied",
+        "Return 404 status code: User not found",
+        "Validate required parameters: username"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "description": "The name that needs to be fetched. Use user1 for testing. ",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "400": {
+          "description": "Invalid username supplied"
+        },
+        "404": {
+          "description": "User not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-003",
+      "category": "User Management",
+      "title": "Updated user",
+      "description": "This can only be done by the logged in user.",
+      "priority": "High",
+      "endpoint": "/user/{username}",
+      "method": "PUT",
+      "operationId": "updateUser",
+      "acceptance_criteria": [
+        "Return 400 status code: Invalid user supplied",
+        "Return 404 status code: User not found",
+        "Validate required parameters: username, body",
+        "Accept content types: application/json"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "description": "name that need to be updated",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Updated user object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      ],
+      "responses": {
+        "400": {
+          "description": "Invalid user supplied"
+        },
+        "404": {
+          "description": "User not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-004",
+      "category": "User Management",
+      "title": "Delete user",
+      "description": "This can only be done by the logged in user.",
+      "priority": "High",
+      "endpoint": "/user/{username}",
+      "method": "DELETE",
+      "operationId": "deleteUser",
+      "acceptance_criteria": [
+        "Return 400 status code: Invalid username supplied",
+        "Return 404 status code: User not found",
+        "Validate required parameters: username"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "username",
+          "in": "path",
+          "description": "The name that needs to be deleted",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "400": {
+          "description": "Invalid username supplied"
+        },
+        "404": {
+          "description": "User not found"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-005",
+      "category": "User Management",
+      "title": "Logs user into the system",
+      "description": "API operation for loginUser",
+      "priority": "Critical",
+      "endpoint": "/user/login",
+      "method": "GET",
+      "operationId": "loginUser",
+      "acceptance_criteria": [
+        "Return 200 status code: successful operation",
+        "Return 400 status code: Invalid username/password supplied",
+        "Validate required parameters: username, password"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "name": "username",
+          "in": "query",
+          "description": "The user name for login",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "in": "query",
+          "description": "The password for login in clear text",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "headers": {
+            "X-Expires-After": {
+              "type": "string",
+              "format": "date-time",
+              "description": "date in UTC when token expires"
+            },
+            "X-Rate-Limit": {
+              "type": "integer",
+              "format": "int32",
+              "description": "calls per hour allowed by the user"
+            }
+          },
+          "schema": {
+            "type": "string"
+          }
+        },
+        "400": {
+          "description": "Invalid username/password supplied"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-006",
+      "category": "User Management",
+      "title": "Logs out current logged in user session",
+      "description": "API operation for logoutUser",
+      "priority": "Critical",
+      "endpoint": "/user/logout",
+      "method": "GET",
+      "operationId": "logoutUser",
+      "acceptance_criteria": [
+        "Return default status code: successful operation"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [],
+      "responses": {
+        "default": {
+          "description": "successful operation"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-007",
+      "category": "User Management",
+      "title": "Creates list of users with given input array",
+      "description": "API operation for createUsersWithArrayInput",
+      "priority": "High",
+      "endpoint": "/user/createWithArray",
+      "method": "POST",
+      "operationId": "createUsersWithArrayInput",
+      "acceptance_criteria": [
+        "Return default status code: successful operation",
+        "Validate required parameters: body",
+        "Accept content types: application/json"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "List of user object",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      ],
+      "responses": {
+        "default": {
+          "description": "successful operation"
+        }
+      }
+    },
+    {
+      "id": "REQ-USE-008",
+      "category": "User Management",
+      "title": "Create user",
+      "description": "This can only be done by the logged in user.",
+      "priority": "High",
+      "endpoint": "/user",
+      "method": "POST",
+      "operationId": "createUser",
+      "acceptance_criteria": [
+        "Return default status code: successful operation",
+        "Validate required parameters: body",
+        "Accept content types: application/json"
+      ],
+      "tags": [
+        "user"
+      ],
+      "parameters": [
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Created user object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      ],
+      "responses": {
+        "default": {
+          "description": "successful operation"
+        }
+      }
+    }
+  ]
+}

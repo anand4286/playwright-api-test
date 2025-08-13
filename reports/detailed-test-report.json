@@ -1,65 +1,697 @@
 {
-  "total": 3,
-  "passed": 3,
-  "failed": 0,
-  "skipped": 0,
-  "flaky": 0,
+  "total": 249,
+  "passed": 0,
+  "failed": 33,
+  "skipped": 13,
+  "flaky": 1,
   "tests": [
     {
-      "title": "User Registration with Validation @regression",
-      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
-      "line": 29,
-      "status": "passed",
-      "duration": 441,
+      "title": "should execute authenticated API operations chain with token management @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 247,
+      "status": "failed",
+      "duration": 20,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
       "retry": 0,
       "annotations": [],
       "tags": [
-        "regression"
+        "regression",
+        "chained"
       ],
-      "timestamp": "2025-08-11T13:36:27.169Z"
+      "timestamp": "2025-08-12T23:28:41.238Z"
     },
     {
-      "title": "User Registration Test @smoke @registration",
-      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
-      "line": 14,
-      "status": "passed",
-      "duration": 854,
+      "title": "should handle error recovery in chained operations @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 415,
+      "status": "failed",
+      "duration": 19,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
       "retry": 0,
-      "annotations": [
-        {
-          "type": "user-id",
-          "description": 11
-        }
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
       ],
+      "timestamp": "2025-08-12T23:28:41.244Z"
+    },
+    {
+      "title": "Step 1: should register user and generate authentication tokens @smoke @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 54,
+      "status": "failed",
+      "duration": 9,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 0,
+      "annotations": [],
       "tags": [
         "smoke",
-        "registration"
+        "chain"
       ],
-      "timestamp": "2025-08-11T13:36:27.580Z"
+      "timestamp": "2025-08-12T23:28:41.246Z"
     },
     {
-      "title": "Multiple User Registration @performance",
-      "file": "/Users/Anand/github/playwright-api-test/tests/real-working/final-working-tests.spec.ts",
-      "line": 41,
-      "status": "passed",
-      "duration": 1466,
+      "title": "Step 2: should access user profile with authentication token @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 101,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.246Z"
+    },
+    {
+      "title": "Step 3: should update profile with authenticated session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 141,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.246Z"
+    },
+    {
+      "title": "Step 4: should verify complete user journey and cleanup session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 183,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.246Z"
+    },
+    {
+      "title": "should execute complete user journey chain with token passing @smoke @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 63,
+      "status": "failed",
+      "duration": 16,
+      "error": "TypeError: Cannot read properties of undefined (reading 'userJourney')",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.249Z"
+    },
+    {
+      "title": "should execute complete user journey chain with token passing @smoke @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 63,
+      "status": "failed",
+      "duration": 13,
+      "error": "TypeError: Cannot read properties of undefined (reading 'userJourney')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.607Z"
+    },
+    {
+      "title": "should handle error recovery in chained operations @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 415,
+      "status": "failed",
+      "duration": 17,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.613Z"
+    },
+    {
+      "title": "should execute authenticated API operations chain with token management @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 247,
+      "status": "failed",
+      "duration": 19,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.616Z"
+    },
+    {
+      "title": "Step 1: should register user and generate authentication tokens @smoke @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 54,
+      "status": "failed",
+      "duration": 9,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.626Z"
+    },
+    {
+      "title": "Step 2: should access user profile with authentication token @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 101,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.626Z"
+    },
+    {
+      "title": "Step 3: should update profile with authenticated session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 141,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.626Z"
+    },
+    {
+      "title": "Step 4: should verify complete user journey and cleanup session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 183,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.626Z"
+    },
+    {
+      "title": "should execute complete user journey chain with token passing @smoke @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 63,
+      "status": "failed",
+      "duration": 14,
+      "error": "TypeError: Cannot read properties of undefined (reading 'userJourney')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.973Z"
+    },
+    {
+      "title": "should handle error recovery in chained operations @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 415,
+      "status": "failed",
+      "duration": 16,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.979Z"
+    },
+    {
+      "title": "should execute authenticated API operations chain with token management @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 247,
+      "status": "failed",
+      "duration": 18,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:41.985Z"
+    },
+    {
+      "title": "Step 1: should register user and generate authentication tokens @smoke @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 54,
+      "status": "failed",
+      "duration": 10,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.987Z"
+    },
+    {
+      "title": "Step 2: should access user profile with authentication token @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 101,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.987Z"
+    },
+    {
+      "title": "Step 3: should update profile with authenticated session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 141,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.987Z"
+    },
+    {
+      "title": "Step 4: should verify complete user journey and cleanup session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 183,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:41.987Z"
+    },
+    {
+      "title": "should execute complete user journey chain with token passing @smoke @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 63,
+      "status": "failed",
+      "duration": 21,
+      "error": "TypeError: Cannot read properties of undefined (reading 'userJourney')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:42.337Z"
+    },
+    {
+      "title": "should execute authenticated API operations chain with token management @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 247,
+      "status": "failed",
+      "duration": 17,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:42.343Z"
+    },
+    {
+      "title": "should handle error recovery in chained operations @regression @chained",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-tests.spec.ts",
+      "line": 415,
+      "status": "failed",
+      "duration": 18,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chained"
+      ],
+      "timestamp": "2025-08-12T23:28:42.355Z"
+    },
+    {
+      "title": "Step 1: should register user and generate authentication tokens @smoke @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 54,
+      "status": "failed",
+      "duration": 10,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "smoke",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:42.359Z"
+    },
+    {
+      "title": "Step 2: should access user profile with authentication token @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 101,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:42.360Z"
+    },
+    {
+      "title": "Step 3: should update profile with authenticated session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 141,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:42.360Z"
+    },
+    {
+      "title": "Step 4: should verify complete user journey and cleanup session @regression @chain",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/chained-test-clean.spec.ts",
+      "line": 183,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "chain"
+      ],
+      "timestamp": "2025-08-12T23:28:42.360Z"
+    },
+    {
+      "title": "should handle multiple concurrent user operations @performance",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 174,
+      "status": "failed",
+      "duration": 19,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
       "retry": 0,
       "annotations": [],
       "tags": [
         "performance"
       ],
-      "timestamp": "2025-08-11T13:36:28.195Z"
+      "timestamp": "2025-08-12T23:28:42.693Z"
+    },
+    {
+      "title": "should create and validate multiple user profiles with different data sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 40,
+      "status": "failed",
+      "duration": 13,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:42.711Z"
+    },
+    {
+      "title": "should authenticate multiple users with different credential sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 82,
+      "status": "failed",
+      "duration": 11,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:42.713Z"
+    },
+    {
+      "title": "should handle multiple concurrent user operations @performance",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 174,
+      "status": "failed",
+      "duration": 15,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "performance"
+      ],
+      "timestamp": "2025-08-12T23:28:43.025Z"
+    },
+    {
+      "title": "should create and validate multiple user profiles with different data sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 40,
+      "status": "failed",
+      "duration": 8,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.040Z"
+    },
+    {
+      "title": "should authenticate multiple users with different credential sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 82,
+      "status": "failed",
+      "duration": 8,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.046Z"
+    },
+    {
+      "title": "should handle multiple concurrent user operations @performance",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 174,
+      "status": "failed",
+      "duration": 15,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "performance"
+      ],
+      "timestamp": "2025-08-12T23:28:43.389Z"
+    },
+    {
+      "title": "should create and validate multiple user profiles with different data sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 40,
+      "status": "failed",
+      "duration": 7,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.403Z"
+    },
+    {
+      "title": "should authenticate multiple users with different credential sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 82,
+      "status": "failed",
+      "duration": 9,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 2,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.411Z"
+    },
+    {
+      "title": "should handle multiple concurrent user operations @performance",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 174,
+      "status": "failed",
+      "duration": 15,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "performance"
+      ],
+      "timestamp": "2025-08-12T23:28:43.707Z"
+    },
+    {
+      "title": "should create and validate multiple user profiles with different data sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 40,
+      "status": "failed",
+      "duration": 9,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.732Z"
+    },
+    {
+      "title": "should authenticate multiple users with different credential sets @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 82,
+      "status": "failed",
+      "duration": 9,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 3,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:43.734Z"
+    },
+    {
+      "title": "should execute multiple user registration scenarios with for loop validation @regression @data-driven",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts",
+      "line": 59,
+      "status": "failed",
+      "duration": 15,
+      "error": "TypeError: Cannot read properties of undefined (reading 'length')",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "data"
+      ],
+      "timestamp": "2025-08-12T23:28:44.029Z"
+    },
+    {
+      "title": "should execute bulk profile update scenarios with validation @regression @data-driven",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts",
+      "line": 153,
+      "status": "failed",
+      "duration": 14,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "data"
+      ],
+      "timestamp": "2025-08-12T23:28:44.053Z"
+    },
+    {
+      "title": "should update user profiles with various data combinations @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 126,
+      "status": "failed",
+      "duration": 1458,
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m300\u001b[39m\nReceived:   \u001b[31m500\u001b[39m",
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:44.171Z"
+    },
+    {
+      "title": "should execute multiple user registration scenarios with for loop validation @regression @data-driven",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts",
+      "line": 59,
+      "status": "failed",
+      "duration": 12,
+      "error": "TypeError: Cannot read properties of undefined (reading 'length')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "data"
+      ],
+      "timestamp": "2025-08-12T23:28:44.347Z"
+    },
+    {
+      "title": "should execute bulk profile update scenarios with validation @regression @data-driven",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts",
+      "line": 153,
+      "status": "failed",
+      "duration": 13,
+      "error": "TypeError: Cannot read properties of undefined (reading 'fullName')",
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "data"
+      ],
+      "timestamp": "2025-08-12T23:28:44.371Z"
+    },
+    {
+      "title": "should validate data consistency across different formats @regression @data-driven",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-tests.spec.ts",
+      "line": 237,
+      "status": "interrupted",
+      "duration": 372,
+      "retry": 0,
+      "annotations": [],
+      "tags": [
+        "regression",
+        "data"
+      ],
+      "timestamp": "2025-08-12T23:28:44.417Z"
+    },
+    {
+      "title": "should update user profiles with various data combinations @regression",
+      "file": "/Users/Anand/github/playwright-api-test/tests/advanced/data-driven-clean.spec.ts",
+      "line": 126,
+      "status": "skipped",
+      "duration": 0,
+      "retry": 1,
+      "annotations": [],
+      "tags": [
+        "regression"
+      ],
+      "timestamp": "2025-08-12T23:28:44.483Z"
     }
   ],
   "summary": {
-    "status": "passed",
-    "startTime": "2025-08-11T13:36:26.404Z",
-    "endTime": "2025-08-11T13:36:32.000Z",
-    "duration": 5596,
-    "success": true
+    "status": "interrupted",
+    "startTime": "2025-08-12T23:28:39.977Z",
+    "endTime": "2025-08-12T23:28:48.276Z",
+    "duration": 8299,
+    "success": false
   },
   "apiLogs": [],
-  "generatedAt": "2025-08-11T13:36:32.000Z",
+  "generatedAt": "2025-08-12T23:28:48.276Z",
   "framework": "Playwright API Testing",
   "version": "1.0.0"
 }
