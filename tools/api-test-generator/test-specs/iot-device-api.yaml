@@ -1,0 +1,1437 @@
+openapi: 3.0.0
+info:
+  title: IoT Device Management API
+  description: |
+    Comprehensive IoT platform for managing connected devices, monitoring sensors,
+    controlling actuators, and analyzing telemetry data across multiple deployments.
+  version: 2.5.0
+  contact:
+    name: IoT Platform Team
+    email: support@iotplatform.com
+    url: https://developer.iotplatform.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: https://api.iotplatform.com/v2
+    description: Production environment
+  - url: https://staging-api.iotplatform.com/v2
+    description: Staging environment
+  - url: https://dev-api.iotplatform.com/v2
+    description: Development environment
+
+security:
+  - apiKey: []
+  - deviceToken: []
+
+paths:
+  /devices:
+    get:
+      summary: List devices
+      description: |
+        Retrieve a list of registered IoT devices with filtering and search capabilities.
+        Supports filtering by device type, status, location, and last activity.
+      operationId: listDevices
+      tags:
+        - Devices
+      parameters:
+        - name: type
+          in: query
+          description: Filter by device type
+          schema:
+            type: string
+            enum: [sensor, actuator, gateway, hub, camera, thermostat, lock, light]
+        - name: status
+          in: query
+          description: Filter by device status
+          schema:
+            type: string
+            enum: [online, offline, maintenance, error, unknown]
+        - name: location
+          in: query
+          description: Filter by location/building
+          schema:
+            type: string
+        - name: last_seen_after
+          in: query
+          description: Devices last seen after this timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: manufacturer
+          in: query
+          description: Filter by device manufacturer
+          schema:
+            type: string
+        - name: firmware_version
+          in: query
+          description: Filter by firmware version
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search by device name or MAC address
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Number of devices per page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: List of devices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  devices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  summary:
+                    type: object
+                    properties:
+                      total_devices:
+                        type: integer
+                      online_count:
+                        type: integer
+                      offline_count:
+                        type: integer
+                      error_count:
+                        type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      summary: Register new device
+      description: |
+        Register a new IoT device to the platform. Device must be physically
+        accessible for initial provisioning and security key exchange.
+      operationId: registerDevice
+      tags:
+        - Devices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRegistration'
+      responses:
+        '201':
+          description: Device registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  device:
+                    $ref: '#/components/schemas/Device'
+                  credentials:
+                    type: object
+                    properties:
+                      device_token:
+                        type: string
+                        description: Authentication token for device
+                      certificate:
+                        type: string
+                        description: Device certificate for secure communication
+                      provisioning_url:
+                        type: string
+                        format: uri
+                        description: URL for device configuration
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Device already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /devices/{deviceId}:
+    get:
+      summary: Get device details
+      description: Retrieve detailed information about a specific device
+      operationId: getDevice
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: Device identifier (UUID or MAC address)
+          schema:
+            type: string
+            pattern: '^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})$'
+      responses:
+        '200':
+          description: Device details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDetails'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      summary: Update device configuration
+      description: Update device settings, metadata, and configuration parameters
+      operationId: updateDevice
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceUpdate'
+      responses:
+        '200':
+          description: Device updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Deregister device
+      description: |
+        Remove device from the platform. This will stop data collection
+        and revoke all device credentials.
+      operationId: deregisterDevice
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: force
+          in: query
+          description: Force removal even if device is currently online
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '204':
+          description: Device deregistered successfully
+        '400':
+          description: Cannot deregister active device without force flag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /devices/{deviceId}/telemetry:
+    get:
+      summary: Get device telemetry
+      description: |
+        Retrieve telemetry data from a specific device with time range filtering
+        and data aggregation options.
+      operationId: getDeviceTelemetry
+      tags:
+        - Telemetry
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: from
+          in: query
+          description: Start time for telemetry data
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: End time for telemetry data
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: metrics
+          in: query
+          description: Comma-separated list of metrics to retrieve
+          schema:
+            type: string
+            example: "temperature,humidity,pressure"
+        - name: interval
+          in: query
+          description: Data aggregation interval
+          schema:
+            type: string
+            enum: [1m, 5m, 15m, 1h, 6h, 24h, 7d]
+            default: 1m
+        - name: aggregation
+          in: query
+          description: Aggregation function for data points
+          schema:
+            type: string
+            enum: [avg, min, max, sum, count, last]
+            default: avg
+        - name: limit
+          in: query
+          description: Maximum number of data points to return
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1000
+      responses:
+        '200':
+          description: Telemetry data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  device_id:
+                    type: string
+                  time_range:
+                    type: object
+                    properties:
+                      from:
+                        type: string
+                        format: date-time
+                      to:
+                        type: string
+                        format: date-time
+                  interval:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TelemetryData'
+                  metadata:
+                    type: object
+                    properties:
+                      total_points:
+                        type: integer
+                      aggregated:
+                        type: boolean
+                      metrics_included:
+                        type: array
+                        items:
+                          type: string
+        '400':
+          description: Invalid time range or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      summary: Send telemetry data
+      description: |
+        Submit telemetry data from an IoT device. This endpoint is typically
+        used by devices to send sensor readings and status updates.
+      operationId: sendTelemetry
+      tags:
+        - Telemetry
+      security:
+        - deviceToken: []
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetrySubmission'
+      responses:
+        '201':
+          description: Telemetry data received successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Telemetry data processed successfully"
+                  points_received:
+                    type: integer
+                  timestamp:
+                    type: string
+                    format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          description: Invalid device credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '413':
+          description: Telemetry payload too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /devices/{deviceId}/commands:
+    post:
+      summary: Send command to device
+      description: |
+        Send a control command to an IoT device. Commands can control actuators,
+        update configuration, or trigger device actions.
+      operationId: sendDeviceCommand
+      tags:
+        - Commands
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceCommand'
+      responses:
+        '202':
+          description: Command queued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  command_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum: [queued, sent, acknowledged, completed, failed]
+                  queued_at:
+                    type: string
+                    format: date-time
+                  expires_at:
+                    type: string
+                    format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          description: Device is offline and cannot receive commands
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    get:
+      summary: Get command history
+      description: Retrieve history of commands sent to a specific device
+      operationId: getDeviceCommands
+      tags:
+        - Commands
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by command status
+          schema:
+            type: string
+            enum: [queued, sent, acknowledged, completed, failed, expired]
+        - name: from
+          in: query
+          description: Commands sent after this timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: Commands sent before this timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: Command history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commands:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CommandHistory'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /commands/{commandId}:
+    get:
+      summary: Get command status
+      description: Retrieve status and details of a specific command
+      operationId: getCommandStatus
+      tags:
+        - Commands
+      parameters:
+        - name: commandId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Command details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandHistory'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /locations:
+    get:
+      summary: List locations
+      description: |
+        Retrieve list of configured locations/buildings with device counts
+        and status summaries.
+      operationId: listLocations
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: List of locations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+
+    post:
+      summary: Create new location
+      description: Create a new location/building for device deployment
+      operationId: createLocation
+      tags:
+        - Locations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationCreate'
+      responses:
+        '201':
+          description: Location created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /locations/{locationId}/devices:
+    get:
+      summary: Get devices at location
+      description: Retrieve all devices deployed at a specific location
+      operationId: getLocationDevices
+      tags:
+        - Locations
+      parameters:
+        - name: locationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: query
+          description: Filter by device status
+          schema:
+            type: string
+            enum: [online, offline, maintenance, error]
+        - name: type
+          in: query
+          description: Filter by device type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Devices at location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    $ref: '#/components/schemas/Location'
+                  devices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  summary:
+                    type: object
+                    properties:
+                      total_devices:
+                        type: integer
+                      online_count:
+                        type: integer
+                      offline_count:
+                        type: integer
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /alerts:
+    get:
+      summary: Get system alerts
+      description: |
+        Retrieve active alerts and notifications for device issues,
+        threshold violations, and system events.
+      operationId: getAlerts
+      tags:
+        - Alerts
+      parameters:
+        - name: severity
+          in: query
+          description: Filter by alert severity
+          schema:
+            type: string
+            enum: [low, medium, high, critical]
+        - name: status
+          in: query
+          description: Filter by alert status
+          schema:
+            type: string
+            enum: [active, acknowledged, resolved, suppressed]
+        - name: device_id
+          in: query
+          description: Filter by specific device
+          schema:
+            type: string
+        - name: location_id
+          in: query
+          description: Filter by location
+          schema:
+            type: string
+            format: uuid
+        - name: from
+          in: query
+          description: Alerts created after this timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Alert'
+                  summary:
+                    type: object
+                    properties:
+                      total_alerts:
+                        type: integer
+                      critical_count:
+                        type: integer
+                      high_count:
+                        type: integer
+                      active_count:
+                        type: integer
+
+  /alerts/{alertId}/acknowledge:
+    post:
+      summary: Acknowledge alert
+      description: Mark an alert as acknowledged by an operator
+      operationId: acknowledgeAlert
+      tags:
+        - Alerts
+      parameters:
+        - name: alertId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  maxLength: 500
+                  description: Optional comment about the acknowledgment
+      responses:
+        '200':
+          description: Alert acknowledged successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Alert already acknowledged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /dashboards/{dashboardId}:
+    get:
+      summary: Get dashboard data
+      description: |
+        Retrieve aggregated data for a specific dashboard with real-time
+        metrics and visualizations.
+      operationId: getDashboard
+      tags:
+        - Analytics
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: time_range
+          in: query
+          description: Time range for dashboard data
+          schema:
+            type: string
+            enum: [1h, 6h, 24h, 7d, 30d]
+            default: 24h
+        - name: refresh
+          in: query
+          description: Force refresh of cached data
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for platform access
+    deviceToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Device authentication token
+
+  schemas:
+    Device:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique device identifier
+        name:
+          type: string
+          description: Human-readable device name
+        mac_address:
+          type: string
+          pattern: '^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$'
+          description: Device MAC address
+        type:
+          type: string
+          enum: [sensor, actuator, gateway, hub, camera, thermostat, lock, light]
+          description: Device type category
+        manufacturer:
+          type: string
+          description: Device manufacturer
+        model:
+          type: string
+          description: Device model number
+        firmware_version:
+          type: string
+          description: Current firmware version
+        status:
+          type: string
+          enum: [online, offline, maintenance, error, unknown]
+          description: Current device status
+        location:
+          $ref: '#/components/schemas/LocationSummary'
+        last_seen:
+          type: string
+          format: date-time
+          description: Last communication timestamp
+        battery_level:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Battery level percentage (if applicable)
+        signal_strength:
+          type: integer
+          minimum: -120
+          maximum: 0
+          description: Signal strength in dBm
+        capabilities:
+          type: array
+          items:
+            type: string
+          description: Device capabilities and supported features
+        tags:
+          type: array
+          items:
+            type: string
+          description: User-defined tags for organization
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - type
+        - status
+
+    DeviceDetails:
+      allOf:
+        - $ref: '#/components/schemas/Device'
+        - type: object
+          properties:
+            configuration:
+              type: object
+              additionalProperties: true
+              description: Device-specific configuration parameters
+            metrics:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  unit:
+                    type: string
+                  type:
+                    type: string
+                    enum: [numeric, boolean, string]
+                  description:
+                    type: string
+              description: Available metrics/sensors on this device
+            connection_info:
+              type: object
+              properties:
+                protocol:
+                  type: string
+                  enum: [mqtt, coap, http, websocket, lorawan, zigbee, bluetooth]
+                endpoint:
+                  type: string
+                  format: uri
+                security:
+                  type: string
+                  enum: [none, psk, certificate, oauth2]
+            health_status:
+              type: object
+              properties:
+                cpu_usage:
+                  type: number
+                  format: float
+                memory_usage:
+                  type: number
+                  format: float
+                disk_usage:
+                  type: number
+                  format: float
+                uptime:
+                  type: integer
+                  description: Uptime in seconds
+                errors:
+                  type: array
+                  items:
+                    type: string
+
+    DeviceRegistration:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Device name
+        mac_address:
+          type: string
+          pattern: '^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$'
+        type:
+          type: string
+          enum: [sensor, actuator, gateway, hub, camera, thermostat, lock, light]
+        manufacturer:
+          type: string
+        model:
+          type: string
+        firmware_version:
+          type: string
+        location_id:
+          type: string
+          format: uuid
+          description: Location where device will be deployed
+        configuration:
+          type: object
+          additionalProperties: true
+          description: Initial device configuration
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+      required:
+        - name
+        - mac_address
+        - type
+        - location_id
+
+    DeviceUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        location_id:
+          type: string
+          format: uuid
+        configuration:
+          type: object
+          additionalProperties: true
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+        maintenance_mode:
+          type: boolean
+          description: Put device in maintenance mode
+
+    TelemetryData:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Data collection timestamp
+        metrics:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: number
+              - type: boolean
+              - type: string
+          description: Metric name to value mapping
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: double
+            longitude:
+              type: number
+              format: double
+            altitude:
+              type: number
+              format: double
+          description: GPS coordinates (if device supports location)
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional contextual data
+      required:
+        - timestamp
+        - metrics
+
+    TelemetrySubmission:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Data collection timestamp (defaults to server time)
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetryData'
+          minItems: 1
+          maxItems: 1000
+          description: Array of telemetry data points
+      required:
+        - data
+
+    DeviceCommand:
+      type: object
+      properties:
+        command:
+          type: string
+          description: Command identifier
+          example: "turn_on"
+        parameters:
+          type: object
+          additionalProperties: true
+          description: Command parameters
+          example:
+            brightness: 75
+            color: "#FF0000"
+        timeout:
+          type: integer
+          minimum: 1
+          maximum: 300
+          default: 30
+          description: Command timeout in seconds
+        priority:
+          type: string
+          enum: [low, normal, high, urgent]
+          default: normal
+          description: Command execution priority
+      required:
+        - command
+
+    CommandHistory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        device_id:
+          type: string
+        command:
+          type: string
+        parameters:
+          type: object
+          additionalProperties: true
+        status:
+          type: string
+          enum: [queued, sent, acknowledged, completed, failed, expired]
+        priority:
+          type: string
+          enum: [low, normal, high, urgent]
+        created_at:
+          type: string
+          format: date-time
+        sent_at:
+          type: string
+          format: date-time
+        acknowledged_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        result:
+          type: object
+          additionalProperties: true
+          description: Command execution result
+        error_message:
+          type: string
+          description: Error message if command failed
+
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Location name
+        description:
+          type: string
+          description: Location description
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            country:
+              type: string
+            postal_code:
+              type: string
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: double
+            longitude:
+              type: number
+              format: double
+        timezone:
+          type: string
+          description: Location timezone
+          example: "America/New_York"
+        device_count:
+          type: integer
+          description: Total number of devices at this location
+        online_devices:
+          type: integer
+          description: Number of online devices
+        created_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+
+    LocationSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        timezone:
+          type: string
+
+    LocationCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 500
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+            country:
+              type: string
+            postal_code:
+              type: string
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: double
+              minimum: -90
+              maximum: 90
+            longitude:
+              type: number
+              format: double
+              minimum: -180
+              maximum: 180
+        timezone:
+          type: string
+          description: IANA timezone identifier
+          example: "America/New_York"
+      required:
+        - name
+
+    Alert:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [device_offline, battery_low, threshold_violation, connection_error, security_breach, maintenance_due]
+        severity:
+          type: string
+          enum: [low, medium, high, critical]
+        status:
+          type: string
+          enum: [active, acknowledged, resolved, suppressed]
+        title:
+          type: string
+          description: Alert title/summary
+        description:
+          type: string
+          description: Detailed alert description
+        device_id:
+          type: string
+          description: Related device ID
+        device_name:
+          type: string
+          description: Related device name
+        location:
+          $ref: '#/components/schemas/LocationSummary'
+        metric:
+          type: string
+          description: Related metric name (for threshold violations)
+        threshold:
+          type: object
+          properties:
+            value:
+              type: number
+            operator:
+              type: string
+              enum: [">", "<", ">=", "<=", "==", "!="]
+            current_value:
+              type: number
+        created_at:
+          type: string
+          format: date-time
+        acknowledged_at:
+          type: string
+          format: date-time
+        acknowledged_by:
+          type: string
+          description: User who acknowledged the alert
+        resolved_at:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional alert context
+      required:
+        - id
+        - type
+        - severity
+        - status
+        - title
+        - created_at
+
+    Dashboard:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Dashboard name
+        description:
+          type: string
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/DashboardWidget'
+        time_range:
+          type: string
+          description: Current time range for dashboard data
+        last_updated:
+          type: string
+          format: date-time
+        auto_refresh:
+          type: boolean
+          description: Whether dashboard auto-refreshes
+
+    DashboardWidget:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [chart, gauge, map, table, counter, status]
+        title:
+          type: string
+        position:
+          type: object
+          properties:
+            x:
+              type: integer
+            y:
+              type: integer
+            width:
+              type: integer
+            height:
+              type: integer
+        config:
+          type: object
+          additionalProperties: true
+          description: Widget-specific configuration
+        data:
+          type: object
+          additionalProperties: true
+          description: Widget data payload
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+        total:
+          type: integer
+          minimum: 0
+        pages:
+          type: integer
+          minimum: 1
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Human-readable error message
+        code:
+          type: string
+          description: Internal error code
+        request_id:
+          type: string
+          format: uuid
+          description: Request ID for debugging
+        timestamp:
+          type: string
+          format: date-time
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional error context
+      required:
+        - error
+        - message
+        - request_id
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or malformed request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Unauthorized:
+      description: Authentication required - invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Forbidden:
+      description: Access denied - insufficient permissions for this resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+tags:
+  - name: Devices
+    description: |
+      Device lifecycle management including registration, configuration,
+      and monitoring of IoT devices.
+  - name: Telemetry
+    description: |
+      Sensor data collection and retrieval with time-series storage
+      and aggregation capabilities.
+  - name: Commands
+    description: |
+      Remote device control and command execution with status tracking
+      and result reporting.
+  - name: Locations
+    description: |
+      Physical location management for organizing and grouping devices
+      by deployment sites.
+  - name: Alerts
+    description: |
+      Automated alerting system for device issues, threshold violations,
+      and system notifications.
+  - name: Analytics
+    description: |
+      Data visualization and analytics dashboards for IoT insights
+      and operational monitoring.
+
+externalDocs:
+  description: IoT Platform Documentation
+  url: https://developer.iotplatform.com/docs

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Requirement Traceability Matrix</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status.implemented {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .priority {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .priority.high {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .priority.medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>API Requirement Traceability Matrix</h1>
+            <p>Digital Banking API v3.2.1</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">19</div>
+                <div class="stat-label">Total Requirements</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">14</div>
+                <div class="stat-label">API Endpoints</div>
+            </div>
+        </div>
+        
+        <div style="padding: 30px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Requirement ID</th>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>API Endpoints</th>
+                        <th>Business Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><strong>REQ-ACCOUNTS-001</strong></td>
+                        <td>Accounts Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /accounts</div><div>POST /accounts</div><div>GET /accounts/{accountId}</div><div>PATCH /accounts/{accountId}</div>
+                        </td>
+                        <td>Enables users to manage Accounts effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSACTIONS-001</strong></td>
+                        <td>Transactions Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /accounts/{accountId}/transactions</div>
+                        </td>
+                        <td>Enables users to manage Transactions effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSFERS-001</strong></td>
+                        <td>Transfers Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /transfers</div><div>GET /transfers/{transferId}</div><div>DELETE /transfers/{transferId}</div>
+                        </td>
+                        <td>Enables users to manage Transfers effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-PAYMENTS-001</strong></td>
+                        <td>Payments Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /payments/bills</div><div>POST /payments/bills</div>
+                        </td>
+                        <td>Enables users to manage Payments effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-LOANS-001</strong></td>
+                        <td>Loans Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /loans</div><div>POST /loans/{loanId}/payments</div>
+                        </td>
+                        <td>Enables users to manage Loans effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-CARDS-001</strong></td>
+                        <td>Cards Management</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /cards</div><div>POST /cards/{cardId}/block</div>
+                        </td>
+                        <td>Enables users to manage Cards effectively through API operations</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-ACCOUNTS-CREATE-001</strong></td>
+                        <td>CREATE Accounts</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /accounts</div>
+                        </td>
+                        <td>Allows create operations on Accounts resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-ACCOUNTS-READ-001</strong></td>
+                        <td>READ Accounts</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /accounts</div><div>GET /accounts/{accountId}</div>
+                        </td>
+                        <td>Allows read operations on Accounts resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-ACCOUNTS-UPDATE-001</strong></td>
+                        <td>UPDATE Accounts</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>PATCH /accounts/{accountId}</div>
+                        </td>
+                        <td>Allows update operations on Accounts resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSACTIONS-READ-001</strong></td>
+                        <td>READ Transactions</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /accounts/{accountId}/transactions</div>
+                        </td>
+                        <td>Allows read operations on Transactions resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSFERS-CREATE-001</strong></td>
+                        <td>CREATE Transfers</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /transfers</div>
+                        </td>
+                        <td>Allows create operations on Transfers resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSFERS-READ-001</strong></td>
+                        <td>READ Transfers</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /transfers/{transferId}</div>
+                        </td>
+                        <td>Allows read operations on Transfers resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-TRANSFERS-DELETE-001</strong></td>
+                        <td>DELETE Transfers</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>DELETE /transfers/{transferId}</div>
+                        </td>
+                        <td>Allows delete operations on Transfers resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-PAYMENTS-CREATE-001</strong></td>
+                        <td>CREATE Payments</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /payments/bills</div>
+                        </td>
+                        <td>Allows create operations on Payments resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-PAYMENTS-READ-001</strong></td>
+                        <td>READ Payments</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /payments/bills</div>
+                        </td>
+                        <td>Allows read operations on Payments resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-LOANS-CREATE-001</strong></td>
+                        <td>CREATE Loans</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /loans/{loanId}/payments</div>
+                        </td>
+                        <td>Allows create operations on Loans resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-LOANS-READ-001</strong></td>
+                        <td>READ Loans</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /loans</div>
+                        </td>
+                        <td>Allows read operations on Loans resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-CARDS-CREATE-001</strong></td>
+                        <td>CREATE Cards</td>
+                        <td><span class="priority medium">MEDIUM</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>POST /cards/{cardId}/block</div>
+                        </td>
+                        <td>Allows create operations on Cards resources</td>
+                    </tr>
+                    
+                    <tr>
+                        <td><strong>REQ-CARDS-READ-001</strong></td>
+                        <td>READ Cards</td>
+                        <td><span class="priority high">HIGH</span></td>
+                        <td><span class="status implemented">IMPLEMENTED</span></td>
+                        <td>
+                            <div>GET /cards</div>
+                        </td>
+                        <td>Allows read operations on Cards resources</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

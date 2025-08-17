@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-17T11:21:32.856Z",
+  "api": {
+    "title": "Swagger Petstore",
+    "version": "1.0.7",
+    "totalEndpoints": 20
+  },
+  "requirements": {
+    "total": 14,
+    "implemented": 14,
+    "tested": 0,
+    "pending": 0
+  },
+  "coverage": {
+    "implementation": 100,
+    "testing": 0
+  }
+}

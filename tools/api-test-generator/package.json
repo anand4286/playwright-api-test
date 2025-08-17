@@ -1,0 +1,62 @@
+{
+  "name": "playwright-api-test-generator",
+  "version": "1.0.0",
+  "description": "Generate Playwright API tests, requirement traceability matrix, and visual flows from OpenAPI specs",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "playwright-api-gen": "dist/cli.js",
+    "pwtgen": "dist/cli.js"
+  },
+  "keywords": [
+    "playwright",
+    "api-testing",
+    "openapi",
+    "swagger",
+    "test-generation",
+    "requirement-traceability"
+  ],
+  "author": "API Test Generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/playwright.git",
+    "directory": "tools/api-test-generator"
+  },
+  "bugs": {
+    "url": "https://github.com/microsoft/playwright/issues"
+  },
+  "homepage": "https://github.com/microsoft/playwright/tree/main/tools/api-test-generator",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "generate": "npm run build && node dist/cli.js",
+    "dev": "tsc --watch",
+    "test": "npm run build && npm run test:petstore",
+    "test:petstore": "node dist/index.js --spec https://petstore.swagger.io/v2/swagger.json",
+    "serve": "npm run build && node dist/server.js"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.1.0",
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "express": "^4.18.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.3",
+    "handlebars": "^4.7.8",
+    "inquirer": "^9.2.23",
+    "mermaid": "^10.9.1",
+    "open": "^9.1.0",
+    "ora": "^8.0.1",
+    "yaml": "^2.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.14.15",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.5.4"
+  },
+  "license": "MIT"
+}

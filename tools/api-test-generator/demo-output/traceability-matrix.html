@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petstore API - Requirement Traceability Matrix</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .filter-group {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .filter-group select, .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .matrix-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .matrix-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .matrix-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .matrix-table tr:hover {
+            background-color: #f8f9ff;
+        }
+        .requirement-id {
+            font-weight: 600;
+            color: #667eea;
+        }
+        .priority {
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .priority.high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .priority.medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .priority.low {
+            background: #d1fae5;
+            color: #059669;
+        }
+        .coverage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .coverage-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            flex: 1;
+            overflow: hidden;
+        }
+        .coverage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+        .coverage-text {
+            font-weight: 600;
+            color: #374151;
+            min-width: 40px;
+        }
+        .test-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .test-link {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            text-decoration: none;
+            border: 1px solid #bfdbfe;
+        }
+        .test-link:hover {
+            background: #dbeafe;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status.complete {
+            background: #d1fae5;
+            color: #059669;
+        }
+        .status.partial {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .status.pending {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .module-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .module-btn {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .module-btn.active {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔗 Requirement Traceability Matrix</h1>
+        <p>Petstore API - Comprehensive requirement coverage tracking</p>
+        <div style="margin-top: 15px;">
+            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/flow-diagrams-simple.html" 
+               style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3);">
+               📊 View Interactive Flow Diagrams
+            </a>
+            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts" 
+               style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); margin-left: 10px;">
+               🧪 View Test File
+            </a>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Total Requirements</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">22</div>
+            <div class="stat-label">API Endpoints</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">48</div>
+            <div class="stat-label">Test Cases</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">96%</div>
+            <div class="stat-label">Coverage</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <div class="filter-group">
+            <label>Module Filter:</label>
+            <div class="module-filter">
+                <button class="module-btn active" onclick="filterByModule('all')">All</button>
+                <button class="module-btn" onclick="filterByModule('pet')">Pet</button>
+                <button class="module-btn" onclick="filterByModule('store')">Store</button>
+                <button class="module-btn" onclick="filterByModule('user')">User</button>
+            </div>
+        </div>
+        
+        <div class="filter-group">
+            <label>Priority:</label>
+            <select id="priorityFilter" onchange="applyFilters()">
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Status:</label>
+            <select id="statusFilter" onchange="applyFilters()">
+                <option value="all">All Status</option>
+                <option value="complete">Complete</option>
+                <option value="partial">Partial</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Search:</label>
+            <input type="text" id="searchFilter" placeholder="Search requirements..." onkeyup="applyFilters()">
+        </div>
+    </div>
+
+    <div class="matrix-container">
+        <table class="matrix-table" id="matrixTable">
+            <thead>
+                <tr>
+                    <th>Requirement ID</th>
+                    <th>Module</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Acceptance Criteria</th>
+                    <th>API Endpoints</th>
+                    <th>Test Cases</th>
+                    <th>Coverage</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pet Module Requirements -->
+                <tr data-module="pet" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-PET-001</td>
+                    <td>Pet</td>
+                    <td>System shall allow users to create new pets in the store</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Pet must have name, photoUrls; optional category, tags, status</td>
+                    <td>POST /pet</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:112" class="test-link">TC-PET-001</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:198" class="test-link">TC-PET-002</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="pet" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-PET-002</td>
+                    <td>Pet</td>
+                    <td>System shall allow users to update existing pets</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>All pet fields can be updated; ID must remain unchanged</td>
+                    <td>PUT /pet</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:143" class="test-link">TC-PET-003</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:143" class="test-link">TC-PET-004</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="pet" data-priority="medium" data-status="complete">
+                    <td class="requirement-id">REQ-PET-003</td>
+                    <td>Pet</td>
+                    <td>System shall allow filtering pets by status</td>
+                    <td><span class="priority medium">Medium</span></td>
+                    <td>Support filtering by available, pending, sold status</td>
+                    <td>GET /pet/findByStatus</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:79" class="test-link">TC-PET-005</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:94" class="test-link">TC-PET-006</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:103" class="test-link">TC-PET-007</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="pet" data-priority="medium" data-status="partial">
+                    <td class="requirement-id">REQ-PET-004</td>
+                    <td>Pet</td>
+                    <td>System shall allow filtering pets by tags</td>
+                    <td><span class="priority medium">Medium</span></td>
+                    <td>Support filtering by one or multiple tags</td>
+                    <td>GET /pet/findByTags</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:126" class="test-link">TC-PET-008</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 70%"></div>
+                            </div>
+                            <span class="coverage-text">70%</span>
+                        </div>
+                    </td>
+                    <td><span class="status partial">Partial</span></td>
+                </tr>
+
+                <tr data-module="pet" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-PET-005</td>
+                    <td>Pet</td>
+                    <td>System shall allow retrieving pet by ID</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Return pet details for valid ID; 404 for invalid ID</td>
+                    <td>GET /pet/{petId}</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:126" class="test-link">TC-PET-009</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:183" class="test-link">TC-PET-010</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="pet" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-PET-006</td>
+                    <td>Pet</td>
+                    <td>System shall allow deleting pets</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Pet should be permanently removed from system</td>
+                    <td>DELETE /pet/{petId}</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:165" class="test-link">TC-PET-011</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:229" class="test-link">TC-PET-012</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <!-- Store Module Requirements -->
+                <tr data-module="store" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-STORE-001</td>
+                    <td>Store</td>
+                    <td>System shall allow placing orders for pets</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Order must include petId, quantity; auto-generate ID and shipDate</td>
+                    <td>POST /store/order</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-STORE-001</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-STORE-002</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="store" data-priority="medium" data-status="complete">
+                    <td class="requirement-id">REQ-STORE-002</td>
+                    <td>Store</td>
+                    <td>System shall provide inventory statistics</td>
+                    <td><span class="priority medium">Medium</span></td>
+                    <td>Return count of pets by status</td>
+                    <td>GET /store/inventory</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-STORE-003</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="coverage-text">90%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="store" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-STORE-003</td>
+                    <td>Store</td>
+                    <td>System shall allow retrieving order by ID</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Return order details for valid ID (1-10); error for others</td>
+                    <td>GET /store/order/{orderId}</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-STORE-004</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-STORE-005</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <!-- User Module Requirements -->
+                <tr data-module="user" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-USER-001</td>
+                    <td>User</td>
+                    <td>System shall allow user registration</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Create user with username, email, password</td>
+                    <td>POST /user</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-USER-001</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-USER-002</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="user" data-priority="high" data-status="complete">
+                    <td class="requirement-id">REQ-USER-002</td>
+                    <td>User</td>
+                    <td>System shall allow user authentication</td>
+                    <td><span class="priority high">High</span></td>
+                    <td>Return session token for valid credentials</td>
+                    <td>GET /user/login</td>
+                    <td>
+                        <div class="test-links">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-USER-003</a>
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="test-link">TC-USER-004</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="coverage-text">100%</span>
+                        </div>
+                    </td>
+                    <td><span class="status complete">Complete</span></td>
+                </tr>
+
+                <tr data-module="user" data-priority="medium" data-status="pending">
+                    <td class="requirement-id">REQ-USER-003</td>
+                    <td>User</td>
+                    <td>System shall allow bulk user creation</td>
+                    <td><span class="priority medium">Medium</span></td>
+                    <td>Accept array of user objects</td>
+                    <td>POST /user/createWithArray</td>
+                    <td>
+                        <div class="test-links">
+                            <span style="color: #999;">No tests yet</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="coverage">
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="coverage-text">0%</span>
+                        </div>
+                    </td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterByModule(module) {
+            // Update button states
+            document.querySelectorAll('.module-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter table rows
+            const rows = document.querySelectorAll('#matrixTable tbody tr');
+            rows.forEach(row => {
+                if (module === 'all' || row.dataset.module === module) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function applyFilters() {
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+            
+            const rows = document.querySelectorAll('#matrixTable tbody tr');
+            rows.forEach(row => {
+                let show = true;
+                
+                // Priority filter
+                if (priorityFilter !== 'all' && row.dataset.priority !== priorityFilter) {
+                    show = false;
+                }
+                
+                // Status filter
+                if (statusFilter !== 'all' && row.dataset.status !== statusFilter) {
+                    show = false;
+                }
+                
+                // Search filter
+                if (searchFilter && !row.textContent.toLowerCase().includes(searchFilter)) {
+                    show = false;
+                }
+                
+                row.style.display = show ? '' : 'none';
+            });
+        }
+
+        // Initialize with some dynamic effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate coverage bars on load
+            setTimeout(() => {
+                document.querySelectorAll('.coverage-fill').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

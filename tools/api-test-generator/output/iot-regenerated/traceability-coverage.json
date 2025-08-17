@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-17T11:01:49.456Z",
+  "api": {
+    "title": "IoT Device Management API",
+    "version": "2.5.0",
+    "totalEndpoints": 16
+  },
+  "requirements": {
+    "total": 19,
+    "implemented": 19,
+    "tested": 0,
+    "pending": 0
+  },
+  "coverage": {
+    "implementation": 100,
+    "testing": 0
+  }
+}

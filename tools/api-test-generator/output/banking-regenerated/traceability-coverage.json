@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-17T10:58:41.565Z",
+  "api": {
+    "title": "Digital Banking API",
+    "version": "3.2.1",
+    "totalEndpoints": 14
+  },
+  "requirements": {
+    "total": 19,
+    "implemented": 19,
+    "tested": 0,
+    "pending": 0
+  },
+  "coverage": {
+    "implementation": 100,
+    "testing": 0
+  }
+}

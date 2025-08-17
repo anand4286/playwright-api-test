@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petstore API - Interactive Flow Diagrams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 35%, #667eea 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            max-width: none;
+        }
+
+        /* Left Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .sidebar-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-align: center;
+            margin: 5px 0 0 0;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin: 15px 0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .header .subtitle {
+            font-size: 1em;
+            opacity: 0.8;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .stat-box:hover::before {
+            left: 100%;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-direction: column;
+            padding: 25px 20px;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .nav-tab {
+            background: rgba(102, 126, 234, 0.1);
+            color: #1a202c;
+            border: none;
+            padding: 18px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            font-weight: 600;
+            font-size: 1em;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Sidebar stats */
+        .sidebar-stats {
+            padding: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .sidebar-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+
+        .sidebar-stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .container {
+                margin-left: 0;
+            }
+            
+            .nav-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            
+            .nav-tab {
+                min-width: 120px;
+                text-align: center;
+                font-size: 0.9em;
+                padding: 12px 16px;
+            }
+            
+            .sidebar-stats {
+                display: none;
+            }
+        }
+
+        /* Breadcrumb styling */
+        .breadcrumb {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Dynamic links notification */
+        .dynamic-links-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            pointer-events: none;
+        }
+
+        .dynamic-links-info.show {
+            opacity: 1;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .diagram-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+        }
+        
+        .diagram-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        
+        .diagram-description {
+            color: #64748b;
+            margin-bottom: 35px;
+            text-align: center;
+            line-height: 1.7;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+        
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+        
+        .step-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .step-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e2e8f0, #cbd5e1);
+            transition: all 0.3s ease;
+        }
+        
+        .step-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-color: #cbd5e1;
+        }
+        
+        .step-box.start::before {
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        }
+        .step-box.start {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        }
+        
+        .step-box.process::before {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+        }
+        .step-box.process {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+        }
+        
+        .step-box.decision::before {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        .step-box.decision {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-radius: 25px;
+        }
+        
+        .step-box.end::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+        .step-box.end {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        }
+        
+        .step-box.error::before {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+        .step-box.error {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, #fef2f2, #fecaca);
+        }
+        
+        .step-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            letter-spacing: -0.25px;
+        }
+        
+        .step-description {
+            font-size: 0.95em;
+            color: #64748b;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .flow-arrow {
+            text-align: center;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .flow-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .connector-line {
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            flex: 1;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .connector-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .connector-arrow {
+            width: 0;
+            height: 0;
+            border-left: 12px solid #764ba2;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            margin: 0 10px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .nav-tabs {
+                gap: 10px;
+            }
+            
+            .nav-tab {
+                padding: 14px 24px;
+                font-size: 0.9em;
+            }
+            
+            .diagram-container {
+                padding: 25px;
+            }
+            
+            .flow-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .api-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .clickable-link {
+            color: #2196F3;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .clickable-link:hover {
+            background: rgba(33, 150, 243, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .file-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 2px 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .test-badge.clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-badge.clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .test-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin: 2px;
+            letter-spacing: 0.3px;
+        }
+        
+        .test-badge.passed {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .test-badge.failed {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .test-badge.coverage {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+        
+        .test-results {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(0,0,0,0.02);
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .test-summary {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .test-details {
+            font-size: 0.85em;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        
+        .coverage-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        
+        .coverage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+        
+        .step-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">🌊 API Flows</h2>
+            <p class="sidebar-subtitle">Interactive Workflows</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 API Overview</button>
+            <button class="nav-tab" onclick="showTab('pet')">🐾 Pet Management</button>
+            <button class="nav-tab" onclick="showTab('store')">🛒 Store Operations</button>
+            <button class="nav-tab" onclick="showTab('user')">👤 User Management</button>
+        </div>
+        
+        <div class="sidebar-stats">
+            <div class="sidebar-stat">
+                <span>Flow Types</span>
+                <span class="sidebar-stat-value">4</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Endpoints</span>
+                <span class="sidebar-stat-value">22</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Test Coverage</span>
+                <span class="sidebar-stat-value">69%</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>User Flows</span>
+                <span class="sidebar-stat-value">8</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Links Notification -->
+    <div id="dynamic-links-info" class="dynamic-links-info">
+        ✅ Dynamic workspace links activated
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <div class="header">
+            <h1>🌊 Interactive Flow Diagrams</h1>
+            <p>Petstore API - Visual process flows for stakeholders</p>
+            <div class="subtitle">Professional workflow visualization for business and technical teams</div>
+        </div>
+
+        <div class="breadcrumb">
+            API Documentation → Flow Diagrams → Interactive Workflows
+        </div>
+
+        <!-- Overview Flow -->
+        <div id="overview" class="tab-content active">
+            <div class="diagram-container">
+                <div class="diagram-title">🏢 Petstore API - System Overview</div>
+                <div class="diagram-description">
+                    High-level view of the Petstore API showing the main modules and their relationships.
+                    This dashboard provides real-time test coverage and quality metrics for stakeholders.
+                </div>
+                
+                <div class="test-results">
+                    <div class="test-summary">
+                        <div class="test-badge coverage">Test Coverage Dashboard</div>
+                        <div class="test-badge passed">9 Tests Passing</div>
+                        <div class="test-badge failed">4 Tests Failing</div>
+                        <div class="test-badge coverage">69% Overall Success</div>
+                    </div>
+                    <div class="coverage-bar">
+                        <div class="coverage-fill" style="width: 69%;"></div>
+                    </div>
+                    <div class="test-details">
+                        Comprehensive API testing with automated validation - Updated: 17 Aug 2025, 08:54 UTC
+                    </div>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="step-box start">
+                        <span class="step-icon">🐾</span>
+                        <div class="step-title">Pet Management</div>
+                        <div class="step-description">Create, read, update, and delete pets. Upload pet images and manage pet inventory with full CRUD operations.</div>
+                        <div class="api-badge">8 Endpoints</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge passed">9 Passed</div>
+                                <div class="test-badge failed">4 Failed</div>
+                                <div class="test-badge coverage">69% Success</div>
+                            </div>
+                            <div class="coverage-bar">
+                                <div class="coverage-fill" style="width: 69%;"></div>
+                            </div>
+                            <div class="test-details">
+                                Fully tested module with comprehensive test scenarios including performance and data validation
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🛒</span>
+                        <div class="step-title">Store Operations</div>
+                        <div class="step-description">Manage store inventory, place orders, track order status, and handle cancellations with real-time updates.</div>
+                        <div class="api-badge">3 Endpoints</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Tests Pending</div>
+                            </div>
+                            <div class="test-details">
+                                Store operations tests can be generated using the API test generator tool
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">👤</span>
+                        <div class="step-title">User Management</div>
+                        <div class="step-description">User registration, authentication, profile management, and bulk operations with secure session handling.</div>
+                        <div class="api-badge">7 Endpoints</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Tests Pending</div>
+                            </div>
+                            <div class="test-details">
+                                User management tests can be generated using the API test generator tool
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box end">
+                        <span class="step-icon">🔐</span>
+                        <div class="step-title">Authentication</div>
+                        <div class="step-description">API key authentication and OAuth 2.0 security for protected endpoints with role-based access control.</div>
+                        <div class="api-badge">Security Layer</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Implicit Testing</div>
+                            </div>
+                            <div class="test-details">
+                                Authentication tested within each protected endpoint operation
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="step-box decision">
+                        <span class="step-icon">🔄</span>
+                        <div class="step-title">Integration Flow</div>
+                        <div class="step-description">User authentication enables access to Pet and Store operations, creating a seamless workflow across all modules with comprehensive test coverage.</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">End-to-End Testing</div>
+                            </div>
+                            <div class="test-details">
+                                Cross-module integration testing ensures seamless user experience across the entire API
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Test Generation Control Panel -->
+                <div class="diagram-container" style="margin-top: 40px;">
+                    <div class="diagram-title">🧪 Test Generation Control Panel</div>
+                    <div class="diagram-description">
+                        Generate additional Playwright API tests for Store and User modules. 
+                        Expand test coverage and validate new API endpoints with automated test creation.
+                    </div>
+                    
+                    <div class="test-results">
+                        <div class="test-summary">
+                            <div class="test-badge coverage">Current Status</div>
+                            <div class="test-badge passed">Pet Tests: Complete</div>
+                            <div class="test-badge coverage">Store Tests: Available</div>
+                            <div class="test-badge coverage">User Tests: Available</div>
+                        </div>
+                        <div class="test-details">
+                            Use the API test generator to create comprehensive test suites for any OpenAPI specification
+                        </div>
+                    </div>
+
+                    <div class="flow-steps">
+                        <div class="step-box process">
+                            <span class="step-icon">🛒</span>
+                            <div class="step-title">Generate Store Tests</div>
+                            <div class="step-description">
+                                Create Playwright tests for all store operations including inventory, orders, and tracking
+                            </div>
+                            <div class="api-badge">3 Endpoints Ready</div>
+                            <div class="test-results">
+                                <div class="test-summary">
+                                    <div class="test-badge coverage">Command</div>
+                                </div>
+                                <div class="test-details" style="font-family: monospace; background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/package.json" class="clickable-link">npm run generate-tests -- --module=store --output=tests/store.spec.ts</a>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="file-link clickable-link">🔧 Generator Source</a> | 
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/swagger.json" class="file-link clickable-link">📋 API Spec</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-box process">
+                            <span class="step-icon">👤</span>
+                            <div class="step-title">Generate User Tests</div>
+                            <div class="step-description">
+                                Create Playwright tests for user lifecycle, authentication, and profile management
+                            </div>
+                            <div class="api-badge">7 Endpoints Ready</div>
+                            <div class="test-results">
+                                <div class="test-summary">
+                                    <div class="test-badge coverage">Command</div>
+                                </div>
+                                <div class="test-details" style="font-family: monospace; background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/package.json" class="clickable-link">npm run generate-tests -- --module=user --output=tests/user.spec.ts</a>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="file-link clickable-link">🔧 Generator Source</a> | 
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/swagger.json" class="file-link clickable-link">📋 API Spec</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-box process">
+                            <span class="step-icon">🔧</span>
+                            <div class="step-title">Custom API Testing</div>
+                            <div class="step-description">
+                                Generate tests for any OpenAPI specification by providing JSON or YAML URL/file
+                            </div>
+                            <div class="api-badge">Any OpenAPI Spec</div>
+                            <div class="test-results">
+                                <div class="test-summary">
+                                    <div class="test-badge coverage">Command</div>
+                                </div>
+                                <div class="test-details" style="font-family: monospace; background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/package.json" class="clickable-link">npm run generate-tests -- --spec=https://your-api.com/openapi.json --output=tests/</a>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/README.md" class="file-link clickable-link">📖 Documentation</a> | 
+                                    <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src" class="file-link clickable-link">📁 Source Code</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-box end">
+                            <span class="step-icon">📊</span>
+                            <div class="step-title">View Generated Reports</div>
+                            <div class="step-description">
+                                Access requirement traceability matrix, test coverage reports, and visual documentation
+                            </div>
+                            <div class="api-badge">HTML Reports</div>
+                            <div class="test-results">
+                                <div class="test-summary">
+                                    <div class="test-badge coverage">Available Reports</div>
+                                </div>
+                                <div class="test-details">
+                                    • <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/traceability-matrix.html" class="clickable-link">Requirement Traceability Matrix</a><br>
+                                    • <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/flow-diagrams-simple.html" class="clickable-link">Interactive Flow Diagrams</a><br>
+                                    • <a href="vscode://file/Users/Anand/github/playwright/test-results" class="clickable-link">Test Coverage Reports</a><br>
+                                    • <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output" class="clickable-link">Business Documentation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pet Management Flow -->
+        <div id="pet" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🐾 Pet Management Workflow</div>
+                <div class="diagram-description">
+                    Detailed workflow for pet management operations including creation, updates, search, and deletion. 
+                    Shows both success and error paths with comprehensive test coverage and live results.
+                </div>
+                
+                <div class="test-results">
+                    <div class="test-summary">
+                        <div class="test-badge coverage">13 Tests Total</div>
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts" class="test-badge passed clickable">9 Passed</a>
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts" class="test-badge failed clickable">4 Failed</a>
+                        <div class="test-badge coverage">69% Success Rate</div>
+                    </div>
+                    <div class="coverage-bar">
+                        <div class="coverage-fill" style="width: 69%;"></div>
+                    </div>
+                    <div class="test-details">
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts" class="file-link clickable-link">📁 pet.spec.ts</a> - Last run: 17 Aug 2025, 08:54 UTC
+                        <br><a href="vscode://file/Users/Anand/github/playwright/test-results" class="file-link clickable-link">📊 View Test Reports</a>
+                    </div>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="step-box start">
+                        <span class="step-icon">🚀</span>
+                        <div class="step-title">Start Pet Management</div>
+                        <div class="step-description">User initiates pet management operations through the web interface or API client</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Entry Point</div>
+                            </div>
+                            <div class="test-details">All pet operations start here - Authentication and permissions verified</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-steps">
+                    <div class="step-box decision">
+                        <span class="step-icon">🔐</span>
+                        <div class="step-title">Authentication Required?</div>
+                        <div class="step-description">Check if user needs to authenticate for the requested operation</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Implicit Testing</div>
+                            </div>
+                            <div class="test-details">Authentication tested within each endpoint operation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">⚡</span>
+                        <div class="step-title">Choose Operation</div>
+                        <div class="step-description">Select from available operations: Create, Search, Update, or Delete pet</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">All Operations Tested</div>
+                            </div>
+                            <div class="test-details">Comprehensive coverage of all CRUD operations with positive and negative test scenarios</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">➕</span>
+                        <div class="step-title">Create Pet</div>
+                        <div class="step-description">POST /pet<br>Add new pet to inventory with validation</div>
+                        <div class="api-badge">POST /pet</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:112" class="test-badge passed clickable">2 Passed</a>
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:198" class="test-badge failed clickable">1 Failed</a>
+                            </div>
+                            <div class="test-details">
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:112" class="clickable-link">"should create a new pet successfully"</a><br>
+                                ❌ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:198" class="clickable-link">"should handle missing required fields when creating pet"</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">Search Pets</div>
+                        <div class="step-description">GET /pet/findByStatus<br>Find pets by status, tags, or ID</div>
+                        <div class="api-badge">GET /pet/findByStatus</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:79" class="test-badge passed clickable">4 Passed</a>
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:183" class="test-badge failed clickable">2 Failed</a>
+                            </div>
+                            <div class="test-details">
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:79" class="clickable-link">"should get available pets successfully"</a><br>
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:94" class="clickable-link">"should get pending pets successfully"</a><br>
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:103" class="clickable-link">"should get sold pets successfully"</a><br>
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:126" class="clickable-link">"should get pet by ID successfully"</a><br>
+                                ❌ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:183" class="clickable-link">"should return 404 for non-existent pet ID"</a><br>
+                                ❌ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:190" class="clickable-link">"should return 400 for invalid status parameter"</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">Update Pet</div>
+                        <div class="step-description">PUT /pet<br>Modify existing pet details and status</div>
+                        <div class="api-badge">PUT /pet</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:143" class="test-badge passed clickable">1 Passed</a>
+                            </div>
+                            <div class="test-details">
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:143" class="clickable-link">"should update an existing pet successfully"</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">Delete Pet</div>
+                        <div class="step-description">DELETE /pet/{id}<br>Remove pet from system permanently</div>
+                        <div class="api-badge">DELETE /pet/{id}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:165" class="test-badge failed clickable">1 Failed</a>
+                            </div>
+                            <div class="test-details">
+                                ❌ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:165" class="clickable-link">"should delete a pet successfully"</a> - Expected 404, got 200
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box end">
+                        <span class="step-icon">✅</span>
+                        <div class="step-title">Success Response</div>
+                        <div class="step-description">Operation completed successfully with appropriate HTTP status code and response data</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:229" class="test-badge passed clickable">2 Performance Tests</a>
+                            </div>
+                            <div class="test-details">
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:229" class="clickable-link">"should respond within acceptable time limits"</a><br>
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:241" class="clickable-link">"should handle concurrent requests"</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box error">
+                        <span class="step-icon">❌</span>
+                        <div class="step-title">Error Handling</div>
+                        <div class="step-description">400/404/401 error responses with detailed error messages for debugging</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:262" class="test-badge passed clickable">1 Data Validation</a>
+                            </div>
+                            <div class="test-details">
+                                ✅ <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts:262" class="clickable-link">"should return pets with valid data structure"</a><br>
+                                Note: Some error handling tests failing due to API behavior differences
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pet Tests Summary Panel -->
+                <div class="diagram-container" style="margin-top: 40px;">
+                    <div class="diagram-title">🧪 Pet API Test Suite</div>
+                    <div class="diagram-description">
+                        Comprehensive test coverage for Pet Management API endpoints with live results and debugging access.
+                    </div>
+                    
+                    <div class="test-results">
+                        <div class="test-summary">
+                            <div class="test-badge coverage">13 Total Tests</div>
+                            <div class="test-badge passed">9 Passing</div>
+                            <div class="test-badge failed">4 Failing</div>
+                            <div class="test-badge coverage">69% Success</div>
+                        </div>
+                        <div class="test-details">
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/pet.spec.ts" class="file-link clickable-link">📁 Open Test File</a> | 
+                            <a href="vscode://file/Users/Anand/github/playwright/test-results" class="file-link clickable-link">📊 View Test Reports</a> | 
+                            <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/demo-output/traceability-matrix.html" class="file-link clickable-link">📋 Traceability Matrix</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Operations Flow -->
+        <div id="store" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🛒 Store Operations Workflow</div>
+                <div class="diagram-description">
+                    E-commerce workflow showing order placement, inventory management, and order tracking processes.
+                    Includes validation steps and business rules for order processing with automated test generation capabilities.
+                </div>
+                
+                <div class="test-results">
+                    <div class="test-summary">
+                        <div class="test-badge coverage">Tests Available for Generation</div>
+                        <div class="test-badge coverage">3 Store Endpoints</div>
+                        <div class="test-badge coverage">Ready for Testing</div>
+                    </div>
+                    <div class="test-details">
+                        Store operations tests can be auto-generated using: <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/package.json" class="clickable-link">npm run generate-tests -- --module=store</a><br>
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="file-link clickable-link">🔧 View Generator Source</a> | 
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/swagger.json" class="file-link clickable-link">📋 OpenAPI Spec</a>
+                    </div>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="step-box start">
+                        <span class="step-icon">🏪</span>
+                        <div class="step-title">Start Store Operations</div>
+                        <div class="step-description">Customer begins e-commerce interaction with the petstore</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Entry Point Testing</div>
+                            </div>
+                            <div class="test-details">User journey testing - Session initialization and cart setup</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-steps">
+                    <div class="step-box decision">
+                        <span class="step-icon">📊</span>
+                        <div class="step-title">Check Inventory?</div>
+                        <div class="step-description">Optionally view available pets and current stock levels</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Business Logic Tests</div>
+                            </div>
+                            <div class="test-details">Decision flow testing - Optional inventory check scenarios</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">📈</span>
+                        <div class="step-title">View Inventory</div>
+                        <div class="step-description">GET /store/inventory<br>Display current stock levels and available pets</div>
+                        <div class="api-badge">GET /store/inventory</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">API Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should return inventory as key-value pairs<br>
+                                • Should handle authentication for protected data<br>
+                                • Should validate response data structure<br>
+                                • Should handle rate limiting
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">🛍️</span>
+                        <div class="step-title">Place Order</div>
+                        <div class="step-description">POST /store/order<br>Create new pet order with validation</div>
+                        <div class="api-badge">POST /store/order</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">CRUD Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should create valid order successfully<br>
+                                • Should validate required order fields<br>
+                                • Should handle invalid pet IDs<br>
+                                • Should validate quantity constraints<br>
+                                • Should test order status workflow
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">Track Order</div>
+                        <div class="step-description">GET /store/order/{id}<br>Monitor order status and progress</div>
+                        <div class="api-badge">GET /store/order/{id}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Retrieval Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should retrieve order by valid ID<br>
+                                • Should return 404 for non-existent order<br>
+                                • Should validate order data structure<br>
+                                • Should handle invalid ID formats
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box decision">
+                        <span class="step-icon">📋</span>
+                        <div class="step-title">Order Status</div>
+                        <div class="step-description">Placed → Approved → Delivered<br>Real-time status tracking</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">State Machine Tests</div>
+                            </div>
+                            <div class="test-details">Status transition testing - Workflow validation and business rules</div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">❌</span>
+                        <div class="step-title">Cancel Order</div>
+                        <div class="step-description">DELETE /store/order/{id}<br>Cancel order if not yet delivered</div>
+                        <div class="api-badge">DELETE /store/order/{id}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Deletion Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should cancel valid order successfully<br>
+                                • Should return 404 for non-existent order<br>
+                                • Should validate cancellation business rules<br>
+                                • Should handle delivered order cancellation
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box end">
+                        <span class="step-icon">🎉</span>
+                        <div class="step-title">Order Complete</div>
+                        <div class="step-description">Successfully delivered or cancelled with confirmation notification</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">End-to-End Tests</div>
+                            </div>
+                            <div class="test-details">Complete order lifecycle testing - Performance and reliability validation</div>
+                        </div>
+                    </div>
+                    <div class="step-box error">
+                        <span class="step-icon">⚠️</span>
+                        <div class="step-title">Order Errors</div>
+                        <div class="step-description">Invalid orders, out of stock, payment issues, or system errors</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Error Handling Tests</div>
+                            </div>
+                            <div class="test-details">Negative testing scenarios - Edge cases and error response validation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Flow -->
+        <div id="user" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">👤 User Management Workflow</div>
+                <div class="diagram-description">
+                    Complete user lifecycle management including registration, authentication, profile management, and bulk operations.
+                    Shows security considerations and user state management with comprehensive test coverage capabilities.
+                </div>
+                
+                <div class="test-results">
+                    <div class="test-summary">
+                        <div class="test-badge coverage">Tests Available for Generation</div>
+                        <div class="test-badge coverage">7 User Endpoints</div>
+                        <div class="test-badge coverage">Security Testing Ready</div>
+                    </div>
+                    <div class="test-details">
+                        User management tests can be auto-generated using: <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/package.json" class="clickable-link">npm run generate-tests -- --module=user</a><br>
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/src/generator.ts" class="file-link clickable-link">🔧 View Generator Source</a> | 
+                        <a href="vscode://file/Users/Anand/github/playwright/tools/api-test-generator/swagger.json" class="file-link clickable-link">📋 OpenAPI Spec</a>
+                    </div>
+                </div>
+                
+                <div class="flow-steps">
+                    <div class="step-box start">
+                        <span class="step-icon">👋</span>
+                        <div class="step-title">Start User Management</div>
+                        <div class="step-description">User begins account operations and identity management</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Session Management</div>
+                            </div>
+                            <div class="test-details">User session testing - Authentication state and security validation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flow-arrow">↓</div>
+                
+                <div class="flow-steps">
+                    <div class="step-box decision">
+                        <span class="step-icon">🔀</span>
+                        <div class="step-title">User Action</div>
+                        <div class="step-description">Choose action: Register, Login, or Manage Profile</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Decision Flow Tests</div>
+                            </div>
+                            <div class="test-details">User journey testing - Path validation and choice handling</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">📝</span>
+                        <div class="step-title">User Registration</div>
+                        <div class="step-description">POST /user<br>Create new user account with validation</div>
+                        <div class="api-badge">POST /user</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Registration Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should create user with valid data<br>
+                                • Should validate required fields<br>
+                                • Should handle duplicate usernames<br>
+                                • Should validate email format<br>
+                                • Should test password strength requirements
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">👥</span>
+                        <div class="step-title">Bulk Registration</div>
+                        <div class="step-description">POST /user/createWithArray<br>Create multiple users efficiently</div>
+                        <div class="api-badge">POST /user/createWithArray</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Bulk Operation Tests</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should create multiple users successfully<br>
+                                • Should handle partial failures gracefully<br>
+                                • Should validate array size limits<br>
+                                • Should test performance with large datasets
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🔐</span>
+                        <div class="step-title">User Login</div>
+                        <div class="step-description">GET /user/login<br>Authenticate and create user session</div>
+                        <div class="api-badge">GET /user/login</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Authentication Tests</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should login with valid credentials<br>
+                                • Should reject invalid credentials<br>
+                                • Should return session token<br>
+                                • Should handle account lockout<br>
+                                • Should validate rate limiting
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🚪</span>
+                        <div class="step-title">User Logout</div>
+                        <div class="step-description">GET /user/logout<br>End user session securely</div>
+                        <div class="api-badge">GET /user/logout</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Session Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should logout successfully<br>
+                                • Should invalidate session tokens<br>
+                                • Should handle already logged out users<br>
+                                • Should clear authentication state
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box process">
+                        <span class="step-icon">👁️</span>
+                        <div class="step-title">View Profile</div>
+                        <div class="step-description">GET /user/{username}<br>Display user details and preferences</div>
+                        <div class="api-badge">GET /user/{username}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Profile Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should get user profile by username<br>
+                                • Should return 404 for non-existent user<br>
+                                • Should validate data privacy rules<br>
+                                • Should handle special characters in username
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">Update Profile</div>
+                        <div class="step-description">PUT /user/{username}<br>Modify user information securely</div>
+                        <div class="api-badge">PUT /user/{username}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Update Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should update user with valid data<br>
+                                • Should validate authorization<br>
+                                • Should handle partial updates<br>
+                                • Should maintain data integrity<br>
+                                • Should log security events
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">Delete Account</div>
+                        <div class="step-description">DELETE /user/{username}<br>Remove user account permanently</div>
+                        <div class="api-badge">DELETE /user/{username}</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Deletion Tests Ready</div>
+                            </div>
+                            <div class="test-details">
+                                Test scenarios to generate:<br>
+                                • Should delete user successfully<br>
+                                • Should return 404 for non-existent user<br>
+                                • Should validate deletion authorization<br>
+                                • Should handle cascade deletions<br>
+                                • Should maintain audit trail
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow"></div>
+                    <div class="connector-line"></div>
+                </div>
+
+                <div class="flow-steps">
+                    <div class="step-box end">
+                        <span class="step-icon">✅</span>
+                        <div class="step-title">Operation Complete</div>
+                        <div class="step-description">User action completed successfully with confirmation and session management</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Success Path Tests</div>
+                            </div>
+                            <div class="test-details">End-to-end user journey testing - Success scenarios and confirmations</div>
+                        </div>
+                    </div>
+                    <div class="step-box error">
+                        <span class="step-icon">🚫</span>
+                        <div class="step-title">Authentication Errors</div>
+                        <div class="step-description">401 Unauthorized, invalid credentials, or permission denied errors</div>
+                        <div class="test-results">
+                            <div class="test-summary">
+                                <div class="test-badge coverage">Security Error Tests</div>
+                            </div>
+                            <div class="test-details">Security testing - Authorization failures, token validation, and access control</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- User Management Flow -->
+    <div id="user" class="tab-content">
+        <div class="diagram-container">
+            <div class="diagram-title">👤 User Management Workflow</div>
+            <div class="diagram-description">
+                Complete user lifecycle management including registration, authentication, profile management, and bulk operations.
+                Shows security considerations and user state management.
+            </div>
+            
+            <div class="flow-steps">
+                <div class="step-box start">
+                    <div class="step-title">Start User Management</div>
+                    <div class="step-description">User begins account operations</div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="step-box decision">
+                    <div class="step-title">User Action</div>
+                    <div class="step-description">Register, Login, or Manage Profile</div>
+                </div>
+            </div>
+
+            <div class="flow-steps">
+                <div class="step-box process">
+                    <div class="step-title">User Registration</div>
+                    <div class="step-description">POST /user<br>Create new user account</div>
+                </div>
+                <div class="step-box process">
+                    <div class="step-title">Bulk Registration</div>
+                    <div class="step-description">POST /user/createWithArray<br>Create multiple users</div>
+                </div>
+                <div class="step-box process">
+                    <div class="step-title">User Login</div>
+                    <div class="step-description">GET /user/login<br>Authenticate user session</div>
+                </div>
+                <div class="step-box process">
+                    <div class="step-title">User Logout</div>
+                    <div class="step-description">GET /user/logout<br>End user session</div>
+                </div>
+            </div>
+
+            <div class="flow-steps">
+                <div class="step-box process">
+                    <div class="step-title">View Profile</div>
+                    <div class="step-description">GET /user/{username}<br>Display user details</div>
+                </div>
+                <div class="step-box process">
+                    <div class="step-title">Update Profile</div>
+                    <div class="step-description">PUT /user/{username}<br>Modify user information</div>
+                </div>
+                <div class="step-box process">
+                    <div class="step-title">Delete Account</div>
+                    <div class="step-description">DELETE /user/{username}<br>Remove user account</div>
+                </div>
+            </div>
+
+            <div class="flow-steps">
+                <div class="step-box end">
+                    <div class="step-title">Operation Complete</div>
+                    <div class="step-description">User action completed successfully</div>
+                </div>
+                <div class="step-box error">
+                    <div class="step-title">Authentication Errors</div>
+                    <div class="step-description">401 Unauthorized, invalid credentials</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dynamic workspace path configuration
+        const WORKSPACE_CONFIG = {
+            // This will be automatically detected and can be overridden
+            workspaceName: 'playwright',
+            defaultPath: 'vscode://file/playwright', // fallback path
+            
+            // Auto-detect workspace root from current environment
+            getWorkspaceRoot: function() {
+                // Try environment detection first
+                if (typeof process !== 'undefined' && process.env && process.env.WORKSPACE_ROOT) {
+                    return process.env.WORKSPACE_ROOT;
+                }
+                
+                // Try to detect from current URL/path
+                if (typeof window !== 'undefined' && window.location) {
+                    const path = window.location.pathname;
+                    if (path.includes('/playwright/')) {
+                        // Extract everything before '/playwright/'
+                        const parts = path.split('/playwright/');
+                        return parts[0] + '/playwright';
+                    }
+                }
+                
+                // Return fallback
+                return this.defaultPath.replace('vscode://file/', '');
+            }
+        };
+
+        // Function to create proper vscode:// links
+        function createVSCodeLink(relativePath) {
+            const workspaceRoot = WORKSPACE_CONFIG.getWorkspaceRoot();
+            return `vscode://file${workspaceRoot}/${relativePath}`;
+        }
+
+        // Initialize and fix all links when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing dynamic workspace links...');
+            
+            // Find and update all hardcoded vscode links
+            const hardcodedLinks = document.querySelectorAll('a[href*="/Users/Anand/github/playwright/"]');
+            let updatedCount = 0;
+            
+            hardcodedLinks.forEach(link => {
+                const originalHref = link.getAttribute('href');
+                
+                if (originalHref.startsWith('vscode://file/Users/Anand/github/playwright/')) {
+                    // Extract the relative path
+                    const relativePath = originalHref.replace('vscode://file/Users/Anand/github/playwright/', '');
+                    
+                    // Create new dynamic link
+                    const newHref = createVSCodeLink(relativePath);
+                    link.setAttribute('href', newHref);
+                    
+                    updatedCount++;
+                }
+            });
+            
+            console.log(`Updated ${updatedCount} hardcoded links to use dynamic workspace paths`);
+            
+            // Show notification if links were updated
+            if (updatedCount > 0) {
+                const notification = document.getElementById('dynamic-links-info');
+                notification.textContent = `✅ ${updatedCount} workspace links made portable`;
+                notification.classList.add('show');
+                
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        });
+
+        function showTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

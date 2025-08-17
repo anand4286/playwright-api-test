@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Special Characters Test</title>
+    <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <h1>Testing Special Characters in Mermaid</h1>
+    
+    <h2>Test 1: With Curly Braces (Original)</h2>
+    <div class="mermaid">
+        graph TD
+        A[Client] --> B[API]
+        B --> C[GET /products/{productId}]
+        B --> D[PUT /products/{productId}]
+    </div>
+    
+    <h2>Test 2: With Escaped Curly Braces</h2>
+    <div class="mermaid">
+        graph TD
+        A[Client] --> B[API]
+        B --> C["GET /products/{productId}"]
+        B --> D["PUT /products/{productId}"]
+    </div>
+    
+    <h2>Test 3: Without Curly Braces</h2>
+    <div class="mermaid">
+        graph TD
+        A[Client] --> B[API]
+        B --> C[GET /products/productId]
+        B --> D[PUT /products/productId]
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagger Petstore - Interactive Flow Diagrams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 35%, #667eea 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            max-width: none;
+        }
+
+        /* Left Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .sidebar-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-align: center;
+            margin: 5px 0 0 0;
+        }
+
+        .nav-tabs {
+            flex: 1;
+            padding: 20px 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-tab {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #4a5568;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .sidebar-stats {
+            padding: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .sidebar-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+
+        .sidebar-stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .diagram-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .diagram-description {
+            color: #4a5568;
+            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .step-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+        
+        .step-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .step-box:hover::before {
+            left: 100%;
+        }
+        
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .step-box.start {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-color: #38b2ac;
+        }
+        
+        .step-box.process {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-color: #3182ce;
+        }
+        
+        .step-box.end {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-color: #38a169;
+        }
+        
+        .step-icon {
+            font-size: 2.5em;
+            display: block;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        
+        .step-description {
+            color: #4a5568;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .api-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 8px auto;
+            letter-spacing: 0.5px;
+            display: block;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .endpoint-list {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .endpoint-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.9em;
+        }
+
+        .endpoint-item:last-child {
+            border-bottom: none;
+        }
+
+        .method-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 10px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .method-get { background: #48bb78; color: white; }
+        .method-post { background: #3182ce; color: white; }
+        .method-put { background: #ed8936; color: white; }
+        .method-patch { background: #805ad5; color: white; }
+        .method-delete { background: #e53e3e; color: white; }
+
+        .endpoint-path {
+            color: #4a5568;
+            font-family: 'Monaco', 'Consolas', monospace;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .container {
+                margin-left: 0;
+            }
+            
+            .nav-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            
+            .nav-tab {
+                min-width: 120px;
+                text-align: center;
+                font-size: 0.9em;
+                padding: 12px 16px;
+            }
+            
+            .sidebar-stats {
+                display: none;
+            }
+
+            .flow-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="sidebar-title">🌊 Flow Diagrams</h1>
+            <p class="sidebar-subtitle">Swagger Petstore</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 API Overview</button>
+            <button class="nav-tab" onclick="showTab('pet')">🔧 pet</button><button class="nav-tab" onclick="showTab('store')">🔧 store</button><button class="nav-tab" onclick="showTab('user')">👤 user</button>
+            <button class="nav-tab" onclick="showTab('crud')">🔄 CRUD Operations</button>
+        </div>
+        
+        <div class="sidebar-stats">
+            <div class="sidebar-stat">
+                <span>Flow Types</span>
+                <span class="sidebar-stat-value">5</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Endpoints</span>
+                <span class="sidebar-stat-value">20</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>API Version</span>
+                <span class="sidebar-stat-value">1.0.7</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Modules</span>
+                <span class="sidebar-stat-value">3</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <div class="header">
+            <h1>🌊 Interactive Flow Diagrams</h1>
+            <p>Swagger Petstore - Visual process flows for stakeholders</p>
+            <div class="subtitle">Professional workflow visualization for business and technical teams</div>
+        </div>
+
+        <div class="breadcrumb">
+            API Documentation → Flow Diagrams → Interactive Workflows
+        </div>
+
+        <!-- Overview Flow -->
+        <div id="overview" class="tab-content active">
+            <div class="diagram-container">
+                <div class="diagram-title">🏢 Swagger Petstore - System Overview</div>
+                <div class="diagram-description">
+                    High-level view of the Swagger Petstore showing the main modules and their relationships.
+                    This dashboard provides comprehensive API structure and endpoint organization.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔧</span>
+                        <div class="step-title">pet</div>
+                        <div class="step-description">Manage pet operations with comprehensive API endpoints.</div>
+                        <div class="api-badge">8 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/pet/{petId}/uploadImage</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/pet</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-put">PUT</span>
+                                <span class="endpoint-path">/pet</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/pet/findByStatus</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/pet/findByTags</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 3 more</em></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔧</span>
+                        <div class="step-title">store</div>
+                        <div class="step-description">Manage store operations with comprehensive API endpoints.</div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/store/inventory</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/store/order</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/store/order/{orderId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/store/order/{orderId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">👤</span>
+                        <div class="step-title">user</div>
+                        <div class="step-description">Manage user operations with comprehensive API endpoints.</div>
+                        <div class="api-badge">8 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/user/createWithList</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/user/{username}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-put">PUT</span>
+                                <span class="endpoint-path">/user/{username}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/user/{username}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/user/login</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 3 more</em></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- pet Flow -->
+        <div id="pet" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🔧 pet Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for pet operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /pet/{petId}/uploadImage</div>
+                        <div class="step-description">
+                            uploads an image
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">petId (path)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">additionalMetadata (formData)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">file (formData)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /pet</div>
+                        <div class="step-description">
+                            Add a new pet to the store
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔄</span>
+                        <div class="step-title">PUT /pet</div>
+                        <div class="step-description">
+                            Update an existing pet
+                        </div>
+                        <div class="api-badge">PUT Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /pet/findByStatus</div>
+                        <div class="step-description">
+                            Finds Pets by status
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">status (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /pet/findByTags</div>
+                        <div class="step-description">
+                            Finds Pets by tags
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">tags (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /pet/{petId}</div>
+                        <div class="step-description">
+                            Find pet by ID
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">petId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /pet/{petId}</div>
+                        <div class="step-description">
+                            Updates a pet in the store with form data
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">petId (path)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">name (formData)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">status (formData)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /pet/{petId}</div>
+                        <div class="step-description">
+                            Deletes a pet
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">api_key (header)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">petId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- store Flow -->
+        <div id="store" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🔧 store Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for store operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /store/inventory</div>
+                        <div class="step-description">
+                            Returns pet inventories by status
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /store/order</div>
+                        <div class="step-description">
+                            Place an order for a pet
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /store/order/{orderId}</div>
+                        <div class="step-description">
+                            Find purchase order by ID
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">orderId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /store/order/{orderId}</div>
+                        <div class="step-description">
+                            Delete purchase order by ID
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">orderId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- user Flow -->
+        <div id="user" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">👤 user Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for user operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /user/createWithList</div>
+                        <div class="step-description">
+                            Creates list of users with given input array
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /user/{username}</div>
+                        <div class="step-description">
+                            Get user by user name
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">username (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔄</span>
+                        <div class="step-title">PUT /user/{username}</div>
+                        <div class="step-description">
+                            Updated user
+                        </div>
+                        <div class="api-badge">PUT Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">username (path)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /user/{username}</div>
+                        <div class="step-description">
+                            Delete user
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">username (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /user/login</div>
+                        <div class="step-description">
+                            Logs user into the system
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">username (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">password (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /user/logout</div>
+                        <div class="step-description">
+                            Logs out current logged in user session
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /user/createWithArray</div>
+                        <div class="step-description">
+                            Creates list of users with given input array
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /user</div>
+                        <div class="step-description">
+                            Create user
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">body (body)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- CRUD Operations Flow -->
+        <div id="crud" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🔄 CRUD Operations Flow</div>
+                <div class="diagram-description">
+                    Standard Create, Read, Update, Delete operations across all API resources.
+                    This view organizes endpoints by their primary function.
+                </div>
+                
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">Create Operations</div>
+                        <div class="step-description">
+                            Add new resources to the system with validation and business rules. Includes 7 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">7 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/pet/{petId}/uploadImage</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/pet</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/pet/{petId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/store/order</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/user/createWithList</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 2 more</em></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">Read Operations</div>
+                        <div class="step-description">
+                            Retrieve and query existing resources with filtering and pagination. Includes 8 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">8 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/pet/findByStatus</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/pet/findByTags</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/pet/{petId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/store/inventory</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/store/order/{orderId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 3 more</em></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔄</span>
+                        <div class="step-title">Update Operations</div>
+                        <div class="step-description">
+                            Modify existing resources with partial or complete updates. Includes 2 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">2 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-put">PUT</span>
+                                <span class="endpoint-path">/pet</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-put">PUT</span>
+                                <span class="endpoint-path">/user/{username}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">Delete Operations</div>
+                        <div class="step-description">
+                            Remove resources from the system with proper cleanup and validation. Includes 3 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">3 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/pet/{petId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/store/order/{orderId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/user/{username}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

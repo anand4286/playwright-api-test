@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Platform API - Interactive Flow Diagrams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 35%, #667eea 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            max-width: none;
+        }
+
+        /* Left Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .sidebar-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-align: center;
+            margin: 5px 0 0 0;
+        }
+
+        .nav-tabs {
+            flex: 1;
+            padding: 20px 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-tab {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #4a5568;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            font-size: 0.95em;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateX(5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .sidebar-stats {
+            padding: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .sidebar-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+
+        .sidebar-stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .diagram-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .diagram-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .diagram-description {
+            color: #4a5568;
+            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .step-box {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+        
+        .step-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .step-box:hover::before {
+            left: 100%;
+        }
+        
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .step-box.start {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-color: #38b2ac;
+        }
+        
+        .step-box.process {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-color: #3182ce;
+        }
+        
+        .step-box.end {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-color: #38a169;
+        }
+        
+        .step-icon {
+            font-size: 2.5em;
+            display: block;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        
+        .step-description {
+            color: #4a5568;
+            line-height: 1.5;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .api-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 8px auto;
+            letter-spacing: 0.5px;
+            display: block;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .endpoint-list {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .endpoint-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.9em;
+        }
+
+        .endpoint-item:last-child {
+            border-bottom: none;
+        }
+
+        .method-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 10px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .method-get { background: #48bb78; color: white; }
+        .method-post { background: #3182ce; color: white; }
+        .method-put { background: #ed8936; color: white; }
+        .method-patch { background: #805ad5; color: white; }
+        .method-delete { background: #e53e3e; color: white; }
+
+        .endpoint-path {
+            color: #4a5568;
+            font-family: 'Monaco', 'Consolas', monospace;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .container {
+                margin-left: 0;
+            }
+            
+            .nav-tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            
+            .nav-tab {
+                min-width: 120px;
+                text-align: center;
+                font-size: 0.9em;
+                padding: 12px 16px;
+            }
+            
+            .sidebar-stats {
+                display: none;
+            }
+
+            .flow-steps {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="sidebar-title">🌊 Flow Diagrams</h1>
+            <p class="sidebar-subtitle">Social Media Platform API</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 API Overview</button>
+            <button class="nav-tab" onclick="showTab('users')">👤 Users</button><button class="nav-tab" onclick="showTab('social')">🤝 Social</button><button class="nav-tab" onclick="showTab('posts')">📝 Posts</button><button class="nav-tab" onclick="showTab('comments')">💬 Comments</button><button class="nav-tab" onclick="showTab('messages')">💌 Messages</button><button class="nav-tab" onclick="showTab('notifications')">🔔 Notifications</button>
+            <button class="nav-tab" onclick="showTab('crud')">🔄 CRUD Operations</button>
+        </div>
+        
+        <div class="sidebar-stats">
+            <div class="sidebar-stat">
+                <span>Flow Types</span>
+                <span class="sidebar-stat-value">8</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Endpoints</span>
+                <span class="sidebar-stat-value">22</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>API Version</span>
+                <span class="sidebar-stat-value">1.8.2</span>
+            </div>
+            <div class="sidebar-stat">
+                <span>Modules</span>
+                <span class="sidebar-stat-value">6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <div class="header">
+            <h1>🌊 Interactive Flow Diagrams</h1>
+            <p>Social Media Platform API - Visual process flows for stakeholders</p>
+            <div class="subtitle">Professional workflow visualization for business and technical teams</div>
+        </div>
+
+        <div class="breadcrumb">
+            API Documentation → Flow Diagrams → Interactive Workflows
+        </div>
+
+        <!-- Overview Flow -->
+        <div id="overview" class="tab-content active">
+            <div class="diagram-container">
+                <div class="diagram-title">🏢 Social Media Platform API - System Overview</div>
+                <div class="diagram-description">
+                    High-level view of the Social Media Platform API showing the main modules and their relationships.
+                    This dashboard provides comprehensive API structure and endpoint organization.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">👤</span>
+                        <div class="step-title">Users</div>
+                        <div class="step-description">Manage user accounts, authentication, profiles, and user lifecycle operations.</div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/users</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/users</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/users/{userId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/users/{userId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🤝</span>
+                        <div class="step-title">Social</div>
+                        <div class="step-description">Social interactions including likes, follows, and relationship management.</div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/users/{userId}/follow</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/users/{userId}/follow</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts/{postId}/like</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/posts/{postId}/like</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">📝</span>
+                        <div class="step-title">Posts</div>
+                        <div class="step-description">Create, read, update, and delete posts. Manage content and social interactions.</div>
+                        <div class="api-badge">5 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">💬</span>
+                        <div class="step-title">Comments</div>
+                        <div class="step-description">Handle comment creation, moderation, and threaded discussions.</div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts/{postId}/comments</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts/{postId}/comments</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/comments/{commentId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/comments/{commentId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">💌</span>
+                        <div class="step-title">Messages</div>
+                        <div class="step-description">Direct messaging system for private communications between users.</div>
+                        <div class="api-badge">3 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/messages</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/messages</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/messages/{conversationId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🔔</span>
+                        <div class="step-title">Notifications</div>
+                        <div class="step-description">Push notifications, alerts, and real-time communication management.</div>
+                        <div class="api-badge">2 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/notifications</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/notifications/{notificationId}/read</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Users Flow -->
+        <div id="users" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">👤 Users Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for users operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /users</div>
+                        <div class="step-description">
+                            Search users
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">q (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">verified (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">page (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /users</div>
+                        <div class="step-description">
+                            Register new user
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /users/{userId}</div>
+                        <div class="step-description">
+                            Get user profile
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">userId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">PATCH /users/{userId}</div>
+                        <div class="step-description">
+                            Update user profile
+                        </div>
+                        <div class="api-badge">PATCH Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">userId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Social Flow -->
+        <div id="social" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🤝 Social Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for social operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /users/{userId}/follow</div>
+                        <div class="step-description">
+                            Follow user
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">userId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /users/{userId}/follow</div>
+                        <div class="step-description">
+                            Unfollow user
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">userId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /posts/{postId}/like</div>
+                        <div class="step-description">
+                            Like post
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /posts/{postId}/like</div>
+                        <div class="step-description">
+                            Unlike post
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Posts Flow -->
+        <div id="posts" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">📝 Posts Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for posts operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /posts</div>
+                        <div class="step-description">
+                            Get posts feed
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">type (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">since (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">page (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /posts</div>
+                        <div class="step-description">
+                            Create new post
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /posts/{postId}</div>
+                        <div class="step-description">
+                            Get post details
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /posts/{postId}</div>
+                        <div class="step-description">
+                            Delete post
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">PATCH /posts/{postId}</div>
+                        <div class="step-description">
+                            Update post
+                        </div>
+                        <div class="api-badge">PATCH Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Comments Flow -->
+        <div id="comments" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">💬 Comments Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for comments operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /posts/{postId}/comments</div>
+                        <div class="step-description">
+                            Get post comments
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">sort (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">page (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /posts/{postId}/comments</div>
+                        <div class="step-description">
+                            Add comment to post
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">postId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">DELETE /comments/{commentId}</div>
+                        <div class="step-description">
+                            Delete comment
+                        </div>
+                        <div class="api-badge">DELETE Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">commentId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">PATCH /comments/{commentId}</div>
+                        <div class="step-description">
+                            Update comment
+                        </div>
+                        <div class="api-badge">PATCH Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">commentId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Messages Flow -->
+        <div id="messages" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">💌 Messages Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for messages operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /messages</div>
+                        <div class="step-description">
+                            Get message conversations
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">unread_only (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">page (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">limit (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">POST /messages</div>
+                        <div class="step-description">
+                            Send message
+                        </div>
+                        <div class="api-badge">POST Request</div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /messages/{conversationId}</div>
+                        <div class="step-description">
+                            Get conversation messages
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">conversationId (path)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">before (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">limit (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Notifications Flow -->
+        <div id="notifications" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🔔 Notifications Management Flow</div>
+                <div class="diagram-description">
+                    Detailed workflow for notifications operations showing request/response patterns and business logic.
+                </div>
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">GET /notifications</div>
+                        <div class="step-description">
+                            Get user notifications
+                        </div>
+                        <div class="api-badge">GET Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">type (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">unread_only (query)</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">Optional</span>
+                                <span class="endpoint-path">page (query)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">✏️</span>
+                        <div class="step-title">PATCH /notifications/{notificationId}/read</div>
+                        <div class="step-description">
+                            Mark notification as read
+                        </div>
+                        <div class="api-badge">PATCH Request</div>
+                        
+                        <div class="endpoint-list">
+                            <strong>Parameters:</strong>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">Required</span>
+                                <span class="endpoint-path">notificationId (path)</span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- CRUD Operations Flow -->
+        <div id="crud" class="tab-content">
+            <div class="diagram-container">
+                <div class="diagram-title">🔄 CRUD Operations Flow</div>
+                <div class="diagram-description">
+                    Standard Create, Read, Update, Delete operations across all API resources.
+                    This view organizes endpoints by their primary function.
+                </div>
+                
+                
+                <div class="flow-steps">
+                    
+                    <div class="step-box start">
+                        <span class="step-icon">✨</span>
+                        <div class="step-title">Create Operations</div>
+                        <div class="step-description">
+                            Add new resources to the system with validation and business rules. Includes 6 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">6 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/users</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/users/{userId}/follow</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts/{postId}/like</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path">/posts/{postId}/comments</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 1 more</em></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔍</span>
+                        <div class="step-title">Read Operations</div>
+                        <div class="step-description">
+                            Retrieve and query existing resources with filtering and pagination. Includes 8 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">8 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/users</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/users/{userId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path">/posts/{postId}/comments</span>
+                            </div>
+                            
+                            <div class="endpoint-item"><em>... and 3 more</em></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-box process">
+                        <span class="step-icon">🔄</span>
+                        <div class="step-title">Update Operations</div>
+                        <div class="step-description">
+                            Modify existing resources with partial or complete updates. Includes 4 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/users/{userId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/comments/{commentId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-patch">PATCH</span>
+                                <span class="endpoint-path">/notifications/{notificationId}/read</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="step-box end">
+                        <span class="step-icon">🗑️</span>
+                        <div class="step-title">Delete Operations</div>
+                        <div class="step-description">
+                            Remove resources from the system with proper cleanup and validation. Includes 4 endpoints across all resources.
+                        </div>
+                        <div class="api-badge">4 Endpoints</div>
+                        <div class="endpoint-list">
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/users/{userId}/follow</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/posts/{postId}</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/posts/{postId}/like</span>
+                            </div>
+                            
+                            <div class="endpoint-item">
+                                <span class="method-badge method-delete">DELETE</span>
+                                <span class="endpoint-path">/comments/{commentId}</span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

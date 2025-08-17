@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Syntax Test</title>
+    <script src="https://unpkg.com/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <h1>Mermaid Syntax Test</h1>
+    
+    <h2>Test 1: Simple Flow</h2>
+    <div class="mermaid">
+        graph TD
+        A[Client] --> B[API]
+        B --> C{Validate}
+        C -->|Valid| D[Success]
+        C -->|Invalid| E[Error]
+    </div>
+    
+    <h2>Test 2: Our Generated Pattern</h2>
+    <div class="mermaid">
+        graph TD
+        A[Client Application] --> B[E-commerce Platform API]
+        B --> C{Authentication}
+        C -->|Valid| D[API Gateway]
+        C -->|Invalid| E[401 Unauthorized]
+        
+        D --> F[Business Logic Layer]
+        
+        F --> G[Products Module]
+        F --> H[Orders Module]
+        
+        G --> G1[GET /products]
+        G --> G2[POST /products]
+        H --> H1[GET /orders]
+        H --> H2[POST /orders]
+        
+        classDef apiClass fill:#e1f5fe;
+        classDef moduleClass fill:#f3e5f5;
+        
+        class B,D,F apiClass;
+        class G,H moduleClass;
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1292 @@
+openapi: 3.0.0
+info:
+  title: Digital Banking API
+  description: |
+    Comprehensive digital banking platform API for managing accounts, transactions, 
+    payments, and financial services. Built with security and compliance in mind.
+  version: 3.2.1
+  contact:
+    name: Banking API Support
+    email: api-support@digitalbank.com
+    url: https://developer.digitalbank.com
+  license:
+    name: Proprietary
+    url: https://digitalbank.com/license
+  termsOfService: https://digitalbank.com/terms
+
+servers:
+  - url: https://api.digitalbank.com/v3
+    description: Production environment
+  - url: https://sandbox-api.digitalbank.com/v3
+    description: Sandbox environment for testing
+
+security:
+  - oauth2: [read, write]
+  - apiKey: []
+
+paths:
+  /accounts:
+    get:
+      summary: List customer accounts
+      description: |
+        Retrieve a list of all accounts belonging to the authenticated customer.
+        Supports filtering by account type and status.
+      operationId: listAccounts
+      tags:
+        - Accounts
+      parameters:
+        - name: type
+          in: query
+          description: Filter accounts by type
+          schema:
+            type: string
+            enum: [checking, savings, credit, investment, loan]
+        - name: status
+          in: query
+          description: Filter accounts by status
+          schema:
+            type: string
+            enum: [active, inactive, frozen, closed]
+        - name: include_balance
+          in: query
+          description: Include current balance in response
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: List of customer accounts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+                  total_count:
+                    type: integer
+                    description: Total number of accounts
+                  summary:
+                    $ref: '#/components/schemas/AccountSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+
+    post:
+      summary: Open new account
+      description: |
+        Open a new bank account for the authenticated customer.
+        Requires identity verification and meets regulatory requirements.
+      operationId: createAccount
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequest'
+      responses:
+        '201':
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Account already exists or duplicate request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /accounts/{accountId}:
+    get:
+      summary: Get account details
+      description: Retrieve detailed information about a specific account
+      operationId: getAccount
+      tags:
+        - Accounts
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          description: Unique account identifier
+          schema:
+            type: string
+            pattern: '^ACC[0-9]{10}$'
+            example: ACC1234567890
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    patch:
+      summary: Update account settings
+      description: Update account preferences and settings
+      operationId: updateAccount
+      tags:
+        - Accounts
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^ACC[0-9]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountUpdate'
+      responses:
+        '200':
+          description: Account updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /accounts/{accountId}/transactions:
+    get:
+      summary: Get account transactions
+      description: |
+        Retrieve transaction history for a specific account with filtering
+        and pagination support. Includes pending and completed transactions.
+      operationId: getAccountTransactions
+      tags:
+        - Transactions
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^ACC[0-9]{10}$'
+        - name: from_date
+          in: query
+          description: Start date for transaction history (ISO 8601)
+          schema:
+            type: string
+            format: date
+            example: '2024-01-01'
+        - name: to_date
+          in: query
+          description: End date for transaction history (ISO 8601)
+          schema:
+            type: string
+            format: date
+            example: '2024-12-31'
+        - name: type
+          in: query
+          description: Filter by transaction type
+          schema:
+            type: string
+            enum: [debit, credit, transfer, payment, fee, interest]
+        - name: status
+          in: query
+          description: Filter by transaction status
+          schema:
+            type: string
+            enum: [pending, completed, failed, cancelled]
+        - name: min_amount
+          in: query
+          description: Minimum transaction amount
+          schema:
+            type: number
+            format: decimal
+        - name: max_amount
+          in: query
+          description: Maximum transaction amount
+          schema:
+            type: number
+            format: decimal
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Number of transactions per page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Transaction history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  summary:
+                    type: object
+                    properties:
+                      total_debits:
+                        type: number
+                        format: decimal
+                      total_credits:
+                        type: number
+                        format: decimal
+                      net_amount:
+                        type: number
+                        format: decimal
+                      transaction_count:
+                        type: integer
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /transfers:
+    post:
+      summary: Initiate money transfer
+      description: |
+        Transfer money between accounts or to external recipients.
+        Supports domestic and international transfers with fraud detection.
+      operationId: createTransfer
+      tags:
+        - Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '201':
+          description: Transfer initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          description: Insufficient funds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          description: Transfer validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /transfers/{transferId}:
+    get:
+      summary: Get transfer status
+      description: Retrieve status and details of a specific transfer
+      operationId: getTransfer
+      tags:
+        - Transfers
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          description: Unique transfer identifier
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Transfer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Cancel transfer
+      description: Cancel a pending transfer before it's processed
+      operationId: cancelTransfer
+      tags:
+        - Transfers
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Transfer cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+        '400':
+          description: Transfer cannot be cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /payments/bills:
+    get:
+      summary: List bill payment history
+      description: Get history of bill payments and scheduled payments
+      operationId: getBillPayments
+      tags:
+        - Payments
+      parameters:
+        - name: payee
+          in: query
+          description: Filter by payee name
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by payment status
+          schema:
+            type: string
+            enum: [scheduled, processing, completed, failed]
+        - name: from_date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to_date
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Bill payment history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillPayment'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      summary: Schedule bill payment
+      description: |
+        Schedule a one-time or recurring bill payment.
+        Supports various payee types and payment methods.
+      operationId: scheduleBillPayment
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPaymentRequest'
+      responses:
+        '201':
+          description: Bill payment scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillPayment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          description: Insufficient funds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /loans:
+    get:
+      summary: List customer loans
+      description: Retrieve all loans associated with the customer
+      operationId: getLoans
+      tags:
+        - Loans
+      parameters:
+        - name: status
+          in: query
+          description: Filter by loan status
+          schema:
+            type: string
+            enum: [active, paid_off, defaulted, in_review]
+        - name: type
+          in: query
+          description: Filter by loan type
+          schema:
+            type: string
+            enum: [personal, auto, mortgage, business, student]
+      responses:
+        '200':
+          description: List of customer loans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loans:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Loan'
+                  summary:
+                    type: object
+                    properties:
+                      total_outstanding:
+                        type: number
+                        format: decimal
+                      monthly_payment_total:
+                        type: number
+                        format: decimal
+                      active_loans_count:
+                        type: integer
+
+  /loans/{loanId}/payments:
+    post:
+      summary: Make loan payment
+      description: Make a payment towards a specific loan
+      operationId: makeLoanPayment
+      tags:
+        - Loans
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          description: Unique loan identifier
+          schema:
+            type: string
+            pattern: '^LOAN[0-9]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanPaymentRequest'
+      responses:
+        '201':
+          description: Loan payment processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanPayment'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          description: Insufficient funds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /cards:
+    get:
+      summary: List customer cards
+      description: Retrieve all debit and credit cards for the customer
+      operationId: getCards
+      tags:
+        - Cards
+      parameters:
+        - name: type
+          in: query
+          description: Filter by card type
+          schema:
+            type: string
+            enum: [debit, credit, prepaid]
+        - name: status
+          in: query
+          description: Filter by card status
+          schema:
+            type: string
+            enum: [active, inactive, blocked, expired]
+      responses:
+        '200':
+          description: List of customer cards
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cards:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Card'
+
+  /cards/{cardId}/block:
+    post:
+      summary: Block card
+      description: Immediately block a card to prevent unauthorized use
+      operationId: blockCard
+      tags:
+        - Cards
+      parameters:
+        - name: cardId
+          in: path
+          required: true
+          description: Unique card identifier
+          schema:
+            type: string
+            pattern: '^CARD[0-9]{12}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  enum: [lost, stolen, suspicious_activity, damaged, other]
+                  description: Reason for blocking the card
+                notes:
+                  type: string
+                  description: Additional notes
+              required:
+                - reason
+      responses:
+        '200':
+          description: Card blocked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Card already blocked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.digitalbank.com/oauth/authorize
+          tokenUrl: https://auth.digitalbank.com/oauth/token
+          scopes:
+            read: Read access to account information
+            write: Write access for transactions and transfers
+            admin: Administrative access
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+          description: Unique account identifier
+          example: ACC1234567890
+        account_number:
+          type: string
+          description: Human-readable account number
+          example: "****5678"
+        type:
+          type: string
+          enum: [checking, savings, credit, investment, loan]
+          description: Type of account
+        status:
+          type: string
+          enum: [active, inactive, frozen, closed]
+          description: Current account status
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: Account currency code
+          example: USD
+        balance:
+          $ref: '#/components/schemas/Balance'
+        nickname:
+          type: string
+          description: Customer-defined account nickname
+        opened_date:
+          type: string
+          format: date
+          description: Date when account was opened
+        last_activity:
+          type: string
+          format: date-time
+          description: Last transaction timestamp
+      required:
+        - id
+        - type
+        - status
+        - currency
+
+    AccountDetails:
+      allOf:
+        - $ref: '#/components/schemas/Account'
+        - type: object
+          properties:
+            routing_number:
+              type: string
+              description: Bank routing number
+            interest_rate:
+              type: number
+              format: decimal
+              description: Current interest rate (if applicable)
+            minimum_balance:
+              type: number
+              format: decimal
+              description: Minimum required balance
+            overdraft_limit:
+              type: number
+              format: decimal
+              description: Overdraft protection limit
+            monthly_fee:
+              type: number
+              format: decimal
+              description: Monthly maintenance fee
+            features:
+              type: array
+              items:
+                type: string
+              description: Account features and benefits
+
+    AccountRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [checking, savings, investment]
+          description: Type of account to open
+        initial_deposit:
+          type: number
+          format: decimal
+          minimum: 0
+          description: Initial deposit amount
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          default: USD
+          description: Account currency
+        nickname:
+          type: string
+          maxLength: 50
+          description: Optional account nickname
+        terms_accepted:
+          type: boolean
+          description: Customer acceptance of terms and conditions
+      required:
+        - type
+        - initial_deposit
+        - terms_accepted
+
+    AccountUpdate:
+      type: object
+      properties:
+        nickname:
+          type: string
+          maxLength: 50
+        notifications:
+          type: object
+          properties:
+            email:
+              type: boolean
+            sms:
+              type: boolean
+            push:
+              type: boolean
+        overdraft_protection:
+          type: boolean
+        statements:
+          type: object
+          properties:
+            delivery_method:
+              type: string
+              enum: [email, mail, online_only]
+            frequency:
+              type: string
+              enum: [monthly, quarterly]
+
+    AccountSummary:
+      type: object
+      properties:
+        total_checking_balance:
+          type: number
+          format: decimal
+        total_savings_balance:
+          type: number
+          format: decimal
+        total_credit_limit:
+          type: number
+          format: decimal
+        total_credit_used:
+          type: number
+          format: decimal
+        net_worth:
+          type: number
+          format: decimal
+
+    Balance:
+      type: object
+      properties:
+        current:
+          type: number
+          format: decimal
+          description: Current available balance
+        available:
+          type: number
+          format: decimal
+          description: Available balance for transactions
+        pending:
+          type: number
+          format: decimal
+          description: Total pending transactions
+        last_updated:
+          type: string
+          format: date-time
+          description: Last balance update timestamp
+      required:
+        - current
+        - available
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique transaction identifier
+        account_id:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+        type:
+          type: string
+          enum: [debit, credit, transfer, payment, fee, interest]
+        amount:
+          type: number
+          format: decimal
+          description: Transaction amount (positive for credits, negative for debits)
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        description:
+          type: string
+          description: Transaction description
+        reference:
+          type: string
+          description: Transaction reference number
+        status:
+          type: string
+          enum: [pending, completed, failed, cancelled]
+        date:
+          type: string
+          format: date-time
+          description: Transaction timestamp
+        balance_after:
+          type: number
+          format: decimal
+          description: Account balance after transaction
+        category:
+          type: string
+          description: Transaction category
+        merchant:
+          type: object
+          properties:
+            name:
+              type: string
+            category:
+              type: string
+            location:
+              type: string
+      required:
+        - id
+        - account_id
+        - type
+        - amount
+        - status
+        - date
+
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        from_account:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+        to_account:
+          type: string
+          description: Destination account (internal or external)
+        amount:
+          type: number
+          format: decimal
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        description:
+          type: string
+        type:
+          type: string
+          enum: [internal, domestic, international, wire]
+        status:
+          type: string
+          enum: [pending, processing, completed, failed, cancelled]
+        scheduled_date:
+          type: string
+          format: date
+          description: Date when transfer should be processed
+        completion_date:
+          type: string
+          format: date-time
+          description: Actual completion timestamp
+        fees:
+          type: number
+          format: decimal
+          description: Transfer fees charged
+        exchange_rate:
+          type: number
+          format: decimal
+          description: Exchange rate applied (for currency conversion)
+        reference:
+          type: string
+          description: Transfer reference number
+      required:
+        - id
+        - from_account
+        - to_account
+        - amount
+        - type
+        - status
+
+    TransferRequest:
+      type: object
+      properties:
+        from_account:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+          description: Source account ID
+        to_account:
+          type: string
+          description: Destination account (account ID, email, or phone)
+        amount:
+          type: number
+          format: decimal
+          minimum: 0.01
+          description: Transfer amount
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          default: USD
+        description:
+          type: string
+          maxLength: 255
+          description: Transfer description or memo
+        scheduled_date:
+          type: string
+          format: date
+          description: Optional scheduled date (defaults to immediate)
+        recipient_info:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+          description: Recipient information for external transfers
+      required:
+        - from_account
+        - to_account
+        - amount
+
+    BillPayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        payee:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            category:
+              type: string
+              enum: [utilities, credit_card, loan, insurance, subscription, other]
+            account_number:
+              type: string
+        amount:
+          type: number
+          format: decimal
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        from_account:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+        scheduled_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [scheduled, processing, completed, failed]
+        recurring:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            frequency:
+              type: string
+              enum: [weekly, monthly, quarterly, annually]
+            end_date:
+              type: string
+              format: date
+        confirmation_number:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    BillPaymentRequest:
+      type: object
+      properties:
+        payee_id:
+          type: string
+          description: Registered payee ID
+        amount:
+          type: number
+          format: decimal
+          minimum: 0.01
+        from_account:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+        scheduled_date:
+          type: string
+          format: date
+          description: Payment date (defaults to today)
+        memo:
+          type: string
+          maxLength: 100
+        recurring:
+          type: object
+          properties:
+            frequency:
+              type: string
+              enum: [weekly, monthly, quarterly, annually]
+            end_date:
+              type: string
+              format: date
+          description: Optional recurring payment setup
+      required:
+        - payee_id
+        - amount
+        - from_account
+
+    Loan:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '^LOAN[0-9]{10}$'
+        type:
+          type: string
+          enum: [personal, auto, mortgage, business, student]
+        status:
+          type: string
+          enum: [active, paid_off, defaulted, in_review]
+        original_amount:
+          type: number
+          format: decimal
+        current_balance:
+          type: number
+          format: decimal
+        interest_rate:
+          type: number
+          format: decimal
+        monthly_payment:
+          type: number
+          format: decimal
+        next_payment_date:
+          type: string
+          format: date
+        maturity_date:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        origination_date:
+          type: string
+          format: date
+
+    LoanPaymentRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: decimal
+          minimum: 0.01
+        from_account:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+        payment_type:
+          type: string
+          enum: [minimum, principal_only, full_payment, custom]
+          default: minimum
+        scheduled_date:
+          type: string
+          format: date
+          description: Payment date (defaults to today)
+      required:
+        - amount
+        - from_account
+
+    LoanPayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        loan_id:
+          type: string
+          pattern: '^LOAN[0-9]{10}$'
+        amount:
+          type: number
+          format: decimal
+        principal_amount:
+          type: number
+          format: decimal
+        interest_amount:
+          type: number
+          format: decimal
+        payment_date:
+          type: string
+          format: date
+        remaining_balance:
+          type: number
+          format: decimal
+        status:
+          type: string
+          enum: [pending, completed, failed]
+
+    Card:
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '^CARD[0-9]{12}$'
+        type:
+          type: string
+          enum: [debit, credit, prepaid]
+        last_four:
+          type: string
+          pattern: '^[0-9]{4}$'
+          description: Last four digits of card number
+        status:
+          type: string
+          enum: [active, inactive, blocked, expired]
+        expiry_date:
+          type: string
+          pattern: '^[0-9]{2}/[0-9]{2}$'
+          description: Card expiry date (MM/YY)
+        account_id:
+          type: string
+          pattern: '^ACC[0-9]{10}$'
+          description: Associated account ID
+        nickname:
+          type: string
+          description: Customer-defined card nickname
+        daily_limit:
+          type: number
+          format: decimal
+          description: Daily spending limit
+        features:
+          type: array
+          items:
+            type: string
+          description: Card features (contactless, rewards, etc.)
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+        total:
+          type: integer
+          minimum: 0
+        pages:
+          type: integer
+          minimum: 1
+        has_next:
+          type: boolean
+        has_prev:
+          type: boolean
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error type identifier
+        message:
+          type: string
+          description: Human-readable error message
+        code:
+          type: string
+          description: Internal error code
+        request_id:
+          type: string
+          format: uuid
+          description: Unique request identifier for support
+        timestamp:
+          type: string
+          format: date-time
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional error context
+      required:
+        - error
+        - message
+        - request_id
+
+    ValidationError:
+      allOf:
+        - $ref: '#/components/schemas/Error'
+        - type: object
+          properties:
+            field_errors:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+              description: Field-specific validation errors
+
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters or request format
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+
+    Unauthorized:
+      description: Authentication required - invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Forbidden:
+      description: Access denied - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    RateLimited:
+      description: Too many requests - rate limit exceeded
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed per time window
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Time when rate limit resets (Unix timestamp)
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+tags:
+  - name: Accounts
+    description: |
+      Account management operations including account creation, 
+      balance inquiries, and account settings.
+  - name: Transactions
+    description: |
+      Transaction history and details for all account types.
+      Includes search and filtering capabilities.
+  - name: Transfers
+    description: |
+      Money transfer operations between accounts and to external recipients.
+      Supports domestic and international transfers.
+  - name: Payments
+    description: |
+      Bill payment services including one-time and recurring payments
+      to registered payees.
+  - name: Loans
+    description: |
+      Loan management including payment processing and loan information.
+      Covers all loan types offered by the bank.
+  - name: Cards
+    description: |
+      Debit and credit card management including blocking, 
+      activation, and settings management.
+
+externalDocs:
+  description: Digital Banking API Documentation
+  url: https://developer.digitalbank.com/docs
